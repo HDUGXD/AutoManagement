@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html class="max_html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" >
+    <meta name="apple-mobile-web-app-capable" content="yes" >
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" >
+    <meta name="format-detection" content="telephone=no" >
+    <meta name="format-detection" content="email=no" >
+    <link href="$!{rc.contextPath}/assets/kendo/ued/framework/styles/kendo.common.min.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/kendo/ued/framework/styles/kendo.default.min.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/kendo/ued/css/layout-default-latest.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/kendo/ued/skins/hctpl3/css/skin.css" rel="stylesheet" id="skin_css_file"/>
+    <link href="$!{rc.contextPath}/assets/kendo/ued/css/ztree/zTreeStyle.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/kendo/ued/css/font-awesome.min.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/css/custom.css?v=$!{platform_version}" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/css/odometer-theme-default.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/css/liMarquee.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/kendo/ued/css/jquery.validator.css" rel="stylesheet">
+
+        <script src="$!{rc.contextPath}/assets/kendo/ued/js/jquery-1.11.1.min.js"></script>
+    <script src="$!{rc.contextPath}/assets/kendo/ued/js/jquery.layout-latest.js"></script>
+    <script src="$!{rc.contextPath}/assets/kendo/ued/js/jquery-ui.min.js"></script>
+    <script src="$!{rc.contextPath}/assets/kendo/ued/js/jselect.js"></script>
+    <script src="$!{rc.contextPath}/assets/datepicker/WdatePicker.js"></script>
+    <script src="$!{rc.contextPath}/assets/js/odometer.min.js"></script>
+    <script src="$!{rc.contextPath}/assets/js/jquery.liMarquee.js"></script>
+    <script src="$!{rc.contextPath}/assets/js/jquery.hDialog.js"></script>
+    <script type="text/javascript">
+        var ROOT = '$!{rc.contextPath}';
+    </script>
+

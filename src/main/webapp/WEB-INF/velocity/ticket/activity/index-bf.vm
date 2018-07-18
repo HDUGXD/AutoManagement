@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="format-detection" content="email=no">
+		<title>抢票系统</title>
+		<link href="$!{rc.contextPath}/assets/stylesheets/common/bootstrap.min.css" rel="stylesheet">
+		<link href="$!{rc.contextPath}/assets/stylesheets/common/font-awesome.min.css" rel="stylesheet">
+		<link href="$!{rc.contextPath}/assets/stylesheets/custom/custom.css" rel="stylesheet">
+		<link href="$!{rc.contextPath}/assets/css/animate.min.css" rel="stylesheet">
+		<!--[if lt IE 9]>
+        <script src="../assets/javascripts/common/html5shiv.js"></script>
+    	<describ![endif]-->
+	</head>
+	<style>
+        /*.lookBtn {*/
+            /*width: 142px;*/
+            /*height: 46px;*/
+            /*margin-right: 20px;*/
+            /*color: #fff;*/
+            /*font-size: 18px;*/
+            /*background-color: #df3033;*/
+            /*font-weight: 700;*/
+        /*}*/
+	</style>
+
+	<body>
+		<div class="container-fluid container-custom">
+			<div class="row-fluid">
+				<!--导航栏-->
+                <div class="navbar-top">
+                    <div class="navbar-top-con">
+                        <a class="brand" href="#">抢票系统</a>
+                        <ul class="nav pull-right">
+                            <li>
+                                <a href="$!{rc.contextPath}/toHome">抢票</a>
+                            </li>
+                            <li>
+                                <a href="$!{rc.contextPath}/activity/list">公示</a>
+                            </li>
+                            <li>
+                                <a href="$!{rc.contextPath}/toPersonInformation">个人中心</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+				<!--导航栏-->
+				<!--正文-->
+				<div class="wrapper" id="activ">
+					<div class="activity">
+						<div class="activity-img">
+							#if(!${activityInfo.picPath})
+                                <img src="$!{rc.contextPath}/assets/images/screen/zldd/timg.jpg" style="padding-top: 7px;padding-left: 24px;width: 330px;height: 240px" />
+							#else
+                                <img src="${rc.contextPath}/activity/filePreview?isTemp=true&fileName=${activityInfo.picPath}" style="padding-top: 7px;padding-left: 24px;width: 330px;height: 240px" />
+							#end
+##							<img src="${rc.contextPath}/activity/filePreview?isTemp=true&fileName=${activityInfo.picPath}" style="padding-top: 7px;padding-left: 24px;width: 330px;height: 240px" />
+##							<img src="${rc.contextPath}/activity/filePreview?isTemp=true&fileName=${activityInfo.picPath}" style="padding-top: 7px;padding-left: 24px;width: 490px;height: 318px" />
+						</div>
+						<div class="activity-content">
+							<div class="activity-title">$!{activityInfo.activityName}</div>
+							<div class="activity-banner">
+								<div class="activity-type">
+									<i class="fa fa-clock-o"></i>
+									<strong>秒杀</strong>
+								</div>
+								<div class="activity-time">
+									<a id="activity-text" style="color:#fff;text-underline: none;">距离开始</a>
+									<span id="day_show">0</span> 天
+									<span id="hour_show">00</span>时 :
+									<span id="minute_show">00</span> 分:
+									<span id="second_show">00</span>秒
+								</div>
+							</div>
+							<div class="activity-details">
+								<p>活动时间:$!{activityInfo.startDate} 至 $!{activityInfo.endDate}</p>
+							</div>
+							<div class="numb">
+								<div class="number">数量</div>
+								<div class="crease">
+									<i class="fa fa-minus" id="increase"></i>
+									<input type="text" id="num" value="1" />
+									<i class="fa fa-plus" id="decrease"></i>
+								</div>
+								<div class="activity-message">
+									剩余票数
+									<span id="remainTicketNum">#set($remainTicketNum = $activityInfo.sumTicketNum - $activityInfo.sellTicketNum)  $!{remainTicketNum}</span> 张
+								</div>
+								<div class="activity-purchase">该商品限购<span>$!{activityInfo.maxLimit}<span>张</div>
+                                <div class="activity-tooltip">
+                                    <div class="in-tip">最少选择$!{activityInfo.minLimit}张票</div>
+                                    <div class="al-tip" style="#if($snagTicketNum != 0) display: block;#end">已获取<span id="snagTicketNum">$!{snagTicketNum}</span><span>张</span></div>
+                                </div>
+							</div>
+
+							<div class="activity-btn">
+								<button type="button" id="btn" class="btn">立即抢票</button>
+                                <button type="button" class="btn btn-color" onclick="toResult($activityInfo.id)">查看抢票结果</button>
+							</div>
+						</div>
+					</div>
+                    <div class="describ">
+						<div class="des-con">
+                            <p><strong>活动详情：</strong></p>
+						</div>
+
+                        <div class="des-con">
+                            <p>$activityInfo.detail</p>
+                        </div>
+                    </div>
+				</div>
+				<!--正文-->
+			</div>
+		</div>
+		<script src="$!{rc.contextPath}/assets/javascripts/jquery/jquery-1.8.3.min.js"></script>
+		<script src="$!{rc.contextPath}/assets/javascripts/common/bootstrap.min.js"></script>
+		<script src="$!{rc.contextPath}/assets/js/jquery.hDialog.js"></script>
+
+		<script>
+			(function($, window, document, undefined) {
+                /**
+                 * setHeight()
+                 * 为了方便一屏展示所有数据，设置元素高度
+                 */
+                var setHeight = function(opt) {
+                    var winHeight = $(window).height(),
+                            panelHeight = opt.offset().top;
+                    var getHeight = winHeight - panelHeight - 20;
+                    opt.height(getHeight + "px");
+                }
+                setHeight($("#activ"));
+				var snagTicketNum = $!{snagTicketNum};     ##获取票数
+				var maxLimit = $!{activityInfo.maxLimit};  ##最大票数 限购
+				var minLimit = $!{activityInfo.minLimit};  ##最小票数
+				var remainTicketNum = $!{remainTicketNum}; ##剩余票数
+
+				##本次获取票数的最大值
+				var maxValue = (maxLimit - snagTicketNum) > remainTicketNum?remainTicketNum:(maxLimit - snagTicketNum);
+
+                var timer = function(intDiff) {
+                    window.setInterval(function() {
+                        var day = 0,
+                                hour = 0,
+                                minute = 0,
+                                second = 0; //时间默认值
+                        if(intDiff > 0) {
+                            day = Math.floor(intDiff / (60 * 60 * 24));
+                            hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+                            minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+                            second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+                        }
+                        if(minute <= 9) minute = '0' + minute;
+                        if(second <= 9) second = '0' + second;
+                        $('#day_show').html(day);
+                        $('#hour_show').html(hour);
+                        $('#minute_show').html(minute);
+                        $('#second_show').html(second);
+                        intDiff--;
+                        //判断开始时间
+						if($('#day_show').html()=="0"&& $('#hour_show').html()=="0"&& $('#minute_show').html()=="00"&& $('#second_show').html()=="00"){
+                            $("#btn").removeClass("disabled");
+                            $("#btn").html("立即抢票");
+                            //给按钮加上单击事件
+                            $("#btn").bind("click",function(){
+                                var num = parseInt($("#num").val());
+                                if(maxValue < num){
+                                    $.tooltip("申请的票数过大");
+                                    return false;
+                                }
+                                $.ajax({
+                                    url:"$!{rc.contextPath}/snatchtickets/getTickets",
+									type:"post",
+                                    data:{id:${activityInfo.id},num:$("#num").val()},
+									type:"post",
+                                    success:function(msg){
+                                        var data = eval("("+msg.data+")");
+                                        if(data.data == '抢票成功'){
+                                            $.tooltip('抢票成功！', 2500, true);
+                                            var snagTicketNum = 0;
+                                            if($("#snagTicketNum").html() != '')
+                                                snagTicketNum = parseInt($("#snagTicketNum").html());
+                                            $("#snagTicketNum").html(snagTicketNum + parseInt($("#num").val()));
+                                            $(".al-tip").show();
+                                            var lastNum = data.remainticketNum;
+                                            $("#remainTicketNum").html(lastNum);
+                                            $("#btn").addClass("disabled");
+                                            $("#btn").html("请等待抢票结果");
+                                            $("#btn").unbind("click");
+                                        }else{
+                                            $.tooltip(msg.message);
+                                            $("#btn").addClass("disabled");
+                                            $("#btn").html(msg.message);
+                                            $("#btn").unbind("click");
+                                        }
+                                    },
+                                    error:function(){
+                                        $.tooltip("抢票失败");
+                                    }
+                                });
+                            });
+						}
+                    }, 1000);
+                }
+				#if(!$isStart && !$isEnd)  ##未开始
+					$("#btn").addClass("disabled");
+					$("#btn").html("未开始");
+					/**
+					 * 倒计时
+					 * */
+                    var intDiff = parseInt("$!{differNum}");
+                    timer(intDiff);
+				#elseif($isStart && !$isEnd)  ##开始
+                    var intDiff = parseInt("$!{differNum}");
+                    timer(intDiff);
+                    $("#activity-text").html("距离结束");
+
+					if(snagTicketNum == maxLimit){
+                        $("#btn").addClass("disabled");
+                        $("#btn").html("票数到达上限");
+						return false;
+                    }
+
+					if(remainTicketNum == 0){
+                        $("#btn").addClass("disabled");
+                        $("#btn").html("无票");
+                        return false;
+                    }
+
+					$("#btn").bind("click",function(){
+                        var num = parseInt($("#num").val());
+						if(maxValue < num){
+                            $.tooltip("申请的票数过大");
+							return false;
+						}
+						$.ajax({
+							url:"$!{rc.contextPath}/snatchtickets/getTickets",
+							data:{id:${activityInfo.id},num:$("#num").val()},
+							type:"post",
+							success:function(msg){
+							    var data = eval("("+msg.data+")");
+								if(data.data == '抢票成功'){
+                                    $.tooltip('抢票成功！', 2500, true);
+                                    var snagTicketNum = 0;
+                                    if($("#snagTicketNum").html() != '')
+                                        snagTicketNum = parseInt($("#snagTicketNum").html());
+                                    $("#snagTicketNum").html(snagTicketNum + parseInt($("#num").val()));
+                                    //修改页面余票
+
+                                    $(".al-tip").show();
+                                   	var lastNum = data.remainticketNum;
+                                    $("#remainTicketNum").html(lastNum);
+                                    $("#btn").addClass("disabled");
+                                    $("#btn").html("请等待抢票结果");
+                                    $("#btn").unbind("click");
+								}else{
+                                    $.tooltip(msg.message);
+                                    $("#btn").addClass("disabled");
+                                    $("#btn").html(msg.message);
+                                    $("#btn").unbind("click");
+                                }
+							},
+							error:function(){
+                                $.tooltip("抢票失败");
+							}
+						});
+					});
+
+				#elseif($isStart && $isEnd)  ##结束
+                    $("#btn").addClass("disabled");
+                    $("#btn").html("已结束");
+					$(".activity-time").hide();
+				#end
+
+				/**
+				 * 判断是否为正整数
+				 * */
+				function isPositiveNum(s) {
+					var re = /^[0-9]*[1-9][0-9]*$/;
+					return re.test(s);
+				}
+				$(document).ready(function() {
+
+					//timer(intDiff);
+					//商品减少事件
+					$("#increase").on("click", function() {
+						var _thisNum = Math.floor($("#num").val());
+						if(isPositiveNum(_thisNum) && _thisNum >1){
+							_thisNum = _thisNum - 1;
+							$("#num").val(_thisNum);
+                            $(".al-tip").hide();
+						}else{
+                            $(".in-tip").show();
+                        }
+					});
+                    //商品增加事件
+					$("#decrease").on("click", function() {
+						var _thisNum = Math.floor($("#num").val());
+						if(isPositiveNum(_thisNum) && _thisNum < maxValue && _thisNum < maxLimit ){
+							_thisNum = _thisNum + 1;
+							$("#num").val(_thisNum);
+                            $(".in-tip").hide();
+						}else{
+                            $(".al-tip").show();
+                        }
+					});
+				});
+			})(jQuery, window, document);
+			function toResult(arg) {
+                var url = "$!{rc.contextPath}/snatchlog/list";
+                window.location.href=url+"?activityId="+arg;
+            }
+		</script>
+	</body>
+
+</html>

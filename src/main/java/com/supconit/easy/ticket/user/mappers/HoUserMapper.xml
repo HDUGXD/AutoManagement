@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.supconit.easy.ticket.user.daos.HoUserMapper" >
+    <resultMap id="BaseResultMap" type="com.supconit.easy.ticket.user.entities.HoUser" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+        <result column="status" property="status" jdbcType="BIGINT" />
+        <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+        <result column="department" property="department" jdbcType="VARCHAR" />
+        <result column="company" property="company" jdbcType="VARCHAR" />
+        <result column="phoneNumber" property="phoneNumber" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="person_name" property="person_name" jdbcType="VARCHAR" />
+        <result column="person_birth" property="person_birth" jdbcType="TIMESTAMP" />
+        <result column="person_code" property="person_code" jdbcType="VARCHAR" />
+
+
+        <!--自定义 用于分页-->
+        <result column="pageNo" property="pageNo" jdbcType="BIGINT" />
+        <result column="pageSize" property="pageSize" jdbcType="BIGINT" />
+
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,
+        username,
+        email,
+        password,
+        create_time,
+        last_login_time,
+        status,
+        idcard,
+        department,
+        company,
+        phoneNumber,
+        remark,
+        person_name,
+        person_birth,
+        person_code
+    </sql>
+
+
+<!--################## 查询 #####################-->
+    <select id="findAllByCondition"  resultType="com.supconit.easy.ticket.user.entities.HoUser">
+        select * from ho_user where 1=1
+        <if test="username!=null">
+            and username=#{username}
+        </if>
+        <if test="department!=null">
+            and department=#{department}
+        </if>
+    </select>
+
+    <!--select by id-->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from ho_user
+        where
+        id = #{id,jdbcType=BIGINT}
+    </select>
+<!--################## 查询end ######################-->
+
+<!--################### 分页 ########################-->
+    <!--查询所有用户(分页)-->
+    <select id="findByPage"  resultType="com.supconit.easy.ticket.user.entities.HoUser">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from ho_user where 1=1
+
+        <if test="username!=null">
+            and username=#{username}
+        </if>
+        order by id desc
+        <if test="pageNo >= 0 and pageSize > 0">
+            limit #{pageNo},#{pageSize}
+        </if>
+
+    </select>
+
+    <select id="getCount"  resultType="java.lang.Long">
+        SELECT
+        count(1) as count
+        from ho_user
+    </select>
+<!--################### 分页end #####################-->
+    <delete id="deleteByPrimaryKey" >
+        delete from ho_user
+        where
+        id = #{id,jdbcType=BIGINT}
+        
+    </delete>
+
+    <delete id="deleteByPrimaryKeys" >
+        delete from ho_user
+        where <foreach collection="primaryKeys" item = "primaryKey" separator=" or " >id = #{primaryKey,jdbcType=BIGINT}</foreach>
+    </delete>
+
+    <insert id="insert" parameterType="com.supconit.easy.ticket.user.entities.HoUser" >
+        insert into ho_user (
+            id,
+            username,
+            email,
+            password,
+            create_time,
+            last_login_time,
+            status,
+            idcard,
+            department,
+            company,
+            phoneNumber,
+            remark,
+            person_name,
+        person_birth,
+        person_code
+        )
+        values (
+            #{id,jdbcType=BIGINT},
+            #{username,jdbcType=VARCHAR},
+            #{email,jdbcType=VARCHAR},
+            #{password,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{lastLoginTime,jdbcType=TIMESTAMP},
+            #{status,jdbcType=BIGINT},
+            #{idcard,jdbcType=VARCHAR},
+            #{department,jdbcType=VARCHAR},
+            #{company,jdbcType=VARCHAR},
+            #{phoneNumber,jdbcType=VARCHAR},
+            #{remark,jdbcType=VARCHAR},
+               #{person_name,jdbcType=VARCHAR},
+               #{person_birth,jdbcType=TIMESTAMP},
+               #{person_code,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.supconit.easy.ticket.user.entities.HoUser" >
+        insert into ho_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="username != null" >
+                username,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="password != null" >
+                password,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="lastLoginTime != null" >
+                last_login_time,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="idcard != null" >
+                idcard,
+            </if>
+            <if test="department != null" >
+                department,
+            </if>
+            <if test="company != null" >
+                company,
+            </if>
+            <if test="phoneNumber != null" >
+                phoneNumber,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="person_name != null" >
+                person_name,
+            </if>
+            <if test="person_birth != null" >
+                person_birth,
+            </if>
+            <if test="person_code != null" >
+                person_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="username != null" >
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginTime != null" >
+                #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=BIGINT},
+            </if>
+            <if test="idcard != null" >
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="department != null" >
+                #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null" >
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNumber != null" >
+                #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="person_name != null" >
+                #{person_name,jdbcType=VARCHAR},
+            </if>
+            <if test="person_birth != null" >
+                #{person_birth,jdbcType=TIMESTAMP},
+            </if>
+            <if test="person_code != null" >
+                #{person_code,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.supconit.easy.ticket.user.entities.HoUser" >
+        update ho_user
+        <set >
+            <if test="id != null" >
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="username != null" >
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginTime != null" >
+                last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=BIGINT},
+            </if>
+            <if test="idcard != null" >
+                idcard = #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="department != null" >
+                department = #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null" >
+                company = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNumber != null" >
+                phoneNumber = #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="person_name != null" >
+                person_name = #{person_name,jdbcType=VARCHAR},
+            </if>
+            <if test="person_birth != null" >
+                person_birth = #{person_birth,jdbcType=TIMESTAMP},
+            </if>
+            <if test="person_code != null" >
+                person_code = #{person_code,jdbcType=VARCHAR},
+            </if>
+        </set>
+            where
+            id = #{id,jdbcType=BIGINT}
+                
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.supconit.easy.ticket.user.entities.HoUser" >
+        update ho_user
+        set
+        <trim suffixOverrides="," >
+            username = #{username,jdbcType=VARCHAR},
+            email = #{email,jdbcType=VARCHAR},
+            password = #{password,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+            status = #{status,jdbcType=BIGINT},
+            idcard = #{idcard,jdbcType=VARCHAR},
+            department = #{department,jdbcType=VARCHAR},
+            company = #{company,jdbcType=VARCHAR},
+            phoneNumber = #{phoneNumber,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+            person_name = #{person_name,jdbcType=VARCHAR},
+            person_birth = #{person_birth,jdbcType=TIMESTAMP},
+            person_code = #{person_code,jdbcType=VARCHAR},
+        </trim>
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </update>
+
+    <select id="loadModels" resultMap="BaseResultMap">
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from ho_user
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="loadMaps" resultType="java.util.HashMap">
+        select
+        <if test="parameters != null">
+         ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from ho_user
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="count" resultType="long">
+        select count(
+        <if test="isDistinct == true">
+            distinct
+        </if>
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        ) from ho_user
+        <if test="condition != null">
+            where ${condition}
+        </if>
+    </select>
+
+    <select id="findModel" resultMap="BaseResultMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from ho_user
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <select id="findMap" resultType="java.util.HashMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from ho_user
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+</mapper>

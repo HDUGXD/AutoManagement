@@ -1,0 +1,61 @@
+<script src="$!{rc.contextPath}/assets/js/navmenu.js"></script>
+<script src="$!{rc.contextPath}/assets/js/custom.js?v=$!{platform_version}"></script>
+<script src="$!{rc.contextPath}/assets/js/echarts/echarts.min.js"></script>
+<script src="$!{rc.contextPath}/assets/js/echarts/theme/macarons.js"></script>
+<script src="$!{rc.contextPath}/assets/js/layer/layer.js"></script>
+<script src="$!{rc.contextPath}/assets/js/ywgl.js"></script>
+
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.core.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.data.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.dom.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.button.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.menu.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.popup.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.list.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.dropdownlist.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.combobox.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.calendar.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.datepicker.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.timepicker.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.datetimepicker.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.userevents.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.numerictextbox.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.pager.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.selectable.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.columnsorter.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.sortable.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.resizable.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.binder.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.validator.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.editable.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.multiselect.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/js/kendo.complexeselect.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.grid.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.treelist.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.autocomplete.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.draganddrop.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.window.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/messages/kendo.messages.zh-CN.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/cultures/kendo.culture.zh-CN.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.tabstrip.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/framework/js/kendo.treeview.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/js/jquery.form.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/js/jquery.validator.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/js/adapter.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/js/base64.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/js/navmenu.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/js/notify-combined.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/js/jquery.autocomplete.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/js/jquery.ztree.all-3.5.min.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/js/site.js"></script>
+<script src="$!{rc.contextPath}/assets/kendo/ued/js/dropdowntreeview.js"></script>
+
+<script type="text/x-kendo-template" id="grid_toolbar_template">
+    <div class="toolbar">
+    	<ul class="grid_operates">
+    	</ul>
+    	<ul class="grid_tool">
+    		##<li><a class="grid_configtable" href="javascript:void(0)"></a></li>
+    	</ul>
+    </div>
+</script>

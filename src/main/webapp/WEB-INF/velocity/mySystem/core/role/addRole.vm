@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+
+    <title>办公自动化系统</title>
+</head>
+
+<body>
+<div class="title"><h2></h2></div>
+
+<div class="main">
+    <form id="user_form" action="" method="post">
+
+
+    </form>
+</div>
+
+</body>
+
+<script type="text/javascript">
+    $(".select-title").on("click", function () {
+        $(".select-list").toggle();
+        return false;
+    });
+    $(".select-list").on("click", "li", function () {
+        var txt = $(this).text();
+        $(".select-title").find("span").text(txt);
+    });
+    //加载表单效果
+    $("document").ready(function () {
+        $('.login').show();
+        $('.login-bg').show();
+    })
+
+
+
+
+
+
+    showRemind('input[type=text], textarea', 'placeholder');
+    function subForm() {
+        var data = $('#user_form').serializeObject();
+        debugger;
+        $.ajax({
+            type: "POST",//方法类型
+            //dataType: "text",//预期服务器返回的数据类型
+            url: "$!{rc.contextPath}/hoUser/addUser",//url
+            data: data,
+//            contentType:"application/x-www-from-urlencoded",
+            success: function (result) {
+                $.message('操作成功');
+
+            },
+            error: function () {
+                $.message({
+                    message: '操作失败',
+                    type: 'error'
+                });
+            }
+        });
+
+    }
+    //将form进行对象进行封装
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+    //消息相关方法
+    //    $(function(){
+    //        $('#btn-success').on('click',function(){
+    //            $.message('成功');
+    //        })
+    //        $('.btn-danger').on('click',function(){
+    //            $.message({
+    //                message:'失败提示',
+    //                type:'error'
+    //            });
+    //        })
+    //        $('.btn-warning').on('click',function(){
+    //            $.message({
+    //                message:'警告提示',
+    //                type:'warning'
+    //            });
+    //        })
+    //        $('.btn-info').on('click',function(){
+    //            $.message({
+    //                message:'信息提醒',
+    //                type:'info'
+    //            });
+    //        })
+    //
+    //    })
+
+
+</script>
+</html>

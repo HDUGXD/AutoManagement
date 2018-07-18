@@ -1,0 +1,117 @@
+.swiper-slide img {
+    width: 100%;
+    height: 135px;
+}
+textarea{
+    width: 100%;
+    resize: none;
+    border: none;
+}
+.prise-textarea{
+    margin:5px 20px 5px 35px;
+}
+.navbg{
+    background-color: #007aff;
+    color: #fff;
+}
+.evaluate {
+    text-align: center;
+    font-size: 2rem;
+}
+.somethings{
+	margin: 35px 35px;
+}
+.thanks{
+    padding: 0px 15px 1px 15px
+}
+.thanks:before {
+    background-color: rgba(0, 0, 0, 0);
+}
+.content-block{
+    margin: 0;
+}
+.mainmenu {
+    padding: 0;
+}
+
+.mainmenu:after {
+    clear: both;
+    content: " ";
+    display: block;
+}
+.btn{
+    margin-top:10px;
+}
+.mainmenu li {
+    float: left;
+    margin-left: 2.5%;
+    margin-top: 2.5%;
+    width: 30%;
+    border-radius: 3px;
+    overflow: hidden;
+    list-style: none;
+    list-style-type: none;
+}
+
+.mainmenu li label {
+    display: block;
+    color: #3d4145;
+    text-align: center;
+}
+
+.mainmenu li span {
+    display: block;
+    height: 60px;
+    line-height: 10px;
+    background-color: #FFF;
+    color: #3d4145;
+    font-size: 14px;
+    text-align: center;
+}
+
+.mainmenu li span.prise-title{
+    height: 20px;
+}
+.goodprise {
+    background: url(../images/goodprise-2.png) center top no-repeat;
+    background-size: 50px 50px;
+}
+
+.goodprise_choice {
+    background: url(../images/goodprise-3.png) center top no-repeat;
+    background-size: 50px 50px;
+}
+
+.midprise {
+    background: url(../images/midprise-2.png) center top no-repeat;
+    background-size: 50px 50px;
+}
+
+.midprise_choice {
+    background: url(../images/midprise-3.png) center top no-repeat;
+    background-size: 50px 50px;
+}
+
+.badprise {
+    background: url(../images/badprise-2.png) center top no-repeat;
+    background-size: 50px 50px;
+}
+
+.badprise_choice {
+    background: url(../images/badprise-3.png) center top no-repeat;
+    background-size: 50px 50px;
+}
+
+.bg{
+    width: 100%;
+    height: 3px;
+    background-color: #ccc;
+}
+.navbar-through .page-content{
+    padding-top:0;
+}
+.submitBtn{
+    display: block;
+    height: 30px;
+    font-size: 16px;
+}

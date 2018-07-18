@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="$!{rc.contextPath}/assets/bootstrap/css/base.css" />
+    <link rel="stylesheet" href="$!{rc.contextPath}/assets/bootstrap/css/info-mgt.css" />
+    <link rel="stylesheet" href="$!{rc.contextPath}/assets/bootstrap/css/WdatePicker.css" />
+##    layer
+    <script type="text/javascript" src="$!{rc.contextPath}/assets/layUI/layer/layer.js"></script>
+    <script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/jquery-1.8.2.min.js"></script>
+
+</head>
+<body>
+<div class="query">
+    <table>
+        <tr style="height: 100px">
+            <td>
+                <div class="query-btn query-conditions ue-clear">
+                    <div class="conditions staff ue-clear">
+                        <label style="font-weight: bold;font-size: 13px">角色名称：</label>
+                        <input type="text" id="role_name" style="margin-bottom: 10px" placeholder="请输入角色名称查询"/>
+                    </div>
+                    <div class="conditions staff ue-clear">
+                        <label style="font-weight: bold;font-size: 13px">角色编码：</label>
+                        <input type="text" id="role_code" style="margin-bottom: 10px" placeholder="请输入角色名称查询"/>
+                    </div>
+
+                    <a onclick="searchByCondition();" class="confirm">查询</a>
+                    <a onclick="clearText();" class="clear">清空条件</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="table-operate ue-clear">
+    <a onclick="addRole()" class="add">添加</a>
+    <a href="javascript:;" class="del">删除</a>
+    <a href="javascript:;" class="edit">编辑</a>
+    <a href="javascript:;" class="count">统计</a>
+    <a href="javascript:;" class="check">审核</a>
+</div>
+<div class="table-box">
+    <table>
+        <thead>
+        <tr>
+            <th class="num">序号</th>
+            <th class="name">姓名</th>
+            <th class="process">流程</th>
+            <th class="node">节点</th>
+            <th class="time">操作时间<span>（小时）</span></th>
+            <th class="operate">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="num">1</td>
+            <td class="name">admin</td>
+            <td class="process">收文</td>
+            <td class="node">登记</td>
+            <td class="time">未完成</td>
+            <td class="operate"><div><img src="$!{rc.contextPath}/assets/bootstrap/images/role.png"><a>分配权限</a></div></td>
+        </tr>
+        <tr>
+            <td class="num"> 1</td>
+            <td class="name">admin</td>
+            <td class="process">收文</td>
+            <td class="node">登记</td>
+            <td class="time">未完成</td>
+            <td class="operate"><a href="javascript:;">查看</a></td>
+        </tr>
+        <tr>
+            <td class="num">1</td>
+            <td class="name">admin</td>
+            <td class="process">收文</td>
+            <td class="node">登记</td>
+            <td class="time">未完成</td>
+            <td class="operate"><a href="javascript:;">查看</a></td>
+        </tr>
+        <tr>
+            <td class="num">1</td>
+            <td class="name">admin</td>
+            <td class="process">收文</td>
+            <td class="node">登记</td>
+            <td class="time">未完成</td>
+            <td class="operate"><a href="javascript:;">查看</a></td>
+        </tr>
+        <tr>
+            <td class="num">1</td>
+            <td class="name">admin</td>
+            <td class="process">收文</td>
+            <td class="node">登记</td>
+            <td class="time">未完成</td>
+            <td class="operate"><a href="javascript:;">查看</a></td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div class="pagination ue-clear"></div>
+</body>
+<script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/jquery.js"></script>
+<script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/common.js"></script>
+<script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/WdatePicker.js"></script>
+<script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/jquery.pagination.js"></script>
+<script type="text/javascript">
+    $(".select-title").on("click",function(){
+        $(".select-list").hide();
+        $(this).siblings($(".select-list")).show();
+        return false;
+    })
+    $(".select-list").on("click","li",function(){
+        var txt = $(this).text();
+        $(this).parent($(".select-list")).siblings($(".select-title")).find("span").text(txt);
+    })
+
+    $('.pagination').pagination(100,{
+        callback: function(page){
+            alert(page);
+        },
+        display_msg: true,
+        setPageNo: true
+    });
+
+    $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
+
+    showRemind('input[type=text], textarea','placeholder');
+    //清空
+    function clearText(){
+        $("#username_id").val("");
+    }
+    //查询
+    function searchByCondition(){
+      alert();
+    }
+    //弹出添加用户页面
+    function addRole(){
+##        window.location.href="$!{rc.contextPath}/role/addRole";
+        //iframe窗
+
+        layer.open({
+            type: 2,
+            title: false,
+            closeBtn: 0, //不显示关闭按钮
+            shade: [0],
+            area: ['340px', '215px'],
+            offset: 'rb', //右下角弹出
+            time: 2000, //2秒后自动关闭
+            anim: 2,
+            content: ['test/guodu.html', 'no'], //iframe的url，no代表不显示滚动条
+            end: function(){ //此处用于演示
+                layer.open({
+                    type: 2,
+                    title: '很多时候，我们想最大化看，比如像这个页面。',
+                    shadeClose: true,
+                    shade: false,
+                    maxmin: true, //开启最大化最小化按钮
+                    area: ['893px', '600px'],
+                    content: '$!{rc.contextPath}/role/addRole'
+                });
+            }
+        });
+    }
+</script>
+</html>

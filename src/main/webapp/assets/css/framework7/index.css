@@ -1,0 +1,56 @@
+.map-iframe{
+    margin: 50px 0 0 0;
+    text-align: center;
+    width:100%;
+    height:100%;
+}
+.map-iframe iframe{
+    width: 100%;
+    height:100%;
+}
+.tl{
+    text-align: right;
+}
+video{
+    width:100%;
+    height: auto;
+}
+.record,.check-rect,.check-more-con{
+    display: none;
+}
+.ztree-content{
+    margin:40px 0 0 0;
+}
+.searchSite{
+    margin:44px 0 0 0;
+}
+.dropzone{
+    margin: 50px 0 0 0;
+}
+.dz-preview{
+    float: left;
+    width: 50%;
+    height: auto;
+    margin: 10px 0 10px 0;
+    text-align: center;
+}
+.dz-image img{
+    width: 90%;
+    height: 120px;
+}
+.totalnum{
+    font-weight: 700;
+    color: #f00!important;
+}
+.uploader{
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+}
+.uploader-list{
+    margin: 60px 0 0 0;
+}
+.row img{
+    width: 100%;
+    height: 100%;
+}

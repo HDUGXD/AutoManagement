@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <title>抢票系统</title>
+    <link href="$!{rc.contextPath}/assets/stylesheets/common/bootstrap.min.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/stylesheets/common/font-awesome.min.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/stylesheets/custom/newcustom.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/kendo/ued/framework/styles/kendo.common.min.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/kendo/ued/framework/styles/kendo.default.min.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/kendo/ued/css/layout-default-latest.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/kendo/ued/skins/hctpl3/css/skin.css" rel="stylesheet" id="skin_css_file"/>
+    <link href="$!{rc.contextPath}/assets/kendo/ued/css/ztree/zTreeStyle.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/kendo/ued/css/font-awesome.min.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/css/custom.css?v=$!{platform_version}" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/css/odometer-theme-default.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/css/liMarquee.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/kendo/ued/css/jquery.validator.css" rel="stylesheet">
+
+    <script src="$!{rc.contextPath}/assets/kendo/ued/js/jquery-1.11.1.min.js"></script>
+    <script src="$!{rc.contextPath}/assets/kendo/ued/js/jquery.layout-latest.js"></script>
+    <script src="$!{rc.contextPath}/assets/kendo/ued/js/jquery-ui.min.js"></script>
+    <script src="$!{rc.contextPath}/assets/kendo/ued/js/jselect.js"></script>
+    <script src="$!{rc.contextPath}/assets/datepicker/WdatePicker.js"></script>
+    <script src="$!{rc.contextPath}/assets/js/odometer.min.js"></script>
+    <script src="$!{rc.contextPath}/assets/js/jquery.liMarquee.js"></script>
+    <script src="$!{rc.contextPath}/assets/js/jquery.hDialog.js"></script>
+    <!--[if lt IE 9]>
+    <script src="../assets/javascripts/common/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<script>
+    /*function loadColor() {
+        //从cookie中取出背景色的标识
+        var color = getCookie("background_Color");
+        if(color=="red"){
+            //将背景色换为红色
+            //将顶部导航栏的背景图片换成红色的
+            document.getElementById('nav-bg').src = "$!{rc.contextPath}/assets/images/grab/nav/2.jpg";
+            //将左侧导航栏的背景图片改为红色
+            document.getElementById('nav-left').src = "$!{rc.contextPath}/assets/images/grab/nav/2.jpg";
+            //第二个导航栏的背景色为红色
+            $("#dhl").css("background-color","red");
+            //将每个活动内字体改为红色
+            //将标题改为红色
+            $(".item-title").css("color","red");
+            $(".item-start").css("color","red");
+            $(".item-end").css("color","red");
+            $(".item-detail a").css("color","red");
+            $(".item-detail").css("border","1px solid red");
+            //将分页条改为红色
+            $(".pagination>li>span").css("color","red");
+            $(".pagination>li>a, .pagination>li>span").css("color","red");
+            $(".pagination>li>a, .pagination>li>span").css("border-color","red");
+            //分页条改为红色
+            $(".pagination>.active>span").css("background-color","red");
+            $(".pagination>.active>span").css("bordor-color","red");
+            $(".pagination>.active>span").css("color","#fff");
+            //将被选中的active颜色改为红色
+            $(".list-left .list-group-item.active").css("background-color","red");
+            $(".list-left .list-group-item.active").css("border-left","4px solid #e48888");
+        }else{
+            //将顶部导航栏的背景图片换成蓝色的
+            document.getElementById('nav-bg').src = "$!{rc.contextPath}/assets/images/grab/nav/nav-bg.png";
+            //将左侧导航栏的背景图片改为蓝色
+            document.getElementById('nav-left').src = "$!{rc.contextPath}/assets/images/grab/nav/nav-left.png";
+            //将蓝色基调背景改成蓝色
+            $("#dhl").css("background-color","#248bdd");
+            //将每个活动内字体改为红色
+            //将标题改为红色
+            $(".item-title").css("color","#248bdd");
+            $(".item-start").css("color","#248bdd");
+            $(".item-end").css("color","#248bdd");
+            $(".item-detail a").css("color","#248bdd");
+            $(".item-detail").css("border","1px solid #248bdd");
+            //将分页条改为蓝色
+            $(".pagination>li>span").css("color","#248bdd");
+            $(".pagination>li>a, .pagination>li>span").css("color","#248bdd");
+            $(".pagination>li>a, .pagination>li>span").css("border-color","#248bdd");
+            //分页条改为蓝色
+            $(".pagination>.active>span").css("background-color","#248bdd");
+            $(".pagination>.active>span").css("bordor-color","#248bdd");
+            $(".pagination>.active>span").css("color","#fff");
+            //将被选中的active颜色改为红色
+            $(".list-left .list-group-item.active").css("background-color","#248bdd");
+            $(".list-left .list-group-item.active").css("border-left","4px solid #6dc9ff");
+        }
+
+    }*/
+    $(function () {
+        //加载页面颜色
+       // loadColor();
+        function timeStamp2String(time){
+            var datetime = new Date();
+//            datetime.setTime(time);
+            var year = datetime.getFullYear();
+            var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+            var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+            var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
+            var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+            var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+            var ymd = year + "-" + month + "-" + date;
+            var hms = hour+":"+minute+":"+second;
+            $("#ymd").text(ymd);
+//            $("#hms").text(hms);
+            return ymd;
+        }
+        function getMyDay(date){
+            var week;
+            if(date.getDay()==0) week="星期日"
+            if(date.getDay()==1) week="星期一"
+            if(date.getDay()==2) week="星期二"
+            if(date.getDay()==3) week="星期三"
+            if(date.getDay()==4) week="星期四"
+            if(date.getDay()==5) week="星期五"
+            if(date.getDay()==6) week="星期六"
+            $("#hms").text(week);
+            return week;
+        }
+        getMyDay(new Date());
+        timeStamp2String();  function isShowButton() {
+            var code = "${code}";
+            var adminRoles = "${user.adminRole}";
+            if(adminRoles.indexOf(code)!=-1){
+                $("#adminRole").css({"display":"block"});
+            }
+        }
+        isShowButton();
+    })
+    //获取浏览器中的Cookie
+    /*function getCookie(cName){
+        var cookieString = decodeURI(document.cookie);
+        var cookieArray = cookieString.split("; ");
+        console.log(cookieArray.length);
+        for(var i = 0; i < cookieArray.length; i++){
+            var cookieNum = cookieArray[i].split("=");
+            console.log(cookieNum.toString());
+            var cookieName = cookieNum[0];
+            var cookieValue = cookieNum[1];
+
+            if(cookieName == cName){
+                return cookieValue;
+            }
+        }
+        return false;
+    }*/
+</script>
+<body style="overflow:-Scroll;overflow-x:hidden">
+<div class="container-fluid container-custom">
+    <div class="row-fluid">
+        <!--导航栏-->
+        <div class="nav-custom">
+            <img src="$!{rc.contextPath}/assets/images/grab/nav/nav-bg.png" alt="" id="nav-bg">
+        </div>
+        <div class="nav-left">
+            <div class="nav-img">
+                <img src="$!{rc.contextPath}/assets/images/grab/nav/nav-hz.png" alt="" />
+            </div>
+            <div class="nav-title">
+                <div class="hzs">浙江省杭州市</div>
+                <div class="gongan">萧山公安<span>抢票系统</span></div>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="nav-msg">
+                <div class="nav-date">
+                    日期:
+                    <span id="ymd">2018-03-27</span>
+                    <span id="hms">星期三</span>
+                </div>
+                <div class="nav-yh">
+                #*---------------------------------------------------先注释掉----------------------------------*#
+                   #* <div class="nav-list" style="height: 13px;width: 13px;background-color: red;margin-left: -16px;margin-top: 4px;" id="bkgRed">
+
+                    </div>
+                    <div class="nav-list" style="height: 13px;width: 13px;background-color: blue;margin-left: -16px;margin-top: 4px;" id="bkgBlue">
+
+                    </div>*#
+
+                    <div class="nav-list">
+                        <a href="${rc.contextPath}/department/list">
+                            我的NAS云盘
+                        </a>
+                    </div>
+                    <div class="nav-list" id="adminRole" style="display: none">
+                        <a href="$!{rc.contextPath}/shiro/list" >后台管理</a>
+                    </div>
+                    <div class="nav-list">
+                        <span>用户:</span>
+                        <span>${user.username}</span>
+                    </div>
+                    <div class="nav-list">
+                        <span>部门:</span>
+                        #if(${user.department})
+                            <span>${user.department}</span>
+                        #else
+                            <span>暂无</span>
+                        #end
+
+                    </div>
+                    <div class="nav-list">
+                        <a href="$!{rc.contextPath}/hoUser/logout">
+                            <span><img src="$!{rc.contextPath}/assets/images/grab/nav/tuichu.png" alt="" /></span>
+                            <span>退出登录</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--导航栏-->
+
+   #* <script>
+        $("#bkgRed").on("click",function () {
+    //将顶部导航栏的背景图片换成红色的
+    document.getElementById('nav-bg').src = "$!{rc.contextPath}/assets/images/grab/nav/2.jpg";
+    //将左侧导航栏的背景图片改为红色
+    document.getElementById('nav-left').src = "$!{rc.contextPath}/assets/images/grab/nav/2.jpg";
+    //将蓝色基调背景改成红色
+    $("#dhl").css("background-color","red");
+    //将每个活动内字体改为红色
+    //将标题改为红色
+    $(".item-title").css("color","red");
+    $(".item-start").css("color","red");
+    $(".item-end").css("color","red");
+    $(".item-detail a").css("color","red");
+    $(".item-detail").css("border","1px solid red");
+    //将分页条改为红色
+    $(".pagination>li>span").css("color","red");
+    $(".pagination>li>a, .pagination>li>span").css("color","red");
+    $(".pagination>li>a, .pagination>li>span").css("border-color","red");
+    //分页条改为红色
+    $(".pagination>.active>span").css("background-color","red");
+    $(".pagination>.active>span").css("bordor-color","red");
+    $(".pagination>.active>span").css("color","#fff");
+
+    //将被选中的active颜色改为红色
+    $(".list-left .list-group-item.active").css("background-color","red");
+    $(".list-left .list-group-item.active").css("border-left","4px solid #e48888");
+
+    //先删除原来的Cookie(吧Cookie的有效天数设为-1就可以),在设置Cookie
+    removeCookie("background_Color");
+    setCookie("background_Color","red",30);
+    })
+    $("#bkgBlue").on("click",function () {
+    //将顶部导航栏的背景图片换成蓝色的
+    document.getElementById('nav-bg').src = "$!{rc.contextPath}/assets/images/grab/nav/nav-bg.png";
+    //将左侧导航栏的背景图片改为蓝色
+    document.getElementById('nav-left').src = "$!{rc.contextPath}/assets/images/grab/nav/nav-left.png";
+    //将蓝色基调背景改成蓝色
+    $("#dhl").css("background-color","#248bdd");
+    //将每个活动内字体改为红色
+    //将标题改为红色
+    $(".item-title").css("color","#248bdd");
+    $(".item-start").css("color","#248bdd");
+    $(".item-end").css("color","#248bdd");
+    $(".item-detail a").css("color","#248bdd");
+    $(".item-detail").css("border","1px solid #248bdd");
+    //将分页条改为蓝色
+    $(".pagination>li>span").css("color","#248bdd");
+    $(".pagination>li>a, .pagination>li>span").css("color","#248bdd");
+    $(".pagination>li>a, .pagination>li>span").css("border-color","#248bdd");
+    //分页条改为蓝色
+    $(".pagination>.active>span").css("background-color","#248bdd");
+    $(".pagination>.active>span").css("bordor-color","#248bdd");
+    $(".pagination>.active>span").css("color","#fff");
+    //将被选中的active颜色改为蓝色
+    $(".list-left .list-group-item.active").css("background-color","#248bdd");
+    $(".list-left .list-group-item.active").css("border-left","4px solid #6dc9ff");
+
+    //先删除原来的Cookie(吧Cookie的有效天数设为-1就可以),在设置Cookie
+    removeCookie("background_Color");
+    setCookie("background_Color","blue",30);
+    })
+    </script>*#
+    <style>
+        .box
+        {
+            display:
+                    table-cell;
+
+            vertical-align:middle;
+
+            text-align:center;
+
+            *display:
+                    block;
+
+            *font-family:Arial;
+
+            width:120px;
+
+            height:180px;
+
+        }
+        .box img{
+            width: 120px;
+            height: 180px;
+        }
+    </style>
+    <!--左侧导航-->
+    <div class="nav-custom-left" id="left-nav">
+        <img src="$!{rc.contextPath}/assets/images/grab/nav/nav-left.png" alt="" id="nav-left">
+    </div>
+    <div class="nav-list-ul">
+        <ul class="list-group list-left">
+            <li class="list-group-item active" id="msqp">
+                <img src="$!{rc.contextPath}/assets/images/grab/nav/mas.png" alt="马上抢票" />
+                <span><a href="$!{rc.contextPath}/toHome"> 马上抢票</a></span>
+            </li>
+            <li class="list-group-item" id="qpjg">
+                <img src="$!{rc.contextPath}/assets/images/grab/nav/result.png" alt="抢票结果" />
+                <span> <a href="$!{rc.contextPath}/activity/result"> 抢票结果</a> </span>
+            </li>
+            <li class="list-group-item" id="grzx">
+                <img src="$!{rc.contextPath}/assets/images/grab/nav/person.png" alt="个人中心" />
+                <span><a href="$!{rc.contextPath}/toPersonInformation"> 个人中心</a></span>
+            </li>
+        </ul>
+    </div>
+    <!--左侧导航-->
+    <!--正文-->
+    <div class="wrapper" id="wrapper-con">
+        <ul class="nav nav-tabs tabs-custom" id="dhl">
+            <li class="active">
+                <a href="#qpz" data-toggle="tab">抢票中</a>
+            </li>
+            <li>
+                <a href="#yjs" data-toggle="tab">已结束</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="qpz">
+                <div class="list-content">
+                    <ul class="list-group list-custom" id="list-con"></ul>
+                </div>
+            </div>
+            <div class="tab-pane" id="yjs">
+                <div class="list-content">
+                    <ul class="list-group list-custom" id="list-end"></ul>
+                </div>
+            </div>
+            <div class="page-fen" >
+                <ul class="pagination">
+                #*<li id="home-page-end"><span>首页</span></li>
+                <li id="previous-page"><span>上一页</span></li>
+                <li id="next-page-end"><span>下一页</span></li>
+                <li id="last-page-end"><span>末页</span></li>*#
+                    <li id="home-page"><span>首页</span></li>
+                    <li id="previous-page"><span>上一页</span></li>
+                    <li id="next-page"><span>下一页</span></li>
+                    <li id="last-page"><span>末页</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--正文-->
+</div>
+</div>
+<script src="$!{rc.contextPath}/assets/javascripts/jquery/jquery-1.8.3.min.js"></script>
+<script src="$!{rc.contextPath}/assets/javascripts/common/bootstrap.min.js"></script>
+<script>
+
+    (function($, window, document, undefined) {
+        /**
+         * 局部变量
+         * */
+        var pageAllSize = "",
+                pageInit = 0;
+        var pageAllSize_end = "",
+                pageInit_end = 0;
+
+        /**
+         * setHeight()
+         * 为了方便一屏展示所有数据，设置元素高度
+         */
+        var setHeight = function(opt) {
+            var winHeight = $(window).height(),
+                    panelHeight = opt.offset().top;
+            var getHeight = winHeight - panelHeight;
+            opt.height($(document).height()-75+"px");
+            opt.find("img").height($(document).height()-75+"px");
+            $("#wrapper-con").height(getHeight-12+"px");
+        };
+
+        /**
+         *initPages()
+         * 生成分页
+         * */
+        var initPages = function(opt){
+            if(opt){
+                var liList = "";
+                for(var i= 1,l=opt;i<=l;i++){
+                    liList += '<li list-name='+i+' class="lilist"><span>'+i+'</span></li>';
+                }
+                $("#previous-page").after(liList);
+                $('.lilist').eq(0).addClass("active");
+                $('.lilist').on("click",function(){
+                    var _this = $(this);
+                    $(".lilist").removeClass("active");
+                    _this.addClass("active");
+                    var listName = _this.attr("list-name");
+                    var data = {
+                        pageNo:listName,
+                        pageSize:"10"
+                    };
+                    getLists(data);
+                });
+               /* //判断当前是红色还是蓝色
+                //从cookie中取出背景色的标识
+                var color = getCookie("background_Color");
+                if(color=="red"){
+                    $(".pagination>.active>span").css("background-color","red");
+                }*/
+            }
+        };
+
+        /**
+         *initPages()
+         * 生成分页
+         * */
+        var initPages_end = function(opt){
+            if(opt){
+                var liList_end = "";
+                for(var i= 1,l=opt;i<=l;i++){
+                    liList_end += '<li list-name-end='+i+' class="lilist_end"><span>'+i+'</span></li>';
+                }
+                $("#previous-page-end").after(liList_end);
+                $('.lilist_end').eq(0).addClass("active");
+                $('.lilist_end').on("click",function(){
+                    var _this = $(this);
+                    $(".lilist_end").removeClass("active");
+                    _this.addClass("active");
+                    var listName = _this.attr("list-name-end");
+                    var data = {
+                        pageNo:listName,
+                        pageSize:"10"
+                    };
+                    getLists_end(data);
+                   // loadColor();
+                });
+
+            }
+        };
+
+        /**
+         *initList()
+         * 生成抢票列表
+         * */
+        var initList = function (opt){
+            if(opt && opt.length>0){
+                $("#list-con").empty();
+                var liGroup = "";
+                for(var i= 0,l=opt.length;i<l;i++){
+                    var liImg = "",
+                            liTitle = "",
+                            liStart = "",
+                            liEnd = "",
+                            liDetail = "";
+                    opt[i]["detail"] = opt[i]["detail"]?opt[i]["detail"]:"暂无介绍";
+                    if(opt[i]["picPath"] !=null) {
+                        liImg += '<div class="item-img"><div class="box"><img style="width: 120px;height: 180px;vertical-align:middle;" src="${rc.contextPath}/activity/filePreview?isTemp=true&fileName='+opt[i]["picPath"]+'"/></div></div>';
+                    }else {
+                        liImg += '<div class="item-img"><div class="box"><img style="width: 120px;height: 180px;vertical-align:middle;" src="$!{rc.contextPath}/assets/images/screen/zldd/timg.jpg"/></div></div>';
+                    ##                                liImg += '<div class="item-img"><img src="$!{rc.contextPath}/assets/images/grab/nav/1.png"/></div>';
+                    }
+                ##                            liImg += '<div class="item-img"><img src="$!{rc.contextPath}/assets/images/grab/nav/1.png"/></div>';
+                    liTitle += '<div class="item-title" style="text-align: center"><p>'+opt[i]["activityName"]+'</p></div>';
+                    liStart += '<div class="item-start">开始时间:<span>'+opt[i]["startDate"]+'</span></div>';
+                    liEnd += '<div class="item-end">结束时间:<span>'+opt[i]["endDate"]+'</span></div>';
+                    liDetail += '<div class="item-detail"><a href="#">查看详情</a></div>';
+                    liGroup +='<li class="list-group-item buffer-list" onclick="toTicketLog('+opt[i]["id"]+')" content='+opt[i]["id"]+'><div class="li-bg-img"><img src="$!{rc.contextPath}/assets/images/grab/li-bg.png" alt=""></div><div class="li-content">' + liImg + liTitle + liStart + liEnd + liDetail + '</div></li>';
+                }
+                $("#list-con").append(liGroup);
+                //执行页面颜色的选择
+                //loadColor();
+            }else {
+                $("#list-con").html("");
+            }
+        };
+
+        /**
+         *initList()
+         * 生成抢票列表已结束
+         * */
+        var initList_end = function (opt){
+            if(opt && opt.length>0){
+                $("#list-end").empty();
+                var liGroup = "";
+                for(var i= 0,l=opt.length;i<l;i++){
+                    var liImg = "",
+                            liTitle = "",
+                            liStart = "",
+                            liEnd = "",
+                            liDetail = "";
+                    opt[i]["detail"] = opt[i]["detail"]?opt[i]["detail"]:"暂无介绍";
+                    if(opt[i]["picPath"] !=null) {
+                        liImg += '<div class="item-img"><div class="box"><img style="width: 120px;height: 180px;vertical-align:middle;" src="${rc.contextPath}/activity/filePreview?isTemp=true&fileName='+opt[i]["picPath"]+'"/></div></div>';
+                    }else {
+                        liImg += '<div class="item-img"><div class="box"><img style="width: 120px;height: 180px;vertical-align:middle;" src="$!{rc.contextPath}/assets/images/screen/zldd/timg.jpg"/></div></div>';
+                    ##                                liImg += '<div class="item-img"><img src="$!{rc.contextPath}/assets/images/grab/nav/1.png"/></div>';
+                    }
+                ##                            liImg += '<div class="item-img"><img src="$!{rc.contextPath}/assets/images/grab/nav/1.png"/></div>';
+                    liTitle += '<div class="item-title" style="text-align: center"><p>'+opt[i]["activityName"]+'</p></div>';
+                    liStart += '<div class="item-start">开始时间:<span>'+opt[i]["startDate"]+'</span></div>';
+                    liEnd += '<div class="item-end">结束时间:<span>'+opt[i]["endDate"]+'</span></div>';
+                    liDetail += '<div class="item-detail"><a href="#">查看详情</a></div>';
+                    liGroup +='<li class="list-group-item buffer-list" onclick="toTicketLog('+opt[i]["id"]+')" content='+opt[i]["id"]+' ><div class="li-bg-img"><img src="$!{rc.contextPath}/assets/images/grab/li-bg.png" alt=""></div><div class="li-content">' + liImg + liTitle + liStart + liEnd + liDetail + '</div></li>';
+                }
+                $("#list-end").append(liGroup);
+               // loadColor();
+            }
+        };
+
+        /**
+         *getLists()
+         * 抢票列表请求数据  详情
+         * */
+        var getLists = function (opt) {
+            $.ajax({
+                url:"$!{rc.contextPath}/activity/toHomeIn",
+                type:"POST",
+                dataType:"json",
+                data:opt,
+                success: function (result) {
+                    if(result){
+                        pageAllSize = result.totalPage;
+                        initList(result.rows);
+                        pageInit++;
+                        if(pageInit < 2){
+                            initPages(pageAllSize);
+                        }
+                    }
+                },
+                error: function (err) {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        };
+
+        /**
+         *getLists()
+         * 抢票列表请求数据  已经结束
+         * */
+        var getLists_end = function (opt) {
+            $.ajax({
+                url:"$!{rc.contextPath}/activity/toHomeEnd",
+                type:"POST",
+                dataType:"json",
+                data:opt,
+                success: function (result) {
+                    if(result){
+                        pageAllSize_end = result.totalPage;
+                        initList_end(result.rows);
+                        pageInit_end++;
+                        if(pageInit_end < 2){
+                            initPages_end(pageAllSize);
+                        }
+                    }
+                },
+                error: function (err) {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        };
+
+        $(document).ready(function() {
+            var data = {pageNo:"1",pageSize:"10"};
+            setHeight($("#left-nav"));
+            getLists(data);
+            getLists_end(data)
+
+            $(window).scroll(function () {
+                var _scrollHiegh = $(window).scrollTop();
+                var _imgHeight = $(document).height() - 75;
+                if(_scrollHiegh <= 30){
+                    $("#left-nav").height(_imgHeight+_scrollHiegh+"px");
+                    $("#left-nav").find("img").height(_imgHeight+_scrollHiegh+"px");
+                }
+            })
+            $(window).resize(function(){
+                setHeight($("#left-nav"));
+            });
+            /*首页*/
+            $("#home-page").on("click",function(){
+                $(".lilist").removeClass("active").eq(0).addClass("active");
+                var data = {
+                    pageNo : "1",
+                    pageSize:"10"
+                };
+                getLists(data);
+            });
+            /*首页*/
+            $("#home-page-end").on("click",function(){
+                $(".lilist_end").removeClass("active").eq(0).addClass("active");
+                var data = {
+                    pageNo : "1",
+                    pageSize:"10"
+                };
+                getLists_end(data);
+            });
+
+            /*末页*/
+            $("#last-page-end").on("click",function(){
+                $(".lilist_end").removeClass("active");
+                $(".lilist_end:last").addClass("active");
+                var data = {
+                    pageNo : pageAllSize,
+                    pageSize:"10"
+                };
+                getLists_end(data);
+            });
+
+            /*上一页*/
+            $("#previous-page").on("click",function (){
+                var _prev = $(".lilist.active").prev(".lilist");
+                if(_prev.length>0){
+                    $(".lilist").removeClass("active");
+                    _prev.addClass("active");
+                    var listName = _prev.attr("list-name");//当前选中页的上一页
+                    var data = {
+                        pageNo : listName,
+                        pageSize:"10"
+                    };
+                    getLists(data);
+                }
+            });
+            /*上一页*/
+            $("#previous-page-end").on("click",function (){
+                var _prev = $(".lilist_end .active").prev(".lilist_end");
+                if(_prev.length>0){
+                    $(".lilist_end").removeClass("active");
+                    _prev.addClass("active");
+                    var listName = _prev.attr("list-name-end");//当前选中页的上一页
+                    var data = {
+                        pageNo : listName,
+                        pageSize:"10"
+                    };
+                    getLists_end(data);
+                }
+            });
+
+            /*下一页*/
+            $("#next-page").on("click",function (){
+                var _next = $(".lilist.active").next(".lilist");
+                if(_next.length>0){
+                    $(".lilist").removeClass("active");
+                    _next.addClass("active");
+                    var listName = _next.attr("list-name");//当前选中页的下一页
+                    var data = {
+                        pageNo : pageAllSize,
+                        pageSize:"10"
+                    };
+                    getLists(data);
+                }
+            });
+            /*下一页*/
+            $("#next-page-end").on("click",function (){
+                var _next = $(".lilist_end .active").next(".lilist");
+                if(_next.length>0){
+                    $(".lilist_end").removeClass("active");
+                    _next.addClass("active");
+                    var listName = _next.attr("list-name-end");//当前选中页的下一页
+                    var data = {
+                        pageNo : pageAllSize,
+                        pageSize:"10"
+                    };
+                    getLists_end(data);
+                }
+            });
+
+            $(".list-group .buffer-list").on("click",function () {
+                var id =  $(this).attr("content");
+                window.location.href = "$!{rc.contextPath}/activity/index?id="+id;
+            });
+
+            $("#msqp").on("click",function () {
+                window.location.href="$!{rc.contextPath}/toHome";
+            });
+            $("#qpjg").on("click",function () {
+                window.location.href="$!{rc.contextPath}/activity/result";
+            });
+            $("#grzx").on("click",function () {
+                window.location.href="$!{rc.contextPath}/toPersonInformation";
+            });
+        });
+    ## 活动不存在弹窗
+        #if(${error})
+            alert('$!{error}');
+        #end
+    })(jQuery, window, document);
+    function toTicketLog(id) {
+        window.location.href = "$!{rc.contextPath}/activity/index?id="+id;
+    }
+
+    /*//添加cookie的函数     键,值,有效时间
+    function setCookie(key,value,iDay){
+        //获取当前时间
+        var oDate = new Date();
+        //设置过期时间为当前天数加上过期天数
+        oDate.setDate(oDate.getDate()+iDay);
+        document.cookie=key +'='+value +';expires ='+ oDate+";path=/";
+    }
+    //删除Cookie
+    function removeCookie(name){
+        setCookie(name,1,-1);
+    }*/
+
+
+</script>
+</body>
+</html>

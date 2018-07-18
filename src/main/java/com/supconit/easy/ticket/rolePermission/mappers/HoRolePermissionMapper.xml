@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.supconit.easy.ticket.rolePermission.daos.HoRolePermissionMapper" >
+    <resultMap id="BaseResultMap" type="com.supconit.easy.ticket.rolePermission.entities.HoRolePermission" >
+        <result column="rid" property="rid" jdbcType="BIGINT" />
+        <result column="pid" property="pid" jdbcType="BIGINT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        rid,
+        pid
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from ho_role_permission
+    </select>
+
+    <delete id="deleteByPrimaryKey" >
+        delete from ho_role_permission
+    </delete>
+
+
+    <insert id="insert" parameterType="com.supconit.easy.ticket.rolePermission.entities.HoRolePermission" >
+        insert into ho_role_permission (
+            rid,
+            pid
+        )
+        values (
+            #{rid,jdbcType=BIGINT},
+            #{pid,jdbcType=BIGINT}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.supconit.easy.ticket.rolePermission.entities.HoRolePermission" >
+        insert into ho_role_permission
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="rid != null" >
+                rid,
+            </if>
+            <if test="pid != null" >
+                pid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="rid != null" >
+                #{rid,jdbcType=BIGINT},
+            </if>
+            <if test="pid != null" >
+                #{pid,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.supconit.easy.ticket.rolePermission.entities.HoRolePermission" >
+        update ho_role_permission
+        <set >
+            <if test="rid != null" >
+                rid = #{rid,jdbcType=BIGINT},
+            </if>
+            <if test="pid != null" >
+                pid = #{pid,jdbcType=BIGINT},
+            </if>
+        </set>
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.supconit.easy.ticket.rolePermission.entities.HoRolePermission" >
+        update ho_role_permission
+        set
+        <trim suffixOverrides="," >
+            rid = #{rid,jdbcType=BIGINT},
+            pid = #{pid,jdbcType=BIGINT},
+        </trim>
+    </update>
+
+    <select id="loadModels" resultMap="BaseResultMap">
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from ho_role_permission
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="loadMaps" resultType="java.util.HashMap">
+        select
+        <if test="parameters != null">
+         ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from ho_role_permission
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="count" resultType="long">
+        select count(
+        <if test="isDistinct == true">
+            distinct
+        </if>
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        ) from ho_role_permission
+        <if test="condition != null">
+            where ${condition}
+        </if>
+    </select>
+
+    <select id="findModel" resultMap="BaseResultMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from ho_role_permission
+    </select>
+
+    <select id="findMap" resultType="java.util.HashMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from ho_role_permission
+    </select>
+</mapper>

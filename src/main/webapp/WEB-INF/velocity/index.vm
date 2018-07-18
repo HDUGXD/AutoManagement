@@ -1,0 +1,16 @@
+#parse("platform/_header.vm")
+<style>
+
+</style>
+</head>
+<body>
+    <center>
+        <div>
+            <h1>$!{init}</h1>
+        </div>
+    </center>
+</body>
+#parse("platform/_footer.vm")
+<script>
+
+</script>

@@ -1,0 +1,19 @@
+#parse("platform/_header.vm")
+</head>
+<style>
+    .font-design{
+        font-size: 30px;
+        text-align: center;
+        padding-left: 336px;
+        text-decoration:underline;
+        color: red;
+    }
+</style>
+<body>
+<div style="padding-top: 20px">
+
+<a href="$!{rc.contextPath}/toHome" class="font-design"><b>对不起,您无权访问管理员页面,点我将跳转抢票页面</b></a>
+</div>
+    #parse("platform/_footer.vm")
+
+</body>

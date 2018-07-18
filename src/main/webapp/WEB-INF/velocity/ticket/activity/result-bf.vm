@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <title>抢票系统</title>
+    <link href="$!{rc.contextPath}/assets/stylesheets/common/bootstrap.min.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/stylesheets/common/font-awesome.min.css" rel="stylesheet">
+##		<link href="$!{rc.contextPath}/assets/stylesheets/plugin/bootstrap-table.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/stylesheets/custom/custom.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="../assets/javascripts/common/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container-fluid container-custom">
+    <div class="row-fluid">
+        <!--导航栏-->
+        <div class="navbar-top">
+            <div class="navbar-top-con">
+                <a class="brand" href="#">抢票系统</a>
+                <ul class="nav pull-right">
+                    <li>
+                        <a href="$!{rc.contextPath}/toHome">抢票</a>
+                    </li>
+                    <li class="active">
+                        <a href="$!{rc.contextPath}/activity/list">公示</a>
+                    </li>
+                    <li>
+                        <a href="$!{rc.contextPath}/toPersonInformation">个人中心</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--导航栏-->
+        <!--正文-->
+        <div class="wrapper">
+            <!--左侧导航栏-->
+            <div class="nav-content" id="nav-wrapper">
+                <ul class="nav nav-tabs nav-pills nav-stacked nav-custom">
+                    <li class="active">
+                        <a href="#result" data-toggle="tab">抢票结果公示</a>
+                    </li>
+                </ul>
+
+                <form action="$!{rc.contextPath}/activity/list" method="get">
+                    <table>
+                        <tr>
+                            <td class="ui-search-name">开始时间:</td>
+                            <td class="ui-search-c">
+                                <input type="text" name="startDate" id="startDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'endDate\')}'})"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ui-search-name">结束时间:</td>
+                            <td class="ui-search-c">
+                                <input type="text" name="endDate" id="endDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'startDate\')}'})"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <button type="submit">查询</button>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+            <!--左侧导航栏-->
+            <!--右侧内容-->
+            <div class="tab-wrapper">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="result">
+                        <div class="list-content">
+                            <ul class="list-group list-result">
+                                #foreach($activity in $activitys)
+                                    <li class="list-group-item">
+                                    ##                                                <div class="list-groups">
+                                        <div>
+                                            <input type="hidden" id="${activity.id}" value="${activity.id}">
+                                            <div class="list-img">
+                                                #if(!${activity.picPath})
+                                                    <img src="$!{rc.contextPath}/assets/images/screen/zldd/timg.jpg" alt="" />
+                                                #else
+                                                    <img src="${rc.contextPath}/activity/filePreview?isTemp=true&fileName=${activity.picPath}" alt="" />
+                                                #end
+
+                                            </div>
+                                            <div class="aaaa-text">
+                                                <div class="list-title" style="cursor: pointer">
+                                                    <span>活动标题:</span>
+                                                    <span onclick="toTicketLog(${activity.id})" style="text-decoration:underline"> ${activity.activityName}</span>
+                                                </div>
+                                                <div class="list-time">
+                                                    <span>开始时间:</span>
+                                                    <span>${activity.startDate}</span>
+                                                </div>
+                                                <div class="list-time">
+                                                    <span>结束时间:</span>
+                                                    <span>${activity.endDate}</span>
+                                                </div>
+                                                <div class="item-content">
+                                                    <span>活动内容:</span>
+                                                    <span>每个人最多抢${activity.maxLimit}张</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                #end
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="history">
+                        <table class="table table-hover" id="history-table">
+                            <thead></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--右侧内容-->
+        </div>
+        <!--正文-->
+    </div>
+</div>
+<script src="$!{rc.contextPath}/assets/javascripts/jquery/jquery-2.1.1.min.js"></script>
+<script src="$!{rc.contextPath}/assets/javascripts/common/bootstrap.min.js"></script>
+<script src="$!{rc.contextPath}/assets/platform/datepicker/WdatePicker.js"></script>
+##		<script src="$!{rc.contextPath}/assets/javascripts/bootstrap-table/bootstrap-table.js"></script>
+##		<script src="$!{rc.contextPath}/assets/javascripts/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script>
+    (function($, window, document, undefined) {
+        /**
+         * setHeight()
+         * 为了方便一屏展示所有数据，设置元素高度
+         */
+        var setHeight = function(opt) {
+            var winHeight = $(window).height(),
+                    panelHeight = opt.offset().top;
+            var getHeight = winHeight - panelHeight - 10;
+            opt.height(getHeight + "px");
+            $("#history").height(getHeight + "px");
+            $("#nav-wrapper").height(getHeight + 20 + "px");
+        }
+        $(document).ready(function() {
+            setHeight($("#result"));
+            /*$('#result-table').bootstrapTable({
+                method: 'post',
+                contentType: "application/x-www-form-urlencoded", //必须要有！！！！
+                url: "", //要请求数据的文件路径
+                toolbar: '#toolbar', //指定工具栏
+                striped: true, //是否显示行间隔色
+                dataField: "res", //bootstrap table 可以前端分页也可以后端分页，这里
+                //我们使用的是后端分页，后端分页时需返回含有total：总记录数,这个键值好像是固定的
+                //rows： 记录集合 键值可以修改  dataField 自己定义成自己想要的就好
+                pageNumber: 1, //初始化加载第一页，默认第一页
+                pagination: true, //是否分页
+                queryParamsType: 'limit', //查询参数组织方式
+                sidePagination: 'server', //指定服务器端分页
+                pageSize: 10, //单页记录数
+                pageList: [5, 10, 20, 30], //分页步进值
+                search:false,
+                showRefresh: false, //刷新按钮
+                showColumns: false,
+                clickToSelect: true, //是否启用点击选中行
+                toolbarAlign: 'right',
+                //工具栏对齐方式
+                buttonsAlign: 'right', //按钮对齐方式
+                toolbar: '#toolbar', //指定工作栏
+                columns: [{
+                        title: '全选',
+                        field: 'select',
+                        //复选框
+                        checkbox: true,
+                        width: 25,
+                        align: 'center',
+                        valign: 'middle'
+                    },
+                    {
+                        title: 'ID',
+                        field: 'ID',
+                        visible: false
+                    },
+                    {
+                        title: '发布时间',
+                        field: 'LoginName',
+                        sortable: true
+                    },
+                    {
+                        title: '抢票内容',
+                        field: 'Name',
+                        sortable: true
+                    },
+                    {
+                        title: '数量',
+                        field: 'Tel',
+                    },
+                    {
+                        title: '得票的警员',
+                        field: 'Email'
+                    }
+                ],
+                locale: 'zh-CN', //中文支持,
+                responseHandler: function(res) {
+                    //在ajax获取到数据，渲染表格之前，修改数据源
+                    return res;
+                }
+            });*/
+//					$('#history-table').bootstrapTable({
+//						method: 'post',
+//						contentType: "application/x-www-form-urlencoded", //必须要有！！！！
+//						url: "", //要请求数据的文件路径
+//						toolbar: '#toolbar', //指定工具栏
+//						striped: true, //是否显示行间隔色
+//						dataField: "res", //bootstrap table 可以前端分页也可以后端分页，这里
+//						//我们使用的是后端分页，后端分页时需返回含有total：总记录数,这个键值好像是固定的
+//						//rows： 记录集合 键值可以修改  dataField 自己定义成自己想要的就好
+//						pageNumber: 1, //初始化加载第一页，默认第一页
+//						pagination: true, //是否分页
+//						queryParamsType: 'limit', //查询参数组织方式
+//						sidePagination: 'server', //指定服务器端分页
+//						pageSize: 10, //单页记录数
+//						pageList: [5, 10, 20, 30], //分页步进值
+//						showRefresh: false, //刷新按钮
+//						showColumns: false,
+//						clickToSelect: true, //是否启用点击选中行
+//						toolbarAlign: 'right',
+//						//工具栏对齐方式
+//						buttonsAlign: 'right', //按钮对齐方式
+//						toolbar: '#toolbar', //指定工作栏
+//						columns: [{
+//								title: '全选',
+//								field: 'select',
+//								//复选框
+//								checkbox: true,
+//								width: 25,
+//								align: 'center',
+//								valign: 'middle'
+//							},
+//							{
+//								title: 'ID',
+//								field: 'ID',
+//								visible: false
+//							},
+//							{
+//								title: '发布时间',
+//								field: 'LoginName',
+//								sortable: true
+//							},
+//							{
+//								title: '抢票内容',
+//								field: 'Name',
+//								sortable: true
+//							},
+//							{
+//								title: '数量',
+//								field: 'Tel',
+//							},
+//							{
+//								title: '得票的警员',
+//								field: 'Email'
+//							}
+//						],
+//						locale: 'zh-CN', //中文支持,
+//						responseHandler: function(res) {
+//							//在ajax获取到数据，渲染表格之前，修改数据源
+//							return res;
+//						}
+//					});
+        });
+    })(jQuery, window, document);
+
+    function toTicketLog(activityId) {
+        var url = "$!{rc.contextPath}/snatchlog/list";
+        window.location.href=url+"?activityId="+activityId;
+    }
+</script>
+</body>
+
+</html>

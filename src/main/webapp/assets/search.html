@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="max_html">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <title>驾驶员信息列表</title>
+    <script src="http://172.16.97.223:8080/ticc_linan_web/assets/kendo/ued/js/jquery-1.11.1.min.js"></script>
+    <style>
+        table {
+            max-width: 100%;
+            background-color: transparent;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        .table {width: 100%;}
+        .table th, .table td {
+            padding: 8px;
+            line-height: 22px;
+            text-align: center;
+            vertical-align: top;
+            border-top: 1px solid #dddddd;
+        }
+        .assertCode {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .table th {
+            font-weight: bold;
+        }
+
+        .table thead th {
+            vertical-align: bottom;
+        }
+        .table tbody+tbody {  border-top: 2px solid #dddddd;  }
+
+        .table .table {
+            background-color: #ffffff;
+        }
+
+        .table-condensed th, .table-condensed td {
+            padding: 4px 5px;
+        }
+
+        .table-bordered {
+            border: 1px solid #dddddd;
+            border-collapse: separate;
+            *border-collapse: collapse;
+            border-left: 0;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+        }
+
+        .table-bordered th, .table-bordered td {
+            border-left: 1px solid #dddddd;
+        }
+
+    </style>
+</head>
+<body >
+<div id="example" style="margin:0px;" class="ui-layout-center">
+    <div class="k-header" >
+            <div>
+                <div style="height: 94%;">
+                    <div class="open_window" id="planList_HBox">
+                        <div>
+                            <div class="s_btn">
+                                <span>姓名：</span>
+                                <input name="DRIVER"
+                                       style="outline:none;color:#A0DDD5;background:none;line-height:26px;height:26px;border:1px solid #A0DDD5;color:#A0DDD5;padding-left:10px;"
+                                       value="" type="text">
+                                <button class="x_cBtn" onclick="queryPlanList(10,'#planList_HBox')">查询</button>
+                            </div>
+                            <div class="tab_xin_c">
+                                <table cellpadding="0" cellspacing="0" class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>姓名</th>
+                                        <th>上岗证</th>
+                                        <th>电话</th>
+                                        <th>备注</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody><tr><td>朱  凯</td><td>202356</td><td>13758259826</td><td>长运公司</td></tr><tr><td>许剑文</td><td>200890</td><td>15924126770</td><td></td></tr><tr><td>杨宇军</td><td>202002</td><td>18967155486</td><td></td></tr><tr><td>何军锋</td><td>202581</td><td>13456883294</td><td></td></tr><tr><td>许忠宝</td><td>201322</td><td>13968033186</td><td></td></tr><tr><td>韦  炜</td><td>202354</td><td>15867103060</td><td></td></tr><tr><td>周伟君</td><td>201444</td><td>13175006881</td><td></td></tr><tr><td>方忠华</td><td>201850</td><td>13588416325</td><td></td></tr><tr><td>吕学敏</td><td>200026</td><td>15888846097</td><td></td></tr><tr><td>郭建武</td><td>202293</td><td>13588189582</td><td></td></tbody>
+                                </table>
+                            </div>
+                            <div class="page_box">
+                                <button class="page_btn" onclick="queryPlanList(10,'#planList_HBox','prev')">上一页</button>
+                                <button class="page_btn" onclick="queryPlanList(10,'#planList_HBox','next')">下一页</button>
+                                <span class="page_num page_now" id="page_now">1</span>/<span class="page_num page_all" id="page_all">39</span><span
+                                    class="page_zs" id="page_zs">显示条目<b class="num_now" id="num_now">1-20</b>，共有信息<b class="num_all" id="num_all">770</b>条</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <script>
+        function queryPlanList(pageSize, selector, direction) {
+            var pageNo = parseInt($(selector).find(".page_now").text());
+            var pageAll = parseInt($(selector).find(".page_all").text());
+            var condition;
+            if ((pageNo < pageAll && direction == "next") || (pageNo > 1 && direction == "prev") || direction == undefined || direction == "") {
+                $(".data_loading").show();
+                if (pageSize == "" || pageSize == undefined) {
+                    pageSize = 10;
+                }
+
+                if (direction == "next") {
+                    pageNo = pageNo + 1;
+                } else if (direction == "prev") {
+                    pageNo = pageNo - 1;
+                } else {
+                    pageNo = 1;
+                    $(selector).find("input[name=condition_keyword]").val($(selector).find("input[name=keyword]").val());
+                }
+                condition = $(selector).find("input[name=DRIVER]").val();
+
+                jQuery.ajax({
+                    type: "post",
+                    url: "/ticc_linan_web/taxievalu/list",
+                    dataType: "json",
+                    data: {"pageNo": pageNo, "pageSize": pageSize, "DRIVER": condition},
+                    success: function (result) {
+                        //插入分页信息
+                        insertPageInfo(result, selector);
+                        //插入列表记录
+                        insertPlanList(result, selector);
+                    }
+                });
+            }
+        }
+
+        function insertPlanList(result, selector) {
+            var size = result.rows.length;
+            var html = "";
+            for (var i = 0; i < size; i++) {
+                html += "<tr>"
+                        + "<td>" + result.rows[i].dw + "</td>"
+                        + "<td>" + result.rows[i].yamc + "</td>"
+                        + "<td>" + result.rows[i].wjh + "</td>"
+                        + "<td>" + result.rows[i].fwsj + "</td>"
+                        + "<td>" + result.rows[i].sxsj + "</td>"
+                        + "</tr>"
+            }
+            html = html.replace(/undefined/g, "");
+            $(selector).find("tbody").html(html);
+        }
+
+        //插入分页信息
+        function insertPageInfo(result, pageName) {
+            if (result.total == 0) {
+                $(pageName).find(".page_now").text("0");
+                $(pageName).find(".page_all").text("0");
+                $(pageName).find(".num_now").text("0-0");
+                $(pageName).find(".num_all").text("0");
+            } else {
+                $(pageName).find(".page_now").text(result.pageNo);
+                $(pageName).find(".page_all").text(Math.ceil(result.total / result.pageSize));
+                $(pageName).find(".num_now").text(((result.pageNo - 1) * result.pageSize + 1) + "-" + ((result.pageNo - 1) * result.pageSize + result.rows.length));
+                $(pageName).find(".num_all").text(result.total);
+            }
+        }
+
+        function insertPlanList(result, selector) {
+            var size = result.rows.length;
+            var html = "";
+            for (var i = 0; i < size; i++) {
+                html += "<tr>"
+                        + "<td>" + result.rows[i].DRIVER + "</td>"
+                        + "<td>" + result.rows[i].DRIVER_CARD + "</td>"
+                        + "<td>" + result.rows[i].DRIVER_MOBILE + "</td>"
+                        + "<td>" + result.rows[i].REMARK + "</td>"
+                        + "</tr>"
+            }
+            html = html.replace(/undefined/g, "");
+            $(selector).find("tbody").html(html);
+
+        }
+
+    </script>
+
+<script>
+
+</script>
+</body>
+</html>

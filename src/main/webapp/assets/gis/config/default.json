@@ -1,0 +1,23 @@
+{
+  "initMap": {
+    "wkid": 4326,
+    "extent":{
+      "xmin": 119.95883618215917,
+      "ymin":30.156469316445463,
+      "xmax": 120.42712842722263,
+      "ymax":  30.381345724448803
+    }
+  },
+  "Layers": [
+    {
+      "id": "baseLayer",
+      "type": "ArcGISTiledMapServiceLayer",
+      "url": "http://21.15.18.252:6080/arcgis/rest/services/hzjtmapNew/black/MapServer"
+    },
+    {
+      "id": "dynamic",
+      "type": "DynamicLayer",
+      "url": "http://172.18.13.146:8399/arcgis/rest/services/trip_taxi_wms/MapServer"
+    }
+  ]
+}
