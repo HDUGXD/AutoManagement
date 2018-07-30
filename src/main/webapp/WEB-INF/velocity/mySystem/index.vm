@@ -42,6 +42,7 @@
                     <li class="nav-info">
                     	<div class="nav-header"><a href="javascript:;" class="ue-clear"><span>导航信息管理</span><i class="icon"></i></a></div>
                         <ul class="subnav">
+                            <li><a onclick="showTV()">授课视频</a></li>
                         	<li><a onclick="tableMenu();">信息录入</a></li>
                             <li><a onclick="listMenu();">信息管理</a></li>
                             <li><a onclick="homeMenu();">领导值岗管理</a></li>
@@ -114,7 +115,9 @@
     function homeMenu(){
         $("#iframe").attr("src","$!{rc.contextPath}/Oa/home");
     }
-
+    function showTV(){
+        $("#iframe").attr("src","$!{rc.contextPath}/Oa/showTV");
+    }
     $(document).ready(function () {
         $("#iframe").attr("src","$!{rc.contextPath}/Oa/home");
     })

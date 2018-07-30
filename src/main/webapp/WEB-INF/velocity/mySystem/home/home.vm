@@ -37,7 +37,7 @@
             </li>
             <li>
             	<a href="javascript:;" class="img"><img src="$!{rc.contextPath}/assets/bootstrap/images/icon06.png" /></a>
-                <p><a href="javascript:;">网络硬盘</a></p>
+                <p><a onclick="showVideo()">视频课程</a></p>
             </li>
             <li>
             	<a href="javascript:;" class="img"><img src="$!{rc.contextPath}/assets/bootstrap/images/icon07.png" /></a>

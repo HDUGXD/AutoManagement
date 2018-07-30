@@ -21,6 +21,11 @@ public class OaController {
         model.put("user",user);
         return "mySystem/home/home";
     }
+    @RequestMapping(value="showTV", method= RequestMethod.GET)
+    public String showTV(ModelMap model, HttpSession session){
+
+        return "mySystem/video/showTV";
+    }
     //表单填写页面
     @RequestMapping(value="info_reg", method= RequestMethod.GET)
     public String info_reg(ModelMap model, HttpSession session){
