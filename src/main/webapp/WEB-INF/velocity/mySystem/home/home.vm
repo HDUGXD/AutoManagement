@@ -27,12 +27,19 @@
             	<a href="javascript:;" class="img"><img src="$!{rc.contextPath}/assets/bootstrap/images/icon03.png" /></a>
                 <p><a href="javascript:;">密码修改</a></p>
             </li>
+##            <li>
+##            	<a href="javascript:;" class="img"><img src="$!{rc.contextPath}/assets/bootstrap/images/icon04.png" /></a>
+##                <p><a onclick="zhoubaoManage();">周报管理</a></p>
+##            </li>
+
             <li>
-            	<a href="javascript:;" class="img"><img src="$!{rc.contextPath}/assets/bootstrap/images/icon04.png" /></a>
-                <p><a onclick="zhoubaoManage();">周报管理</a></p>
+                <a href="javascript:;" class="img"><img src="$!{rc.contextPath}/assets/bootstrap/images/icon04.png" /></a>
+                <p><a onclick="zhoubaoManage();">周报管理测试</a></p>
             </li>
+
+
             <li>
-            	<a href="javascript:;" class="img"><img src="$!{rc.contextPath}/assets/bootstrap/images/icon05.png" /></a>
+            	<a href="javascript:;" class="img"><img src="/upload/fjgc.png" /></a>
                 <p><a href="javascript:;">添加文章</a></p>
             </li>
             <li>

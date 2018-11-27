@@ -49,4 +49,7 @@ public interface IHoUserService {
     List<HoUser> findByPage(HoUser condition);
 
     long getCount();
+
+//    void  saveUser(HoUser hoUser);
+    void insert(HoUser user);
 }

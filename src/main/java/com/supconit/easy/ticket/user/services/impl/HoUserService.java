@@ -1,15 +1,20 @@
 package com.supconit.easy.ticket.user.services.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.alibaba.fastjson.JSONObject;
 import com.supconit.easy.ticket.user.daos.HoUserMapper;
 import com.supconit.easy.ticket.user.entities.HoUser;
+import com.supconit.easy.ticket.user.entities.UserTest;
 import com.supconit.easy.ticket.user.services.IHoUserService;
 import com.supconit.easy.ticket.util.util.SqlUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +24,9 @@ import org.springframework.stereotype.Service;
 public class HoUserService implements IHoUserService ,Serializable {
     @Resource(name="hoUserMapper")
     private HoUserMapper hoUserMapper;
+
+    @Resource
+    private MongoTemplate mongoTemplate;
 
     @Override
     public boolean save(HoUser hoUser) {
@@ -129,5 +137,41 @@ public class HoUserService implements IHoUserService ,Serializable {
         return hoUserMapper.getCount();
     }
 
+//    @Override
+//    public void saveUser(HoUser hoUser) {
+//        new UserRepository().save(hoUser);
+//    }
+
+
+    //
+
+    /**
+     * 插入
+     */
+
+
+    @Override
+    public void insert(HoUser hoUser) {
+        List<String> list = new ArrayList<>();
+        String jsonStr = JSONObject.toJSONString(hoUser);
+        list.add(jsonStr);
+        try {
+            System.out.println("插入开始。。。。。");
+//            mongoTemplate.insert(list);
+//             new UserRepository().insert(hoUser);
+            UserTest userTest = new UserTest();
+//            userTest.setId("123123");
+            userTest.setEmail("123123");
+            userTest.setCompany("123123");
+            userTest.setDepartment("123123");
+
+
+            mongoTemplate.save(userTest,"gxd");
+            System.out.println("插入结束。。。。。");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }

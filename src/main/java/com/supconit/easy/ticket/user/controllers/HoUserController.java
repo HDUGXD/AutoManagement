@@ -12,10 +12,12 @@ import javax.servlet.http.HttpSession;
 import com.supconit.easy.ticket.user.entities.HoUser;
 import com.supconit.easy.ticket.user.entities.HoUserDTO;
 import com.supconit.easy.ticket.user.services.IHoUserService;
+import com.supconit.easy.ticket.user.services.impl.HoUserMongo;
 import com.supconit.easy.ticket.util.pager.PageInfo;
 import com.supconit.easy.ticket.util.util.DateUtil;
 import com.supconit.easy.ticket.util.util.LimitShowDTO;
 import com.supconit.easy.ticket.util.util.ResponseUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,7 +31,8 @@ import org.springframework.web.bind.annotation.*;
 public class HoUserController {
     @Resource(name = "hoUserService")
     private IHoUserService hoUserService;
-
+    @Autowired
+    private HoUserMongo hoUserMongo;
     //登录主页
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(String username, String password, ModelMap model,
@@ -37,8 +40,11 @@ public class HoUserController {
 //        HoUser nowUser = new HoUser();
 //        nowUser.setUsername();
         return "mySystem/index";
+//        return "mySystem/testMap";
     }
-    @RequestMapping("/logout")
+    //退出到登录页面
+//    @RequestMapping("/logout")
+    @RequestMapping(value = "logout", method = RequestMethod.GET)
     public String logout(HttpSession session) {
         session.invalidate();
         return "ticket/login";
@@ -80,6 +86,11 @@ public class HoUserController {
         HoUser hoUserModel = hoUserDTO.toModel();
         //创建时间
         hoUserModel.setCreateTime( DateUtil.parse(DateUtil.format(new Date())));
+//        hoUserService.saveUser(hoUserModel);
+        hoUserService.insert(hoUserModel);
+//          HoUserMongo hoUserMongo = new HoUserMongo();
+//          hoUserMongo.insertMongo();
+
         return ResponseUtil.getResEntityForPPP(hoUserService.save(hoUserModel));
     }
     @ResponseBody      //返回数据实体  要用此标签

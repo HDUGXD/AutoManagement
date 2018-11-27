@@ -6,10 +6,13 @@ import com.supconit.easy.ticket.Department.services.DepartmentService;
 import com.supconit.easy.ticket.index.entities.Pageable;
 import com.supconit.easy.ticket.index.entities.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -17,6 +20,7 @@ public class DepartmentServiceImpl implements DepartmentService,Serializable {
 
     @Autowired
     private DepartmentDao departmentDao;
+
 
     @Override
     public Pageable findByPager(Pagination<Department> pager, Department condition) {

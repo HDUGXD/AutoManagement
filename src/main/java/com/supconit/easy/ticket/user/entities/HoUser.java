@@ -1,13 +1,18 @@
 package com.supconit.easy.ticket.user.entities;
 
+import com.supconit.easy.ticket.user.services.impl.AutoValue;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Date;
 import java.io.Serializable;
 
-
+@Document
 public class HoUser implements Serializable {
         
         private static final long serialVersionUID = 1L;
-        
+        @AutoValue
+        @Id
         private Long id;
         /**用户昵称*/
         private String username;

@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.supconit.easy.ticket.role.entities.HoRole;
-import org.apache.ibatis.annotations.Param;
+import org.springframework.data.repository.query.Param;
+
 
 public interface HoRoleMapper {
     int deleteByPrimaryKey(@Param("id") Long id);

@@ -1,93 +1,138 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="$!{rc.contextPath}/assets/bootstrap/css/base.css"/>
-    <link rel="stylesheet" href="$!{rc.contextPath}/assets/bootstrap/css/info-reg.css"/>
-## 消息
-    <link rel="stylesheet" href="$!{rc.contextPath}/assets/message/css/message.css">
-##    <link rel="stylesheet" type="text/css" href="$!{rc.contextPath}/assets/message/css/bootstrap.css">
-    <title>办公自动化系统</title>
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="$!{rc.contextPath}/assets/layUI/layui/css/layui.css" />
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
-
 <body>
-<div class="title"><h2>信息登记</h2></div>
 
-<div class="main">
-    <form id="user_form" action="" method="post">
-        <p class="long-input ue-clear">
-            <label>用户名：</label>
-            <input type="text" name="username" id="username_id" style="width: 300px" placeholder="3~12位字母加数字"/>
-        </p>
-        <p class="long-input ue-clear">
-            <label>密码：</label>
-            <input type="password" name="password" id="" style="height: 25px;width: 320px"/>
-        </p>
-        <p class="long-input ue-clear">
-            <label>确认密码：</label>
-            <input type="password" id="repetPassword" style="height: 25px;width: 320px"/>
-        </p>
-##        <p class="short-input ue-clear">
-##            <label>生日：</label>
-##            <input type="text" placeholder="生日日期" style="width: 300px" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"/>
-##        </p>
-        <p class="long-input ue-clear">
-            <label>联系电话：</label>
-            <input type="text" name="phoneNumber" style="width: 300px" placeholder="联系电话"/>
-        </p>
-    ##        <p class="long-input ue-clear">
-    ##            <label>邮箱：</label>
-    ##            <input type="text" style="width: 300px" name="email" placeholder="邮箱"/>
-    ##        </p>
+<form class="layui-form" id="user_form" action=""  style="margin-top: 3%">
 
-    ##        <p class="long-input ue-clear">
-    ##            <label>人员姓名：</label>
-    ##            <input type="text" style="width: 300px" name="person_name" placeholder="邮箱"/>
-    ##        </p>
-        <p class="short-input ue-clear">
-            <label>所属部门：</label>
-            <select id="department" name="department" style="width:325px; height: 30px">
-                <option value="">请选择</option>
-                #foreach($data in $department)
-                    <option value="$!{data.id}">
-                        $!{data.name}
-                    </option>
-                #end
-            </select>
-        </p>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">用户姓名</label>
+            <div class="layui-input-inline">
+                <input  type="text" name="username" lay-verify="username" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">用户编号</label>
+            <div class="layui-input-inline">
+                <input  type="text" name="person_code" lay-verify="person_code" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+       <label class="layui-form-label">身份证号</label>
+            <div class="layui-input-inline">
+        <input  type="text" name="idcard" lay-verify="identity" placeholder="" autocomplete="off" class="layui-input">
+       </div>
+        </div>
+        <div class="layui-inline">
+        <label class="layui-form-label">所属部门</label>
+            <div class="layui-input-inline">
+            <input  type="text" name="department" lay-verify="department" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">验证手机</label>
+            <div class="layui-input-inline">
+                <input type="tel" id="phoneNumber" name="phoneNumber" lay-verify="required|phone" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">验证邮箱</label>
+            <div class="layui-input-inline">
+                <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">普通文本域</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" style="width: 75%" class="layui-textarea"></textarea>
+        </div>
+    </div>
 
-
-        <p class="short-input ue-clear">
-            <label>备注：</label>
-            <textarea name="remark" placeholder="请输入内容"></textarea>
-        </p>
-    </form>
-</div>
-<div class="btn ue-clear">
-    <a class="confirm" onclick="subForm()">确定</a>
-    <a href="javascript:;" class="clear">清空</a>
-</div>
-</body>
+    <div class="layui-form-item" align="center">
+        <div class="layui-input-block" align="center">
+            <button class="layui-btn"  type="submit" onclick="subForm()" lay-filter="demo1">提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="$!{rc.contextPath}/assets/layUI/layui/layui.js"></script>
 <script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/jquery.js"></script>
-<script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/common.js"></script>
-<script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/WdatePicker.js"></script>
-##提示消息
-<script src="$!{rc.contextPath}/assets/message/js/jquery.min.js"></script>
-<script src="$!{rc.contextPath}/assets/message/js/message.js"></script>
-<script type="text/javascript">
-    $(".select-title").on("click", function () {
-        $(".select-list").toggle();
-        return false;
-    });
-    $(".select-list").on("click", "li", function () {
-        var txt = $(this).text();
-        $(".select-title").find("span").text(txt);
-    });
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+        //自定义验证规则
+        form.verify({
+            username: function(value){
+                if(value.length==""){
+                    return '用户名不能为空！';
+                }
+            }
+            ,person_code: function(value){
+                if(value.length==""){
+                    return '人员编号不能为空！';
+                }
+            }
+            ,title: function(value){
+                if(value.length < 5){
+                    return '标题至少得5个字符啊';
+                }
+            }
+            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+            ,content: function(value){
+                layedit.sync(editIndex);
+            }
+        });
 
 
-    showRemind('input[type=text], textarea', 'placeholder');
+
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+
+
+
+
+    });
+
+//    showRemind('input[type=text], textarea', 'placeholder');
     function subForm() {
+
         var data = $('#user_form').serializeObject();
+
         debugger;
         $.ajax({
             type: "POST",//方法类型
@@ -124,32 +169,7 @@
         });
         return o;
     };
-    //消息相关方法
-    //    $(function(){
-    //        $('#btn-success').on('click',function(){
-    //            $.message('成功');
-    //        })
-    //        $('.btn-danger').on('click',function(){
-    //            $.message({
-    //                message:'失败提示',
-    //                type:'error'
-    //            });
-    //        })
-    //        $('.btn-warning').on('click',function(){
-    //            $.message({
-    //                message:'警告提示',
-    //                type:'warning'
-    //            });
-    //        })
-    //        $('.btn-info').on('click',function(){
-    //            $.message({
-    //                message:'信息提醒',
-    //                type:'info'
-    //            });
-    //        })
-    //
-    //    })
-
-
 </script>
+
+</body>
 </html>
