@@ -28,18 +28,16 @@
     	p:username="${jdbc.ds1.username}" p:password="${jdbc.ds1.password}"
 		p:initialSize="${jdbc.ds1.initialSize}" p:maxActive="${jdbc.ds1.maxActive}" p:testOnBorrow="${jdbc.ds1.testOnBorrow:false}" destroy-method="close">
 	</bean>
-
 	<!--sqlSessionFactory-->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds1"/>
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
-		<property name="mapperLocations" value="classpath*:com/supconit/**/mappers/*Mapper.xml"/>
+		<property name="mapperLocations" value="classpath*:com/supconit/easy/**/mappers/*Mapper.xml"/>
 	</bean>
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 		<constructor-arg ref="sqlSessionFactory"/>
 	</bean>
 
-	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="ds1"/>
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
@@ -55,11 +53,11 @@
 		<property name="testOnBorrow" value="${redis.testOnBorrow}"/>
 	</bean>
 
-	<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+	<bean id="jedis" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
 		  p:hostName="${redis.host}" p:port="${redis.port}" p:poolConfig-ref="poolConfig" p:timeout="${redis.timeout}"/>
 
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
-		<property name="connectionFactory" ref="connectionFactory"/>
+		<property name="connectionFactory" ref="jedis"/>
 		<property name="keySerializer">
 			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
 		</property>
@@ -69,39 +67,49 @@
 		</property>
 	</bean>
 	<!--==========mongodb start===================-->
-	<!--引入MongoDB连接文件-->
+	<!--&lt;!&ndash;引入MongoDB连接文件&ndash;&gt;-->
 	<context:property-placeholder location="classpath*:mongodb.properties" ignore-unresolvable="true"/>
 	<!--连接MongoDB服务器-->
-	<!--<mongo:mongo-client id="mongo" host="192.168.11.69" port="27017" >-->
-		<!--<mongo:client-options connections-per-host="8"-->
-							  <!--threads-allowed-to-block-for-connection-multiplier="4"-->
-							  <!--connect-timeout="1500"-->
-							  <!--max-wait-time="1500"-->
-							  <!--socket-keep-alive="true"-->
-							  <!--socket-timeout="1500"/>-->
-	<!--</mongo:mongo-client>-->
+	<mongo:mongo-client id="mongo" host="192.168.11.69" port="27017" >
+		<mongo:client-options connections-per-host="8"
+							  threads-allowed-to-block-for-connection-multiplier="4"
+							  connect-timeout="1500"
+							  max-wait-time="1500"
+							  socket-keep-alive="true"
+							  socket-timeout="1500"/>
+	</mongo:mongo-client>
 
-	<!--<mongo:db-factory id="mongoDbFactory"  dbname="${mongo.dbname}"  mongo-ref="mongo"/>-->
+	<mongo:db-factory id="mongoDbFactory"  dbname="${mongo.dbname}"  mongo-ref="mongo"/>
 
 
-	<!--&lt;!&ndash;配置mongoTemplate&ndash;&gt;-->
-	<!--&lt;!&ndash; mongodb的主要操作对象，所有对mongodb的增删改查的操作都是通过它完成&ndash;&gt;-->
-	<!--<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">-->
-		<!--<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>-->
-	<!--</bean>-->
+	<!--配置mongoTemplate-->
+	<!-- mongodb的主要操作对象，所有对mongodb的增删改查的操作都是通过它完成-->
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+	</bean>
 
 
 
 	<!--==========mongodb end =====================-->
+
 	<!-- =============== PROFILES BEGIN ================ -->
 	<beans profile="dev">
 		<context:property-placeholder location="classpath:/config-dev.properties" ignore-unresolvable="true" />
 		<util:properties id="_globalVars" location="classpath:/global-vars-dev.properties" />
 		<context:property-placeholder location="classpath:/redis.properties" ignore-unresolvable="true"/>
 		<import resource="classpath:/mvc.xml" />
-		<!--ssm 集成 mongodb  -->
+		<!--ssm 集成 mongodb-->
 		<import resource="classpath:/spring-mongodb.xml"/>
+		<!--ssm 集成 rabbitmq-->
+		<import resource="classpath:/spring-rabbitmq.xml"/>
+		<!-- 扫描指定package下所有带有如@controller,@services,@resource,@ods并把所注释的注册为Spring Beans -->
+		<context:component-scan base-package="com.supconit.easy.ticket.util.rabbitMq" />
 
+		<!-- 激活annotation功能 -->
+		<context:annotation-config />
+		<!-- 激活annotation功能 -->
+		<context:spring-configured />
 	</beans>
+
 	<!-- ================ PROFILES END ================= -->
 </beans>

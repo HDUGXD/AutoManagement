@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>地图</title>
     <link rel="stylesheet" type="text/css" href="$!{rc.contextPath}/assets/maps/ThreeLever/static/css/main.css">
+    <link rel="stylesheet" href="$!{rc.contextPath}/assets/echarts/css/common.css"/>
+    <link rel="stylesheet" href="$!{rc.contextPath}/assets/echarts/css/map.css"/>
     <script type="text/javascript" src="$!{rc.contextPath}/assets/maps/ThreeLever/static/js/echarts.min.js"></script>
     <!-- 全国344个市、区、州对应的数字编号 -->
     <script type="text/javascript" src="$!{rc.contextPath}/assets/maps/ThreeLever/static/js/citymap.js"></script>
@@ -12,5 +14,9 @@
 <div id="main" style="width: 100%;height:800px;"></div>
 <script type="text/javascript" src="$!{rc.contextPath}/assets/maps/ThreeLever/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="$!{rc.contextPath}/assets/maps/ThreeLever/static/js/app.js"></script>
+<script src="$!{rc.contextPath}/assets/javascripts/jquery/jquery-2.1.1.min.js"></script>
+<script src="$!{rc.contextPath}/assets/echarts/js/china.js"></script>
+<script src="$!{rc.contextPath}/assets/echarts/js/echarts.js"></script>
+<script src="$!{rc.contextPath}/assets/bootstrap/js/jquery.js"></script>
 </body>
 </html>

@@ -39,17 +39,17 @@
                 <ul class="nav">
                 	<li class="office current"><div class="nav-header"><a onclick="homeMenu();" class="ue-clear"><span>日常办公</span><i class="icon"></i></a></div></li>
                     <li class="gongwen"><div class="nav-header"><a href="javascript:;" class="ue-clear"><span>公文起草</span><i class="icon"></i></a></div></li>
-                    <li class="nav-info">
-                    	<div class="nav-header"><a href="javascript:;" class="ue-clear"><span>导航信息管理</span><i class="icon"></i></a></div>
-                        <ul class="subnav">
-                            <li><a onclick="showTV()">授课视频</a></li>
-                        	<li><a onclick="tableMenu();">信息录入</a></li>
-                            <li><a onclick="listMenu();">信息管理</a></li>
-                            <li><a onclick="homeMenu();">领导值岗管理</a></li>
-                            <li><a href="javascript:;">中层领导管理</a></li>
-                            <li><a href="javascript:;">领导值班记录</a></li>
-                        </ul>
-                    </li>
+##                    <li class="nav-info">
+##                    	<div class="nav-header"><a href="javascript:;" class="ue-clear"><span>导航信息管理</span><i class="icon"></i></a></div>
+##                        <ul class="subnav">
+##                            <li><a onclick="showTV()">授课视频</a></li>
+##                        	<li><a onclick="tableMenu();">信息录入</a></li>
+##                            <li><a onclick="listMenu();">信息管理</a></li>
+##                            <li><a onclick="homeMenu();">领导值岗管理</a></li>
+##                            <li><a href="javascript:;">中层领导管理</a></li>
+##                            <li><a href="javascript:;">领导值班记录</a></li>
+##                        </ul>
+##                    </li>
                     <li class="konwledge"><div class="nav-header"><a href="javascript:;" class="ue-clear"><span>图书借阅管理</span><i class="icon"></i></a></div>
                         <ul class="subnav">
                             <li><a onclick="borrowBook()">图书借阅</a></li>
@@ -60,9 +60,9 @@
                     <li class="agency"><div class="nav-header"><a href="javascript:;" class="ue-clear"><span>流程中心</span><i class="icon"></i></a></div>
 
                     </li>
-                    <li class="email"><div class="nav-header"><a href="javascript:;" class="ue-clear"><span>邮件管理</span><i class="icon"></i></a></div>
-
-                    </li>
+##                    <li class="email"><div class="nav-header"><a href="javascript:;" class="ue-clear"><span>邮件管理</span><i class="icon"></i></a></div>
+##
+##                    </li>
                     <li class="system"><div class="nav-header"><a href="javascript:;" class="ue-clear"><span>系统管理</span><i class="icon"></i></a></div>
                         <ul class="subnav">
                             <li><a onclick="userCeter();">用户中心</a></li>

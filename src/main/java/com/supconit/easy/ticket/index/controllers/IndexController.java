@@ -52,7 +52,9 @@ public class IndexController {
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String login(ModelMap model) {
         model.put("init",iIndexService.indexInit());
-        return "ticket/login";
+        return "ticket/bookLogin";         //移动登录
+//        return "mySystem/testMap";
+//        return "mySystem/bookManage/bookLogin";
     }
 
      @RequestMapping(value = "toPersonInformation",method = RequestMethod.GET)

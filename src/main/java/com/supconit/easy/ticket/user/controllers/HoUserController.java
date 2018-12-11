@@ -39,8 +39,13 @@ public class HoUserController {
                         HttpSession session, HttpServletRequest request) {
 //        HoUser nowUser = new HoUser();
 //        nowUser.setUsername();
+//        return "mySystem/index";
+        return "mySystem/testMap";
+    }
+    @RequestMapping(value = "mainn", method = RequestMethod.POST)
+    public String main(HoUser hoUser, ModelMap model,
+                       HttpSession session, HttpServletRequest request) {
         return "mySystem/index";
-//        return "mySystem/testMap";
     }
     //退出到登录页面
 //    @RequestMapping("/logout")
@@ -71,12 +76,12 @@ public class HoUserController {
     }
 
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<String> show(@PathVariable("id") Long id) {
-        Map<String, Object> hoUserModel = hoUserService.findMap(id);
-
-        return ResponseUtil.getResEntityForGetAndJson(hoUserModel);
-    }
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public ResponseEntity<String> show(@PathVariable("id") Long id) {
+//        Map<String, Object> hoUserModel = hoUserService.findMap(id);
+//
+//        return ResponseUtil.getResEntityForGetAndJson(hoUserModel);
+//    }
 
     @RequestMapping(value = "addUser", method = RequestMethod.POST)
     public ResponseEntity<String> create(@Validated HoUserDTO hoUserDTO, BindingResult errors) {
@@ -86,8 +91,8 @@ public class HoUserController {
         HoUser hoUserModel = hoUserDTO.toModel();
         //创建时间
         hoUserModel.setCreateTime( DateUtil.parse(DateUtil.format(new Date())));
-//        hoUserService.saveUser(hoUserModel);
-        hoUserService.insert(hoUserModel);
+        hoUserService.save(hoUserModel);
+//        hoUserService.insert(hoUserModel);      //mongodb
 //          HoUserMongo hoUserMongo = new HoUserMongo();
 //          hoUserMongo.insertMongo();
 

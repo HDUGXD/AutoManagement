@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图书管理</title>
+    <link href="$!{rc.contextPath}/assets/mySystem/bookManage/css/bootstrap.min.css" rel="stylesheet">
+    <link href="$!{rc.contextPath}/assets/mySystem/bookManage/css/signin.css" rel="stylesheet">
+    <script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/jquery.js"></script>
+
+</head>
+
+<body>
+<div class="signin">
+    <div class="signin-head"><img src="$!{rc.contextPath}/assets/mySystem/bookManage/images/test/head_120.png" alt="" class="img-circle"></div>
+    <form class="form-signin" id="user_form" action="$!{rc.contextPath}/hoUser/mainn" method="post">
+        <input type="text" class="form-control" placeholder="用户名" name="username" required autofocus />
+        <input type="password" class="form-control" placeholder="密码" name="password" required />
+        <button class="btn btn-lg btn-warning btn-block" type="submit" >登录</button>
+        <label class="checkbox">
+            <input type="checkbox" value="remember-me"> 记住我
+        </label>
+    </form>
+</div>
+
+</body>
+<script type="text/javascript">
+
+    //    showRemind('input[type=text], textarea', 'placeholder');
+//    function subForm() {
+//alert(123);
+//        var data = $('#user_form').serializeObject();
+
+##        debugger;
+##        $.ajax({
+##            type: "POST",//方法类型
+##            //dataType: "text",//预期服务器返回的数据类型
+##            url: "$!{rc.contextPath}/hoUser/login",//url
+##            data: data,
+##//            contentType:"application/x-www-from-urlencoded",
+##            success: function (result) {
+##//                if(1==1){
+####                    window.location.href="$!{rc.contextPath}/hoUser/mainn";
+##//                }else{
+##//                    alert("用户名密码不匹配！")
+##//                }
+##
+##            },
+##            error: function () {
+##                $.message({
+##                    message: '操作失败',
+##                    type: 'error'
+##                });
+##            }
+##        });
+##        window.location.href="$!{rc.contextPath}/hoUser/mainn";
+    }
+    //将form进行对象进行封装
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+
+</script>
+</html>
+
+
