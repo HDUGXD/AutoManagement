@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
 	   xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
 	   xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
 	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/task"
@@ -12,7 +12,9 @@
                 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
                 http://www.springframework.org/schema/data/mongo
                 http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
-                http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+                http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd
+ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+">
 	<!-- Spring 配置文件，可插拔Bean在此配置以获得开启或者关闭 -->
 	<!-- =============== SPRING CONFIG BEGIN ================ -->
 	<context:annotation-config />
@@ -22,6 +24,19 @@
 	<context:component-scan base-package="com.supconit.easy"/>
 	<!-- ================ SPRING CONFIG END ================= -->
 
+	<!--&lt;!&ndash; 导入jar包中的cxf配置文件。这里不用写，是写好的放在jar包里，直接引入即可。 &ndash;&gt;-->
+	<!--<import resource="classpath:/cxf.xml" />-->
+	<!--<import resource="classpath:/cxf-servlet.xml" />-->
+
+	<!--&lt;!&ndash; define web service provider  &ndash;&gt;-->
+	<!--&lt;!&ndash; 要暴露给外部调用的接口，address:请求路径 &ndash;&gt;-->
+	<!--<jaxws:endpoint  implementor="com.supconit.easy.ticket.webservice.GEForMcuImpl"  address="/TracklogSenser" />-->
+
+
+	<!--<import resource="classpath:META-INF/cxf/cxf.xml"/>-->
+	<!--<jaxws:endpoint id="TracklogSender" address="/TracklogSender" implementor="com.supconit.easy.ticket.webservice.GEForMcuImpl"></jaxws:endpoint>-->
+	<bean id="Track" class="com.supconit.easy.ticket.webservice.GEForMcuImpl"></bean>
+	<jaxws:endpoint id="wbUserService" implementor="#Track" address="/wsser" />
 	<!-- =============== ORM CONFIG BEGIN ================ -->
 	<!-- 数据源配置 -->
     <bean id="ds1" class="com.alibaba.druid.pool.DruidDataSource" p:driverClassName="${jdbc.ds1.driver}" p:url="${jdbc.ds1.jdbcUrl}" 
@@ -88,8 +103,6 @@
 		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
 	</bean>
 
-
-
 	<!--==========mongodb end =====================-->
 
 	<!-- =============== PROFILES BEGIN ================ -->
@@ -109,6 +122,8 @@
 		<context:annotation-config />
 		<!-- 激活annotation功能 -->
 		<context:spring-configured />
+        <!--spring cxf-->
+		<!--<import resource="classpath:/application-cxf.xml"/>-->
 	</beans>
 
 	<!-- ================ PROFILES END ================= -->
