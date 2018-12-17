@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.supconit.easy.ticket.user.dao.HoRoleMapper" >
+    <resultMap id="BaseResultMap" type="com.kdmt.gxd.easy.role.entities.HoRole" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,
+        name,
+        type
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from ho_role
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <delete id="deleteByPrimaryKey" >
+        delete from ho_role
+        where
+        id = #{id,jdbcType=BIGINT}
+        
+    </delete>
+
+    <delete id="deleteByPrimaryKeys" >
+        delete from ho_role
+        where <foreach collection="primaryKeys" item = "primaryKey" separator=" or " >id = #{primaryKey,jdbcType=BIGINT}</foreach>
+    </delete>
+
+    <insert id="insert" parameterType="com.kdmt.gxd.easy.role.entities.HoRole" >
+        insert into ho_role (
+            id,
+            name,
+            type
+        )
+        values (
+            #{id,jdbcType=BIGINT},
+            #{name,jdbcType=VARCHAR},
+            #{type,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.kdmt.gxd.easy.role.entities.HoRole" >
+        insert into ho_role
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.kdmt.gxd.easy.role.entities.HoRole" >
+        update ho_role
+        <set >
+            <if test="id != null" >
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+        </set>
+            where
+            id = #{id,jdbcType=BIGINT}
+                
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.kdmt.gxd.easy.role.entities.HoRole" >
+        update ho_role
+        set
+        <trim suffixOverrides="," >
+            name = #{name,jdbcType=VARCHAR},
+            type = #{type,jdbcType=VARCHAR},
+        </trim>
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </update>
+
+    <select id="loadModels" resultMap="BaseResultMap">
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from ho_role
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="loadMaps" resultType="java.util.HashMap">
+        select
+        <if test="parameters != null">
+         ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from ho_role
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="count" resultType="long">
+        select count(
+        <if test="isDistinct == true">
+            distinct
+        </if>
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        ) from ho_role
+        <if test="condition != null">
+            where ${condition}
+        </if>
+    </select>
+
+    <select id="findModel" resultMap="BaseResultMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from ho_role
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <select id="findMap" resultType="java.util.HashMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from ho_role
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+</mapper>

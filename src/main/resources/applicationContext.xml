@@ -21,21 +21,11 @@
 	<task:annotation-driven />
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	<!-- 请在此加入需要注解扫描的包路径 -->
-	<context:component-scan base-package="com.supconit.easy"/>
+	<context:component-scan base-package="com.kdmt.gxd.easy"/>
 	<!-- ================ SPRING CONFIG END ================= -->
 
-	<!--&lt;!&ndash; 导入jar包中的cxf配置文件。这里不用写，是写好的放在jar包里，直接引入即可。 &ndash;&gt;-->
-	<!--<import resource="classpath:/cxf.xml" />-->
-	<!--<import resource="classpath:/cxf-servlet.xml" />-->
-
-	<!--&lt;!&ndash; define web service provider  &ndash;&gt;-->
-	<!--&lt;!&ndash; 要暴露给外部调用的接口，address:请求路径 &ndash;&gt;-->
-	<!--<jaxws:endpoint  implementor="com.supconit.easy.ticket.webservice.GEForMcuImpl"  address="/TracklogSenser" />-->
-
-
-	<!--<import resource="classpath:META-INF/cxf/cxf.xml"/>-->
-	<!--<jaxws:endpoint id="TracklogSender" address="/TracklogSender" implementor="com.supconit.easy.ticket.webservice.GEForMcuImpl"></jaxws:endpoint>-->
-	<bean id="Track" class="com.supconit.easy.ticket.webservice.GEForMcuImpl"></bean>
+    <!--Spring CXF-->
+	<bean id="Track" class="com.kdmt.gxd.easy.webservice.GEForMcuImpl"></bean>
 	<jaxws:endpoint id="wbUserService" implementor="#Track" address="/wsser" />
 	<!-- =============== ORM CONFIG BEGIN ================ -->
 	<!-- 数据源配置 -->
@@ -47,7 +37,7 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds1"/>
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
-		<property name="mapperLocations" value="classpath*:com/supconit/easy/**/mappers/*Mapper.xml"/>
+		<property name="mapperLocations" value="classpath*:com/kdmt/gxd/easy/**/mappers/*Mapper.xml"/>
 	</bean>
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 		<constructor-arg ref="sqlSessionFactory"/>
@@ -58,7 +48,7 @@
 
 	<!--mybatis统一扫描接口,你可以使用分号或逗号 作为分隔符设置多于一个的包路径。每个映射器将会在指定的包路径中递归地被搜索到,支持Ant通配符-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.supconit.**.daos"/>
+		<property name="basePackage" value="com.kdmt.gxd.**.daos"/>
 	</bean>
 	<!-- ================ ORM CONFIG END ================= -->
 	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
@@ -116,7 +106,7 @@
 		<!--ssm 集成 rabbitmq-->
 		<import resource="classpath:/spring-rabbitmq.xml"/>
 		<!-- 扫描指定package下所有带有如@controller,@services,@resource,@ods并把所注释的注册为Spring Beans -->
-		<context:component-scan base-package="com.supconit.easy.ticket.util.rabbitMq" />
+		<context:component-scan base-package="com.kdmt.gxd.easy.util.rabbitMq" />
 
 		<!-- 激活annotation功能 -->
 		<context:annotation-config />

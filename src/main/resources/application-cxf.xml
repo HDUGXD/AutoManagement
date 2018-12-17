@@ -12,7 +12,7 @@
 
     <!--&lt;!&ndash; implementor 表示你要对外开发的接口实现类，address表示的地址，本质就是一个servletName，可以随便命名 &ndash;&gt;-->
     <!--<jaxws:endpoint id="webService"-->
-                    <!--implementor="com.supconit.easy.ticket.webservice.GEForMcuImpl"-->
+                    <!--implementGEForMcuImplImpl"-->
                     <!--address="/sayCXFServiceWs">-->
     <!--</jaxws:endpoint>-->
 

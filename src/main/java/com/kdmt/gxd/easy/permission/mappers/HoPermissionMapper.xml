@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.supconit.easy.ticket.permission.dao.HoPermissionMapper" >
+    <resultMap id="BaseResultMap" type="com.kdmt.gxd.easy.permission.entities.HoPermission" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,
+        url,
+        name
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from ho_permission
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <delete id="deleteByPrimaryKey" >
+        delete from ho_permission
+        where
+        id = #{id,jdbcType=BIGINT}
+        
+    </delete>
+
+    <delete id="deleteByPrimaryKeys" >
+        delete from ho_permission
+        where <foreach collection="primaryKeys" item = "primaryKey" separator=" or " >id = #{primaryKey,jdbcType=BIGINT}</foreach>
+    </delete>
+
+    <insert id="insert" parameterType="com.kdmt.gxd.easy.permission.entities.HoPermission" >
+        insert into ho_permission (
+            id,
+            url,
+            name
+        )
+        values (
+            #{id,jdbcType=BIGINT},
+            #{url,jdbcType=VARCHAR},
+            #{name,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.kdmt.gxd.easy.permission.entities.HoPermission" >
+        insert into ho_permission
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="url != null" >
+                url,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="url != null" >
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.kdmt.gxd.easy.permission.entities.HoPermission" >
+        update ho_permission
+        <set >
+            <if test="id != null" >
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="url != null" >
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+        </set>
+            where
+            id = #{id,jdbcType=BIGINT}
+                
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.kdmt.gxd.easy.permission.entities.HoPermission" >
+        update ho_permission
+        set
+        <trim suffixOverrides="," >
+            url = #{url,jdbcType=VARCHAR},
+            name = #{name,jdbcType=VARCHAR},
+        </trim>
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </update>
+
+    <select id="loadModels" resultMap="BaseResultMap">
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from ho_permission
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="loadMaps" resultType="java.util.HashMap">
+        select
+        <if test="parameters != null">
+         ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from ho_permission
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="count" resultType="long">
+        select count(
+        <if test="isDistinct == true">
+            distinct
+        </if>
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        ) from ho_permission
+        <if test="condition != null">
+            where ${condition}
+        </if>
+    </select>
+
+    <select id="findModel" resultMap="BaseResultMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from ho_permission
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <select id="findMap" resultType="java.util.HashMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from ho_permission
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+</mapper>

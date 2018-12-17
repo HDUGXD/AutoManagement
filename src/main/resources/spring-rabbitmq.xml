@@ -57,9 +57,9 @@
 
     <!-- 消息接收者 -->
 
-    <bean id="asdfConsumer" class="com.supconit.easy.ticket.util.rabbitMq.Consumor"></bean>
-    <bean id="asdfConsumer2" class="com.supconit.easy.ticket.util.rabbitMq.Consumor2"></bean>
-    <bean id="qwerConsumer3" class="com.supconit.easy.ticket.util.rabbitMq.Consumor3"></bean>
+    <bean id="asdfConsumer" class="com.kdmt.gxd.easy.util.rabbitMq.Consumor"></bean>
+    <bean id="asdfConsumer2" class="com.kdmt.gxd.easy.util.rabbitMq.Consumor2"></bean>
+    <bean id="qwerConsumer3" class="com.kdmt.gxd.easy.util.rabbitMq.Consumor3"></bean>
     <!-- queue litener 观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象
     acknowledeg = "manual"，意为表示该消费者的ack方式为手动-->
     <rabbit:listener-container connection-factory="conn"  acknowledge="manual">
