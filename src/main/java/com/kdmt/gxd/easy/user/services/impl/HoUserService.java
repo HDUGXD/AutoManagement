@@ -163,9 +163,9 @@ public class HoUserService implements IHoUserService ,Serializable {
             userTest.setEmail("123123");
             userTest.setCompany("123123");
             userTest.setDepartment("123123");
+            hoUser.setId(null);
 
-
-            mongoTemplate.save(userTest,"gxd");
+            mongoTemplate.save(hoUser,"gxd");
             System.out.println("插入结束。。。。。");
         } catch (Exception e) {
             e.printStackTrace();

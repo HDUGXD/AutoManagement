@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.kdmt.gxd.easy.user.services.impl.HoUserMongo;
 import com.kdmt.gxd.easy.user.entities.HoUser;
 import com.kdmt.gxd.easy.user.entities.HoUserDTO;
 import com.kdmt.gxd.easy.user.services.IHoUserService;
@@ -28,8 +27,8 @@ import org.springframework.web.bind.annotation.*;
 public class HoUserController {
     @Resource(name = "hoUserService")
     private IHoUserService hoUserService;
-    @Autowired
-    private HoUserMongo hoUserMongo;
+//    @Autowired
+//    private HoUserMongo hoUserMongo;
     //登录主页
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(String username, String password, ModelMap model,
@@ -89,7 +88,7 @@ public class HoUserController {
         //创建时间
         hoUserModel.setCreateTime( DateUtil.parse(DateUtil.format(new Date())));
         hoUserService.save(hoUserModel);
-//        hoUserService.insert(hoUserModel);      //mongodb
+        hoUserService.insert(hoUserModel);      //mongodb
 //          HoUserMongo hoUserMongo = new HoUserMongo();
 //          hoUserMongo.insertMongo();
 

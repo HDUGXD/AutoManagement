@@ -66,10 +66,10 @@
         <rabbit:listener  queues="two.hello"  ref="asdfConsumer"/>
     </rabbit:listener-container>
 
-    <rabbit:listener-container connection-factory="conn" >
+    <rabbit:listener-container connection-factory="conn" acknowledge="manual">
         <rabbit:listener  queues="queueTest"  ref="asdfConsumer2"/>
     </rabbit:listener-container>
-    <rabbit:listener-container connection-factory="conn" >
+    <rabbit:listener-container connection-factory="conn" acknowledge="manual">
         <rabbit:listener  queues="queueChris"  ref="qwerConsumer3"/>
     </rabbit:listener-container>
 

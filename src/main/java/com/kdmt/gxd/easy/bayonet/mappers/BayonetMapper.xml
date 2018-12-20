@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kdmt.gxd.easy.bayonet.daos.BayonetMapper" >
+    <resultMap id="BaseResultMap" type="com.kdmt.gxd.easy.bayonet.entities.Bayonet" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+        <result column="agency_id" property="agencyId" jdbcType="VARCHAR" />
+        <result column="agency_key" property="agencyKey" jdbcType="VARCHAR" />
+        <result column="passport_name" property="passportName" jdbcType="VARCHAR" />
+        <result column="direction_name" property="directionName" jdbcType="VARCHAR" />
+        <result column="way_id" property="wayId" jdbcType="VARCHAR" />
+        <result column="way_name" property="wayName" jdbcType="VARCHAR" />
+        <result column="passtime" property="passtime" jdbcType="TIMESTAMP" />
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR" />
+        <result column="plate_color" property="plateColor" jdbcType="VARCHAR" />
+        <result column="plate_type" property="plateType" jdbcType="VARCHAR" />
+        <result column="car_type" property="carType" jdbcType="VARCHAR" />
+        <result column="car_logo" property="carLogo" jdbcType="VARCHAR" />
+        <result column="car_model" property="carModel" jdbcType="VARCHAR" />
+        <result column="car_color" property="carColor" jdbcType="VARCHAR" />
+        <result column="car_length" property="carLength" jdbcType="VARCHAR" />
+        <result column="first_pic_path" property="firstPicPath" jdbcType="VARCHAR" />
+        <result column="second_pic_path" property="secondPicPath" jdbcType="VARCHAR" />
+        <result column="reserve_pic_path" property="reservePicPath" jdbcType="VARCHAR" />
+        <result column="speed" property="speed" jdbcType="VARCHAR" />
+        <result column="max_limit_speed" property="maxLimitSpeed" jdbcType="VARCHAR" />
+        <result column="min_limit_speed" property="minLimitSpeed" jdbcType="VARCHAR" />
+        <result column="little_area" property="littleArea" jdbcType="VARCHAR" />
+        <result column="first_pic" property="firstPic" jdbcType="VARCHAR" />
+        <result column="second_pic" property="secondPic" jdbcType="VARCHAR" />
+        <result column="reserve_pic" property="reservePic" jdbcType="VARCHAR" />
+        <result column="car_no_confide" property="carNoConfide" jdbcType="VARCHAR" />
+        <result column="car_rect" property="carRect" jdbcType="VARCHAR" />
+        <result column="bz1" property="bz1" jdbcType="VARCHAR" />
+        <result column="bz2" property="bz2" jdbcType="VARCHAR" />
+        <result column="page_no" property="pageNo" jdbcType="INTEGER" />
+        <result column="page_size" property="pageSize" jdbcType="INTEGER" />
+        <result column="count_day" property="countDay" jdbcType="VARCHAR" />
+        <result column="count_hour" property="countHour" jdbcType="VARCHAR" />
+        <result column="count_month" property="countMonth" jdbcType="VARCHAR" />
+        <result column="qy_code" property="qyCode" jdbcType="VARCHAR" />
+        <result column="gs_code" property="gsCode" jdbcType="VARCHAR" />
+        <!--自定义 用于时间查询-->
+        <result column="start" property="start" jdbcType="TIMESTAMP" />
+        <result column="end" property="end" jdbcType="TIMESTAMP" />
+        <result column="jgsjCn" property="jgsjCn" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,
+        device_id,
+        agency_id,
+        agency_key,
+        passport_name,
+        direction_name,
+        way_id,
+        way_name,
+        passtime,
+        plate_number,
+        plate_color,
+        plate_type,
+        car_type,
+        car_logo,
+        car_model,
+        car_color,
+        car_length,
+        first_pic_path,
+        second_pic_path,
+        reserve_pic_path,
+        speed,
+        max_limit_speed,
+        min_limit_speed,
+        little_area,
+        first_pic,
+        second_pic,
+        reserve_pic,
+        car_no_confide,
+        car_rect,
+        bz1,
+        bz2,
+        page_no,
+        page_size,
+        count_day,
+        count_hour,
+        count_month,
+        qy_code,
+        gs_code
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from bayonet
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <delete id="deleteByPrimaryKey" >
+        delete from bayonet
+        where
+        id = #{id,jdbcType=BIGINT}
+        
+    </delete>
+
+    <delete id="deleteByPrimaryKeys" >
+        delete from bayonet
+        where <foreach collection="primaryKeys" item = "primaryKey" separator=" or " >id = #{primaryKey,jdbcType=BIGINT}</foreach>
+    </delete>
+
+    <insert id="insert" parameterType="com.kdmt.gxd.easy.bayonet.entities.Bayonet" >
+        insert into bayonet (
+            id,
+            device_id,
+            agency_id,
+            agency_key,
+            passport_name,
+            direction_name,
+            way_id,
+            way_name,
+            passtime,
+            plate_number,
+            plate_color,
+            plate_type,
+            car_type,
+            car_logo,
+            car_model,
+            car_color,
+            car_length,
+            first_pic_path,
+            second_pic_path,
+            reserve_pic_path,
+            speed,
+            max_limit_speed,
+            min_limit_speed,
+            little_area,
+            first_pic,
+            second_pic,
+            reserve_pic,
+            car_no_confide,
+            car_rect,
+            bz1,
+            bz2,
+            page_no,
+            page_size,
+            count_day,
+            count_hour,
+            count_month,
+            qy_code,
+            gs_code
+        )
+        values (
+            #{id,jdbcType=BIGINT},
+            #{deviceId,jdbcType=VARCHAR},
+            #{agencyId,jdbcType=VARCHAR},
+            #{agencyKey,jdbcType=VARCHAR},
+            #{passportName,jdbcType=VARCHAR},
+            #{directionName,jdbcType=VARCHAR},
+            #{wayId,jdbcType=VARCHAR},
+            #{wayName,jdbcType=VARCHAR},
+            #{passtime,jdbcType=TIMESTAMP},
+            #{plateNumber,jdbcType=VARCHAR},
+            #{plateColor,jdbcType=VARCHAR},
+            #{plateType,jdbcType=VARCHAR},
+            #{carType,jdbcType=VARCHAR},
+            #{carLogo,jdbcType=VARCHAR},
+            #{carModel,jdbcType=VARCHAR},
+            #{carColor,jdbcType=VARCHAR},
+            #{carLength,jdbcType=VARCHAR},
+            #{firstPicPath,jdbcType=VARCHAR},
+            #{secondPicPath,jdbcType=VARCHAR},
+            #{reservePicPath,jdbcType=VARCHAR},
+            #{speed,jdbcType=VARCHAR},
+            #{maxLimitSpeed,jdbcType=VARCHAR},
+            #{minLimitSpeed,jdbcType=VARCHAR},
+            #{littleArea,jdbcType=VARCHAR},
+            #{firstPic,jdbcType=VARCHAR},
+            #{secondPic,jdbcType=VARCHAR},
+            #{reservePic,jdbcType=VARCHAR},
+            #{carNoConfide,jdbcType=VARCHAR},
+            #{carRect,jdbcType=VARCHAR},
+            #{bz1,jdbcType=VARCHAR},
+            #{bz2,jdbcType=VARCHAR},
+            #{pageNo,jdbcType=INTEGER},
+            #{pageSize,jdbcType=INTEGER},
+            #{countDay,jdbcType=VARCHAR},
+            #{countHour,jdbcType=VARCHAR},
+            #{countMonth,jdbcType=VARCHAR},
+            #{qyCode,jdbcType=VARCHAR},
+            #{gsCode,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.kdmt.gxd.easy.bayonet.entities.Bayonet" >
+        insert into bayonet
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="deviceId != null" >
+                device_id,
+            </if>
+            <if test="agencyId != null" >
+                agency_id,
+            </if>
+            <if test="agencyKey != null" >
+                agency_key,
+            </if>
+            <if test="passportName != null" >
+                passport_name,
+            </if>
+            <if test="directionName != null" >
+                direction_name,
+            </if>
+            <if test="wayId != null" >
+                way_id,
+            </if>
+            <if test="wayName != null" >
+                way_name,
+            </if>
+            <if test="passtime != null" >
+                passtime,
+            </if>
+            <if test="plateNumber != null" >
+                plate_number,
+            </if>
+            <if test="plateColor != null" >
+                plate_color,
+            </if>
+            <if test="plateType != null" >
+                plate_type,
+            </if>
+            <if test="carType != null" >
+                car_type,
+            </if>
+            <if test="carLogo != null" >
+                car_logo,
+            </if>
+            <if test="carModel != null" >
+                car_model,
+            </if>
+            <if test="carColor != null" >
+                car_color,
+            </if>
+            <if test="carLength != null" >
+                car_length,
+            </if>
+            <if test="firstPicPath != null" >
+                first_pic_path,
+            </if>
+            <if test="secondPicPath != null" >
+                second_pic_path,
+            </if>
+            <if test="reservePicPath != null" >
+                reserve_pic_path,
+            </if>
+            <if test="speed != null" >
+                speed,
+            </if>
+            <if test="maxLimitSpeed != null" >
+                max_limit_speed,
+            </if>
+            <if test="minLimitSpeed != null" >
+                min_limit_speed,
+            </if>
+            <if test="littleArea != null" >
+                little_area,
+            </if>
+            <if test="firstPic != null" >
+                first_pic,
+            </if>
+            <if test="secondPic != null" >
+                second_pic,
+            </if>
+            <if test="reservePic != null" >
+                reserve_pic,
+            </if>
+            <if test="carNoConfide != null" >
+                car_no_confide,
+            </if>
+            <if test="carRect != null" >
+                car_rect,
+            </if>
+            <if test="bz1 != null" >
+                bz1,
+            </if>
+            <if test="bz2 != null" >
+                bz2,
+            </if>
+            <if test="pageNo != null" >
+                page_no,
+            </if>
+            <if test="pageSize != null" >
+                page_size,
+            </if>
+            <if test="countDay != null" >
+                count_day,
+            </if>
+            <if test="countHour != null" >
+                count_hour,
+            </if>
+            <if test="countMonth != null" >
+                count_month,
+            </if>
+            <if test="qyCode != null" >
+                qy_code,
+            </if>
+            <if test="gsCode != null" >
+                gs_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="deviceId != null" >
+                #{deviceId,jdbcType=VARCHAR},
+            </if>
+            <if test="agencyId != null" >
+                #{agencyId,jdbcType=VARCHAR},
+            </if>
+            <if test="agencyKey != null" >
+                #{agencyKey,jdbcType=VARCHAR},
+            </if>
+            <if test="passportName != null" >
+                #{passportName,jdbcType=VARCHAR},
+            </if>
+            <if test="directionName != null" >
+                #{directionName,jdbcType=VARCHAR},
+            </if>
+            <if test="wayId != null" >
+                #{wayId,jdbcType=VARCHAR},
+            </if>
+            <if test="wayName != null" >
+                #{wayName,jdbcType=VARCHAR},
+            </if>
+            <if test="passtime != null" >
+                #{passtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="plateNumber != null" >
+                #{plateNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="plateColor != null" >
+                #{plateColor,jdbcType=VARCHAR},
+            </if>
+            <if test="plateType != null" >
+                #{plateType,jdbcType=VARCHAR},
+            </if>
+            <if test="carType != null" >
+                #{carType,jdbcType=VARCHAR},
+            </if>
+            <if test="carLogo != null" >
+                #{carLogo,jdbcType=VARCHAR},
+            </if>
+            <if test="carModel != null" >
+                #{carModel,jdbcType=VARCHAR},
+            </if>
+            <if test="carColor != null" >
+                #{carColor,jdbcType=VARCHAR},
+            </if>
+            <if test="carLength != null" >
+                #{carLength,jdbcType=VARCHAR},
+            </if>
+            <if test="firstPicPath != null" >
+                #{firstPicPath,jdbcType=VARCHAR},
+            </if>
+            <if test="secondPicPath != null" >
+                #{secondPicPath,jdbcType=VARCHAR},
+            </if>
+            <if test="reservePicPath != null" >
+                #{reservePicPath,jdbcType=VARCHAR},
+            </if>
+            <if test="speed != null" >
+                #{speed,jdbcType=VARCHAR},
+            </if>
+            <if test="maxLimitSpeed != null" >
+                #{maxLimitSpeed,jdbcType=VARCHAR},
+            </if>
+            <if test="minLimitSpeed != null" >
+                #{minLimitSpeed,jdbcType=VARCHAR},
+            </if>
+            <if test="littleArea != null" >
+                #{littleArea,jdbcType=VARCHAR},
+            </if>
+            <if test="firstPic != null" >
+                #{firstPic,jdbcType=VARCHAR},
+            </if>
+            <if test="secondPic != null" >
+                #{secondPic,jdbcType=VARCHAR},
+            </if>
+            <if test="reservePic != null" >
+                #{reservePic,jdbcType=VARCHAR},
+            </if>
+            <if test="carNoConfide != null" >
+                #{carNoConfide,jdbcType=VARCHAR},
+            </if>
+            <if test="carRect != null" >
+                #{carRect,jdbcType=VARCHAR},
+            </if>
+            <if test="bz1 != null" >
+                #{bz1,jdbcType=VARCHAR},
+            </if>
+            <if test="bz2 != null" >
+                #{bz2,jdbcType=VARCHAR},
+            </if>
+            <if test="pageNo != null" >
+                #{pageNo,jdbcType=INTEGER},
+            </if>
+            <if test="pageSize != null" >
+                #{pageSize,jdbcType=INTEGER},
+            </if>
+            <if test="countDay != null" >
+                #{countDay,jdbcType=VARCHAR},
+            </if>
+            <if test="countHour != null" >
+                #{countHour,jdbcType=VARCHAR},
+            </if>
+            <if test="countMonth != null" >
+                #{countMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="qyCode != null" >
+                #{qyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="gsCode != null" >
+                #{gsCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.kdmt.gxd.easy.bayonet.entities.Bayonet" >
+        update bayonet
+        <set >
+            <if test="id != null" >
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="deviceId != null" >
+                device_id = #{deviceId,jdbcType=VARCHAR},
+            </if>
+            <if test="agencyId != null" >
+                agency_id = #{agencyId,jdbcType=VARCHAR},
+            </if>
+            <if test="agencyKey != null" >
+                agency_key = #{agencyKey,jdbcType=VARCHAR},
+            </if>
+            <if test="passportName != null" >
+                passport_name = #{passportName,jdbcType=VARCHAR},
+            </if>
+            <if test="directionName != null" >
+                direction_name = #{directionName,jdbcType=VARCHAR},
+            </if>
+            <if test="wayId != null" >
+                way_id = #{wayId,jdbcType=VARCHAR},
+            </if>
+            <if test="wayName != null" >
+                way_name = #{wayName,jdbcType=VARCHAR},
+            </if>
+            <if test="passtime != null" >
+                passtime = #{passtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="plateNumber != null" >
+                plate_number = #{plateNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="plateColor != null" >
+                plate_color = #{plateColor,jdbcType=VARCHAR},
+            </if>
+            <if test="plateType != null" >
+                plate_type = #{plateType,jdbcType=VARCHAR},
+            </if>
+            <if test="carType != null" >
+                car_type = #{carType,jdbcType=VARCHAR},
+            </if>
+            <if test="carLogo != null" >
+                car_logo = #{carLogo,jdbcType=VARCHAR},
+            </if>
+            <if test="carModel != null" >
+                car_model = #{carModel,jdbcType=VARCHAR},
+            </if>
+            <if test="carColor != null" >
+                car_color = #{carColor,jdbcType=VARCHAR},
+            </if>
+            <if test="carLength != null" >
+                car_length = #{carLength,jdbcType=VARCHAR},
+            </if>
+            <if test="firstPicPath != null" >
+                first_pic_path = #{firstPicPath,jdbcType=VARCHAR},
+            </if>
+            <if test="secondPicPath != null" >
+                second_pic_path = #{secondPicPath,jdbcType=VARCHAR},
+            </if>
+            <if test="reservePicPath != null" >
+                reserve_pic_path = #{reservePicPath,jdbcType=VARCHAR},
+            </if>
+            <if test="speed != null" >
+                speed = #{speed,jdbcType=VARCHAR},
+            </if>
+            <if test="maxLimitSpeed != null" >
+                max_limit_speed = #{maxLimitSpeed,jdbcType=VARCHAR},
+            </if>
+            <if test="minLimitSpeed != null" >
+                min_limit_speed = #{minLimitSpeed,jdbcType=VARCHAR},
+            </if>
+            <if test="littleArea != null" >
+                little_area = #{littleArea,jdbcType=VARCHAR},
+            </if>
+            <if test="firstPic != null" >
+                first_pic = #{firstPic,jdbcType=VARCHAR},
+            </if>
+            <if test="secondPic != null" >
+                second_pic = #{secondPic,jdbcType=VARCHAR},
+            </if>
+            <if test="reservePic != null" >
+                reserve_pic = #{reservePic,jdbcType=VARCHAR},
+            </if>
+            <if test="carNoConfide != null" >
+                car_no_confide = #{carNoConfide,jdbcType=VARCHAR},
+            </if>
+            <if test="carRect != null" >
+                car_rect = #{carRect,jdbcType=VARCHAR},
+            </if>
+            <if test="bz1 != null" >
+                bz1 = #{bz1,jdbcType=VARCHAR},
+            </if>
+            <if test="bz2 != null" >
+                bz2 = #{bz2,jdbcType=VARCHAR},
+            </if>
+            <if test="pageNo != null" >
+                page_no = #{pageNo,jdbcType=INTEGER},
+            </if>
+            <if test="pageSize != null" >
+                page_size = #{pageSize,jdbcType=INTEGER},
+            </if>
+            <if test="countDay != null" >
+                count_day = #{countDay,jdbcType=VARCHAR},
+            </if>
+            <if test="countHour != null" >
+                count_hour = #{countHour,jdbcType=VARCHAR},
+            </if>
+            <if test="countMonth != null" >
+                count_month = #{countMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="qyCode != null" >
+                qy_code = #{qyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="gsCode != null" >
+                gs_code = #{gsCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+            where
+            id = #{id,jdbcType=BIGINT}
+                
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.kdmt.gxd.easy.bayonet.entities.Bayonet" >
+        update bayonet
+        set
+        <trim suffixOverrides="," >
+            device_id = #{deviceId,jdbcType=VARCHAR},
+            agency_id = #{agencyId,jdbcType=VARCHAR},
+            agency_key = #{agencyKey,jdbcType=VARCHAR},
+            passport_name = #{passportName,jdbcType=VARCHAR},
+            direction_name = #{directionName,jdbcType=VARCHAR},
+            way_id = #{wayId,jdbcType=VARCHAR},
+            way_name = #{wayName,jdbcType=VARCHAR},
+            passtime = #{passtime,jdbcType=TIMESTAMP},
+            plate_number = #{plateNumber,jdbcType=VARCHAR},
+            plate_color = #{plateColor,jdbcType=VARCHAR},
+            plate_type = #{plateType,jdbcType=VARCHAR},
+            car_type = #{carType,jdbcType=VARCHAR},
+            car_logo = #{carLogo,jdbcType=VARCHAR},
+            car_model = #{carModel,jdbcType=VARCHAR},
+            car_color = #{carColor,jdbcType=VARCHAR},
+            car_length = #{carLength,jdbcType=VARCHAR},
+            first_pic_path = #{firstPicPath,jdbcType=VARCHAR},
+            second_pic_path = #{secondPicPath,jdbcType=VARCHAR},
+            reserve_pic_path = #{reservePicPath,jdbcType=VARCHAR},
+            speed = #{speed,jdbcType=VARCHAR},
+            max_limit_speed = #{maxLimitSpeed,jdbcType=VARCHAR},
+            min_limit_speed = #{minLimitSpeed,jdbcType=VARCHAR},
+            little_area = #{littleArea,jdbcType=VARCHAR},
+            first_pic = #{firstPic,jdbcType=VARCHAR},
+            second_pic = #{secondPic,jdbcType=VARCHAR},
+            reserve_pic = #{reservePic,jdbcType=VARCHAR},
+            car_no_confide = #{carNoConfide,jdbcType=VARCHAR},
+            car_rect = #{carRect,jdbcType=VARCHAR},
+            bz1 = #{bz1,jdbcType=VARCHAR},
+            bz2 = #{bz2,jdbcType=VARCHAR},
+            page_no = #{pageNo,jdbcType=INTEGER},
+            page_size = #{pageSize,jdbcType=INTEGER},
+            count_day = #{countDay,jdbcType=VARCHAR},
+            count_hour = #{countHour,jdbcType=VARCHAR},
+            count_month = #{countMonth,jdbcType=VARCHAR},
+            qy_code = #{qyCode,jdbcType=VARCHAR},
+            gs_code = #{gsCode,jdbcType=VARCHAR},
+        </trim>
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </update>
+
+    <select id="loadModels" resultMap="BaseResultMap">
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from bayonet
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="loadMaps" resultType="java.util.HashMap">
+        select
+        <if test="parameters != null">
+         ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from bayonet
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="count" resultType="long">
+        select count(
+        <if test="isDistinct == true">
+            distinct
+        </if>
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        ) from bayonet
+        <if test="condition != null">
+            where ${condition}
+        </if>
+    </select>
+
+    <select id="findModel" resultMap="BaseResultMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from bayonet
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <select id="findMap" resultType="java.util.HashMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from bayonet
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+    <!--/区/-->
+    <select id="getEcharts_1"  resultType="com.kdmt.gxd.easy.bayonet.entities.Bayonet">
+
+        select passport_name,count(*) as id from bayonet where 1=1
+        <if test="countDay!=null and countDay!=''" >
+            AND count_day = #{countDay}
+        </if>
+        group by passport_name
+
+    </select>
+    <select id="getEcharts_2"  resultType="com.kdmt.gxd.easy.bayonet.entities.Bayonet">
+        select plate_color,id FROM (
+        select plate_color,count(*) as id from bayonet where 1=1
+        <if test="countDay!=null and countDay!=''" >
+            AND count_day = #{countDay}
+        </if>
+        group by plate_color
+        ) as a ORDER by a.id DESC limit 0,5
+    </select>
+    <!--//-->
+    <select id="getEcharts_3"  resultType="com.kdmt.gxd.easy.bayonet.entities.Bayonet">
+        select count_hour,count(*) as id from bayonet where 1=1
+        <if test="countDay!=null and countDay!=''" >
+            AND count_day = #{countDay}
+        </if>
+        group by count_hour order BY count_hour
+    </select>
+    <!--/区/-->
+    <select id="getEcharts_4"  resultType="com.kdmt.gxd.easy.bayonet.entities.Bayonet">
+        select qy_code,count(0) as id from bayonet where 1=1
+        <if test="countDay!=null and countDay!=''" >
+            AND count_day = #{countDay}
+        </if>
+        group by qy_code
+    </select>
+
+    <select id="getEcharts_5"  resultType="com.kdmt.gxd.easy.bayonet.entities.Bayonet">
+        select passport_name,id FROM (
+        select passport_name,count(0) as id from bayonet where 1=1
+        <if test="countDay!=null and countDay!=''" >
+            AND count_day = #{countDay}
+        </if>
+        group by passport_name
+        ) as a ORDER by a.id DESC limit 0,5
+    </select>
+    <select id="getEcharts_6"  resultType="com.kdmt.gxd.easy.bayonet.entities.Bayonet">
+        select gs_code,count(*) as id from bayonet where 1=1
+        <if test="countDay!=null and countDay!=''" >
+            AND count_day = #{countDay}
+        </if>
+        group by gs_code
+    </select>
+    <!--//-->
+    <select id="findAllByCondition"  resultType="com.kdmt.gxd.easy.bayonet.entities.Bayonet">
+        select
+        <include refid="Base_Column_List"/>
+        from bayonet where 1=1
+        <if test="passportName!=null and passportName!=''">
+            and passport_name  LIKE '%${passportName}%'
+        </if>
+        <if test="plateNumber!=null and plateNumber!=''">
+            and plate_number  LIKE '%${plateNumber}%'
+        </if>
+        <if test="carType!=null and carType!='' ">
+            and car_type=#{carType}
+        </if>
+        <if test="start!=null and start!=''">
+            AND passtime &gt;= #{start}
+        </if>
+
+        <!-- 查询条件：创建结束时间 -->
+        <if test="end!=null and end!=''">
+            AND passtime &lt;= #{end}
+        </if>
+    </select>
+    <select id="findByPage"  resultType="com.kdmt.gxd.easy.bayonet.entities.Bayonet">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from bayonet where 1=1
+
+        <if test="passportName!=null and passportName!=''">
+            and passport_name LIKE '%${passportName}%'
+        </if>
+        <if test="plateNumber!=null and plateNumber!=''">
+            and plate_number LIKE '%${plateNumber}%'
+        </if>
+        <if test="carType!=null and carType!='' ">
+            and car_type=#{carType}
+        </if>
+        <if test="start!=null and start!=''">
+            AND passtime &gt;= #{start}
+        </if>
+
+        <!-- 查询条件：创建结束时间 -->
+        <if test="end!=null and end!=''">
+            AND passtime &lt;= #{end}
+        </if>
+        order by id desc
+        <if test="pageNo >= 0 and pageSize > 0">
+            limit #{pageNo},#{pageSize}
+        </if>
+
+    </select>
+
+    <select id="getCount"  resultType="java.lang.Integer">
+        SELECT
+        count(1) as count
+        from bayonet
+    </select>
+</mapper>

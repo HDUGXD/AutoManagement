@@ -24,9 +24,14 @@
 	<context:component-scan base-package="com.kdmt.gxd.easy"/>
 	<!-- ================ SPRING CONFIG END ================= -->
 
-    <!--Spring CXF-->
-	<bean id="Track" class="com.kdmt.gxd.easy.webservice.GEForMcuImpl"></bean>
-	<jaxws:endpoint id="wbUserService" implementor="#Track" address="/wsser" />
+    <!--&lt;!&ndash;Spring CXF&ndash;&gt;-->
+	<!--<bean id="TracklogSender" class="com.kdmt.gxd.easy.webservice.services.impl.GEForMcuImpl"></bean>-->
+	<!--<jaxws:endpoint id="wbUserService" implementor="#TracklogSender" address="/wsser" />-->
+
+	<!--<bean id="amqpTemplate" class="org.springframework.amqp.rabbit.core.RabbitTemplate"></bean>-->
+
+
+
 	<!-- =============== ORM CONFIG BEGIN ================ -->
 	<!-- 数据源配置 -->
     <bean id="ds1" class="com.alibaba.druid.pool.DruidDataSource" p:driverClassName="${jdbc.ds1.driver}" p:url="${jdbc.ds1.jdbcUrl}" 
@@ -71,6 +76,7 @@
 			<!--<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>-->
 		</property>
 	</bean>
+
 	<!--==========mongodb start===================-->
 	<!--&lt;!&ndash;引入MongoDB连接文件&ndash;&gt;-->
 	<context:property-placeholder location="classpath*:mongodb.properties" ignore-unresolvable="true"/>
@@ -95,6 +101,8 @@
 
 	<!--==========mongodb end =====================-->
 
+
+
 	<!-- =============== PROFILES BEGIN ================ -->
 	<beans profile="dev">
 		<context:property-placeholder location="classpath:/config-dev.properties" ignore-unresolvable="true" />
@@ -106,14 +114,12 @@
 		<!--ssm 集成 rabbitmq-->
 		<import resource="classpath:/spring-rabbitmq.xml"/>
 		<!-- 扫描指定package下所有带有如@controller,@services,@resource,@ods并把所注释的注册为Spring Beans -->
-		<context:component-scan base-package="com.kdmt.gxd.easy.util.rabbitMq" />
+		<context:component-scan base-package="com.kdmt.gxd.easy.util.rabbitMq,com.kdmt.gxd.easy.webservice.services" />
 
 		<!-- 激活annotation功能 -->
 		<context:annotation-config />
 		<!-- 激活annotation功能 -->
 		<context:spring-configured />
-        <!--spring cxf-->
-		<!--<import resource="classpath:/application-cxf.xml"/>-->
 	</beans>
 
 	<!-- ================ PROFILES END ================= -->

@@ -59,7 +59,7 @@
 
 	<servlet-mapping>
 		<servlet-name>CXFServlet</servlet-name>
-		<url-pattern>/services/*</url-pattern>
+		<url-pattern>/webservice/*</url-pattern>
 	</servlet-mapping>
 	<!--webService  -->
 

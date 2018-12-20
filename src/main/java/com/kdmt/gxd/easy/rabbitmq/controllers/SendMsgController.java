@@ -17,7 +17,20 @@ import java.util.Date;
 @RequestMapping("/send")
 public class SendMsgController {
     @Autowired
-    private AmqpTemplate amqpTemplate;
+    public AmqpTemplate amqpTemplate;
+
+    public AmqpTemplate getAmqpTemplate() {
+        return amqpTemplate;
+    }
+
+    public void setAmqpTemplate(AmqpTemplate amqpTemplate) {
+        this.amqpTemplate = amqpTemplate;
+    }
+
+    public SendMsgController() {
+        this.amqpTemplate=amqpTemplate;
+    }
+
     @RequestMapping("/sendMsg")
     public String sendAmqbMsg(Model model, @RequestParam(value="msg",defaultValue="hello world!!!")String msg){
         if(model!=null&&!"".equals(msg)){

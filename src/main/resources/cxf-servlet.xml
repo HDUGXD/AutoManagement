@@ -8,12 +8,11 @@
         http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
     <import resource="classpath:META-INF/cxf/cxf.xml" />
-    <!--<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />-->
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-    <jaxws:server id="TracklogSender" serviceClass="com.kdmt.gxd.easy.webservice.TracklogSender" address="/TracklogSender">
+    <jaxws:server id="TracklogSender" serviceClass="com.kdmt.gxd.easy.webservice.services.TracklogSender" address="/TracklogSender">
         <jaxws:serviceBean>
-            <bean class="com.kdmt.gxd.easy.webservice.GEForMcuImpl" />
+            <bean class="com.kdmt.gxd.easy.webservice.services.impl.GEForMcuImpl" />
         </jaxws:serviceBean>
     </jaxws:server>
 </beans>
