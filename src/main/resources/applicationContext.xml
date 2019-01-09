@@ -13,7 +13,6 @@
                 http://www.springframework.org/schema/data/mongo
                 http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
                 http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd
- http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
 ">
 	<!-- Spring 配置文件，可插拔Bean在此配置以获得开启或者关闭 -->
 	<!-- =============== SPRING CONFIG BEGIN ================ -->
@@ -24,13 +23,26 @@
 	<context:component-scan base-package="com.kdmt.gxd.easy"/>
 	<!-- ================ SPRING CONFIG END ================= -->
 
-    <!--&lt;!&ndash;Spring CXF&ndash;&gt;-->
-	<!--<bean id="TracklogSender" class="com.kdmt.gxd.easy.webservice.services.impl.GEForMcuImpl"></bean>-->
-	<!--<jaxws:endpoint id="wbUserService" implementor="#TracklogSender" address="/wsser" />-->
+	<!-- rocketmq配置 -->
+	<bean id="messageListeners" class="com.kdmt.gxd.easy.util.rocketMq.MessageListenerImpl"></bean>
+	<!-- 导入Spring配置文件 -->
+	<bean id="rocketmqConsumer" class="org.apache.rocketmq.client.consumer.DefaultMQPushConsumer" init-method="start" destroy-method="shutdown">
+		<property name="consumerGroup" value="${rocketmq.consumerGroup}" />
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="messageListener" ref="messageListeners" />
+		<property name="subscription">
+			<map>
+				<entry key="${rocketmq.topic}" value="${rocketmq.tags}" />
+			</map>
+		</property>
+	</bean>
 
-	<!--<bean id="amqpTemplate" class="org.springframework.amqp.rabbit.core.RabbitTemplate"></bean>-->
 
-
+	<bean id="rocketMQProducer" class="com.kdmt.gxd.easy.util.rocketMq.RocketMQProducer" init-method="init" destroy-method="destroy">
+		<property name="producerGroup" value="${rocketmq.producer.group}" />
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<!-- 失败重试次数 <property name="retryTimes" value="${rocketmq.producer.retryTimes}" /> -->
+	</bean>
 
 	<!-- =============== ORM CONFIG BEGIN ================ -->
 	<!-- 数据源配置 -->
@@ -111,15 +123,21 @@
 		<import resource="classpath:/mvc.xml" />
 		<!--ssm 集成 mongodb-->
 		<import resource="classpath:/spring-mongodb.xml"/>
-		<!--ssm 集成 rabbitmq-->
-		<import resource="classpath:/spring-rabbitmq.xml"/>
-		<!-- 扫描指定package下所有带有如@controller,@services,@resource,@ods并把所注释的注册为Spring Beans -->
-		<context:component-scan base-package="com.kdmt.gxd.easy.util.rabbitMq,com.kdmt.gxd.easy.webservice.services" />
+		<!--&lt;!&ndash;ssm 集成 rabbitmq&ndash;&gt;-->
+		<!--<import resource="classpath:/spring-rabbitmq.xml"/>-->
+		<!--&lt;!&ndash; 扫描指定package下所有带有如@controller,@services,@resource,@ods并把所注释的注册为Spring Beans &ndash;&gt;-->
+		<!--<context:component-scan base-package="com.kdmt.gxd.easy.util.rabbitMq,com.kdmt.gxd.easy.webservice.services" />-->
 
-		<!-- 激活annotation功能 -->
+		<!--&lt;!&ndash; 激活annotation功能 &ndash;&gt;-->
+		<!--<context:annotation-config />-->
+		<!--&lt;!&ndash; 激活annotation功能 &ndash;&gt;-->
+		<!--<context:spring-configured />-->
+
+		<!--######## rocketmq ########-->
 		<context:annotation-config />
-		<!-- 激活annotation功能 -->
-		<context:spring-configured />
+		<!--<context:component-scan base-package="com.th" />-->
+		<!--<mvc:annotation-driven />-->
+
 	</beans>
 
 	<!-- ================ PROFILES END ================= -->

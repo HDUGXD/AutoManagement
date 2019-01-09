@@ -1,5 +1,6 @@
 package com.kdmt.gxd.easy.util.cxf;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -10,6 +11,8 @@ import java.util.Date;
 
 import javax.activation.DataHandler;
 
+import com.alibaba.fastjson.JSONObject;
+import com.kdmt.gxd.easy.bayonet.entities.Bayonet;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -106,7 +109,12 @@ public class StaticElement {
 		}
 		
 	}
-	
+
+	/**
+	 * 统计字段
+	 * @param passtime
+	 * @return
+	 */
 	public static String changePasstimeToYearDay(String passtime)   {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH");
 		String str = null;
@@ -123,8 +131,98 @@ public class StaticElement {
 	return str;
 }
 	}
+
+	/**
+	 * 获得毫秒时间挫
+	 * @param passtime
+	 * @return
+	 */
     public static String getPicNameMill(String passtime){
     	String picName=passtime.substring(passtime.length()-8,passtime.length()).replace(".", "_");
     	return picName;
-    	}	
+    	}
+
+	/**
+	 * 存储文件的文件夹
+	 * @param toFile
+	 */
+	public static  void createDir(File toFile,String toDir){
+		if (!toFile.exists()) {
+			System.out.println("当前文件夹不存在,创建了文件夹");
+			toFile.mkdir();
+			toFile.setExecutable(true);
+			toFile.setReadable(true);
+			toFile.setWritable(true);
+
+			String command = "chmod 777 " + toDir;
+			try {
+				Process process = Runtime.getRuntime().exec(command);
+				process.waitFor();
+				int existValue = process.exitValue();
+			} catch (Exception e) {
+				System.out.println("授权问题");
+			}
+		}
+	}
+
+	/**
+	 * 将json转换为bean
+	 * @param jsonObject
+	 */
+	public static Bayonet changeToBean(JSONObject jsonObject){
+
+		long a= new Date().getTime();
+		Bayonet bayonet = new Bayonet();
+		bayonet.setDeviceId((String) jsonObject.get("deviceId"));
+		bayonet.setAgencyId((String) jsonObject.get("agencyId"));
+		bayonet.setAgencyKey((String) jsonObject.get("agencyKey"));
+		bayonet.setPassportName((String) jsonObject.get("passportName"));
+		bayonet.setDirectionName((String) jsonObject.get("directionName"));
+		bayonet.setWayId((String) jsonObject.get("wayId"));
+		bayonet.setWayName((String) jsonObject.get("wayName"));
+
+		//过车时间
+		String passtime=(String) jsonObject.get("passtime");
+		Date pt = changePasstime(passtime);
+		bayonet.setPasstime(pt);
+
+
+		bayonet.setPlateNumber((String) jsonObject.get("plateNumber"));
+		bayonet.setPlateColor((String) jsonObject.get("plateColor"));
+		bayonet.setPlateType((String) jsonObject.get("plateType"));
+		bayonet.setCarType((String) jsonObject.get("carType"));
+		bayonet.setCarLogo((String) jsonObject.get("carLogo"));
+		bayonet.setCarModel((String) jsonObject.get("carModel"));
+		bayonet.setCarColor((String) jsonObject.get("carColor"));
+		bayonet.setCarLength((String) jsonObject.get("carLength"));
+		bayonet.setFirstPicPath((String) jsonObject.get("firstPicPath"));
+		bayonet.setSecondPicPath((String) jsonObject.get("secondPicPath"));
+		bayonet.setReservePicPath((String) jsonObject.get("reservePicPath"));
+		bayonet.setSpeed((String) jsonObject.get("speed"));
+		bayonet.setMaxLimitSpeed((String) jsonObject.get("maxLimitSpeed"));
+		bayonet.setMinLimitSpeed((String) jsonObject.get("minLimitSpeed"));
+		bayonet.setLittleArea((String) jsonObject.get("littleArea"));
+		bayonet.setCarNoConfide((String) jsonObject.get("carNoConfide"));
+		bayonet.setCarRect((String) jsonObject.get("carRect"));
+		bayonet.setBz1((String) jsonObject.get("bz1"));
+		bayonet.setBz2((String) jsonObject.get("bz2"));
+
+		//统计时间字段
+		String day_hour = changePasstimeToYearDay(passtime);
+		String [] timeArr=day_hour.split("_");
+		bayonet.setCountDay(timeArr[0]);
+		bayonet.setCountHour(timeArr[1]);
+
+		//区域Code 公司Code
+        String qy_code =((String) jsonObject.get("agencyId")).substring(0,6);
+        String gs_code = ((String) jsonObject.get("agencyId")).substring(6,8);
+        bayonet.setQyCode(qy_code);
+        bayonet.setGsCode(gs_code);
+
+		System.out.println(new Date().getTime()-a+"***************************************************");
+
+		return bayonet;
+	}
+
+
 }

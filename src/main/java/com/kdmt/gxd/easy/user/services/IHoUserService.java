@@ -15,6 +15,8 @@ public interface IHoUserService {
 
     boolean batchDelete(Long[] primaryKeys);
 
+    boolean batchInsert(List<HoUser> list);
+
     HoUser findModel(Long id);
 
     HoUser findModel(Long id, String[] parameters);
@@ -51,4 +53,6 @@ public interface IHoUserService {
 
 //    void  saveUser(HoUser hoUser);
     void insert(HoUser user);
+
+
 }

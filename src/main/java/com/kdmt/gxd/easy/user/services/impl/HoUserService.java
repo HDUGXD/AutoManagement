@@ -159,12 +159,10 @@ public class HoUserService implements IHoUserService ,Serializable {
 //            mongoTemplate.insert(list);
 //             new UserRepository().insert(hoUser);
             UserTest userTest = new UserTest();
-//            userTest.setId("123123");
             userTest.setEmail("123123");
             userTest.setCompany("123123");
             userTest.setDepartment("123123");
             hoUser.setId(null);
-
             mongoTemplate.save(hoUser,"gxd");
             System.out.println("插入结束。。。。。");
         } catch (Exception e) {
@@ -172,5 +170,13 @@ public class HoUserService implements IHoUserService ,Serializable {
         }
 
     }
+    /**
+     * 批量插入
+     */
+    @Override
+    public boolean batchInsert(List<HoUser> list){
+        return hoUserMapper.insertBatch(list) > 0;
+    }
+
 
 }

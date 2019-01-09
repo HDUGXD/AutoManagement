@@ -40,4 +40,7 @@ public interface HoUserMapper {
 
     //获得所有记录数
     long getCount();
+
+    //批量插入
+    int insertBatch(List<HoUser> list);
 }

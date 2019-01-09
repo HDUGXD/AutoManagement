@@ -87,10 +87,13 @@ public class HoUserController {
         HoUser hoUserModel = hoUserDTO.toModel();
         //创建时间
         hoUserModel.setCreateTime( DateUtil.parse(DateUtil.format(new Date())));
-        hoUserService.save(hoUserModel);
-        hoUserService.insert(hoUserModel);      //mongodb
+//        hoUserService.save(hoUserModel);
+//        hoUserService.insert(hoUserModel);      //mongodb
 //          HoUserMongo hoUserMongo = new HoUserMongo();
 //          hoUserMongo.insertMongo();
+
+        //批量插入
+
 
         return ResponseUtil.getResEntityForPPP(hoUserService.save(hoUserModel));
     }
