@@ -67,11 +67,11 @@ public class IndexController {
          return "user/person";
     }
 
-//    @RequestMapping("/logout")
-//    public String logout(HttpSession session) {
-//        session.invalidate();
-//        return "ticket/login";
-//    }
+    @RequestMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "ticket/login";
+    }
 
 
     @RequestMapping(value="toHome",method = RequestMethod.GET)

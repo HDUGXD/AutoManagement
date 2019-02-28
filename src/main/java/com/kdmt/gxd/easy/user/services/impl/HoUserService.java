@@ -98,10 +98,6 @@ public class HoUserService implements IHoUserService ,Serializable {
         return hoUserMapper.loadMaps(SqlUtil.formatParametersForAlias(parameters), SqlUtil.fillCondition(condition, values), order, sort, SqlUtil.getOffset(curPage, limit), limit);
     }
 
-    @Override
-    public List<HoUser> findAllByCondition(HoUser condition) {
-        return hoUserMapper.findAllByCondition(condition);
-    }
 
     @Override
     public long count() {
@@ -135,20 +131,16 @@ public class HoUserService implements IHoUserService ,Serializable {
     public long getCount() {
         return hoUserMapper.getCount();
     }
-
-//    @Override
-//    public void saveUser(HoUser hoUser) {
-//        new UserRepository().save(hoUser);
-//    }
-
+    @Override
+    public List<HoUser> findAllByCondition(HoUser condition) {
+        return hoUserMapper.findAllByCondition(condition);
+    }
 
     //
 
     /**
      * 插入
      */
-
-
     @Override
     public void insert(HoUser hoUser) {
         List<String> list = new ArrayList<>();
@@ -159,18 +151,25 @@ public class HoUserService implements IHoUserService ,Serializable {
 //            mongoTemplate.insert(list);
 //             new UserRepository().insert(hoUser);
             UserTest userTest = new UserTest();
-//            userTest.setId("123123");
             userTest.setEmail("123123");
             userTest.setCompany("123123");
             userTest.setDepartment("123123");
             hoUser.setId(null);
-
-            mongoTemplate.save(hoUser,"gxd");
+//            mongoTemplate.save(hoUser,"gxd");
+            hoUserMapper.insert(hoUser);
             System.out.println("插入结束。。。。。");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+    /**
+     * 批量插入
+     */
+    @Override
+    public boolean batchInsert(List<HoUser> list){
+        return hoUserMapper.insertBatch(list) > 0;
+    }
+
 
 }

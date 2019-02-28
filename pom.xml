@@ -529,6 +529,25 @@
 		    <version>1.2.4</version>
 		</dependency>
 
+        <!--######  rocketmq ######-->
+        <dependency>
+            <groupId>com.alibaba.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>3.2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.rocketmq</groupId>
+            <artifactId>rocketmq-all</artifactId>
+            <version>3.2.6</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <!--####################-->
+
 		<!--<dependency>-->
 		    <!--<groupId>com.alibaba</groupId>-->
 		    <!--<artifactId>druid</artifactId>-->
@@ -545,6 +564,7 @@
             <!--<artifactId>poi</artifactId>-->
             <!--<version>3.14</version>-->
         <!--</dependency>-->
+
     </dependencies>
 
 

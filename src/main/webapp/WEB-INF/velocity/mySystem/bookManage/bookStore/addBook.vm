@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="$!{rc.contextPath}/assets/layUI/layui/css/layui.css"/>
+
+</head>
+<body>
+
+<form class="layui-form" id="user_form" action="$!{rc.contextPath}/hoUser/addUser" method="post"
+      enctype="multipart/form-data">
+
+    <div class="layui-form-item" style="margin-top: 3%">
+        <div class="layui-inline">
+            <label class="layui-form-label">图书名称</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="bookName" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">图书作者</label>
+            <div class="layui-input-inline">
+                <input type="text" name="bookAuthor" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label">图书类型</label>
+            <div class="layui-input-inline">
+                            <select name="bookType" lay-verify="required" lay-search="">
+                                <option value="">直接选择或搜索选择</option>
+                                <option value="1001">电子信息类（1001）</option>
+                                <option value="1002">计算机类（1002）</option>
+                                <option value="1003">外语类（1003）</option>
+                                <option value="1004">通信工程类（1004）</option>
+                                <option value="1005">考研辅导类（1005）</option>
+                                <option value="1006">等级考试类（1006）</option>
+                                <option value="1007">工商管理类（1007）</option>
+                                <option value="1008">机械工程类（1008）</option>
+                                <option value="1111">其他书籍（1111）</option>
+                            </select>
+##                <select  name="bookType" lay-verify="required" lay-search="">
+##                    <option value="">直接选择或搜索选择</option>
+##                    #foreach($data in $bookTypeList)
+##                        <option value="$!{data.depCode}">
+##                            $!{data.depName}
+##                        </option>
+##                    #end
+##                </select>
+            </div>
+
+
+        </div>
+##        <div class="layui-inline">
+##            <label class="layui-form-label">图书编号</label>
+##            <div class="layui-input-inline">
+##                <input type="text" name="phoneNumber" lay-verify="required" autocomplete="off"
+##                       class="layui-input">
+##            </div>
+##        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">入库数量</label>
+            <div class="layui-input-inline">
+                <input type="text" name="bookLeftNum" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+
+
+        <div style="margin-left: 6%">
+            <table>
+                <td>
+                <td>
+                    <div>封面照片</div>
+                </td>
+                <td>
+                    <div id="preview" style="margin-left: 10px">
+                        <img id="imghead" border="0"
+                             src="$!{rc.contextPath}/assets/upload/pic_upload/single_head/img/photo_icon.png"
+                             width="90" height="90" onClick="$('#previewImg').click();">
+                    </div>
+                    <input type="file" name="headImg" onChange="previewImage(this)" style="display: none;"
+                           id="previewImg">
+                    <input type="hidden" name="bookPicUrl" id="bookPicUrl">
+                    <input type="hidden" name="imgName" id="imgName">
+                </td>
+
+
+                </tr>
+            </table>
+
+
+        </div>
+
+        <div class="layui-form-item" style="margin-top: 3%">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="addUser">提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+</form>
+
+
+<script src="$!{rc.contextPath}/assets/layUI/layui/layui.js" charset="utf-8"></script>
+
+<script type="text/javascript" src="$!{rc.contextPath}/assets/upload/pic_upload/single_head/js/jquery.min.js"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+        //自定义验证规则
+        form.verify({
+            title: function (value) {
+                if (value.length < 5) {
+                    return '标题至少得5个字符啊';
+                }
+            }
+            , pass: [
+                /^[\S]{6,12}$/
+                , '密码必须6到12位，且不能出现空格'
+            ]
+            , content: function (value) {
+                layedit.sync(editIndex);
+            }
+        });
+
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+
+        //监听提交
+        form.on('submit(addUser)', function (data) {
+            var jsonStr = JSON.stringify(data.field)
+        ##            $.ajax({
+        ##                        type: "POST",//方法类型
+        ##                        //dataType: "text",//预期服务器返回的数据类型
+        ##                        url: "$!{rc.contextPath}/hoUser/addUser?jsonStr="+para,//url
+        ##//                        data: data,
+        ##            //            contentType:"application/x-www-from-urlencoded",
+        ##                        success: function (result) {
+        ##                            $.message('操作成功');
+        ##                        },
+        ##                        error: function () {
+        ##                            $.message({
+        ##                                message: '操作失败',
+        ##                                type: 'error'
+        ##                            });
+        ##                        }
+        ##                    });
+
+
+//            layer.alert(JSON.stringify(data.field), {
+//                title: '最终的提交信息'
+//            })
+
+
+            jQuery.ajax({
+                type: "POST",
+                url: "$!{rc.contextPath}/bookStore/addBook",
+                dataType: "json",
+                data: {jsonStr: jsonStr},
+                async: false,
+                //map传值前台获取
+                success: function (jso) {
+
+                    alert(123);
+                }
+            });
+
+
+            return false;
+        });
+
+//        //表单初始赋值
+//        form.val('example', {
+//            "username": "贤心" // "name": "value"
+//            ,"password": "123456"
+//            ,"interest": 1
+//            ,"like[write]": true //复选框选中状态
+//            ,"close": true //开关状态
+//            ,"sex": "女"
+//            ,"desc": "我爱 layui"
+//        })
+
+
+    });
+
+    //权限表单
+    $(".select-title").on("click", function () {
+        $(".select-list").hide();
+        $(this).siblings($(".select-list")).show();
+        return false;
+    })
+    $(".select-list").on("click", "li", function () {
+        var txt = $(this).text();
+        $(this).parent($(".select-list")).siblings($(".select-title")).find("span").text(txt);
+    })
+
+    //图片上传
+    //图片上传预览    IE是用了滤镜。
+    function previewImage(file) {
+        //图片名称
+        var picName = getPicName(file);
+        var s = picName.lastIndexOf("\\") + 1;
+        var name = picName.substring(s, picName.length)
+        $("#imgName").val(name)
+        //图片base64
+        getPicBase64();
+        var MAXWIDTH = 90;
+        var MAXHEIGHT = 90;
+        var div = document.getElementById('preview');
+        if (file.files && file.files[0]) {
+            div.innerHTML = '<img id=imghead onclick=$("#previewImg").click()>';
+            var img = document.getElementById('imghead');
+            img.onload = function () {
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                img.width = rect.width;
+                img.height = rect.height;
+//                 img.style.marginLeft = rect.left+'px';
+                img.style.marginTop = rect.top + 'px';
+            }
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                img.src = evt.target.result;
+            }
+            reader.readAsDataURL(file.files[0]);
+        }
+        else //兼容IE
+        {
+            var sFilter = 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+            file.select();
+            var src = document.selection.createRange().text;
+            div.innerHTML = '<img id=imghead>';
+            var img = document.getElementById('imghead');
+            img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+            status = ('rect:' + rect.top + ',' + rect.left + ',' + rect.width + ',' + rect.height);
+            div.innerHTML = "<div id=divhead style='width:" + rect.width + "px;height:" + rect.height + "px;margin-top:" + rect.top + "px;" + sFilter + src + "\"'></div>";
+        }
+    }
+    function clacImgZoomParam(maxWidth, maxHeight, width, height) {
+        var param = {top: 0, left: 0, width: width, height: height};
+        if (width > maxWidth || height > maxHeight) {
+            rateWidth = width / maxWidth;
+            rateHeight = height / maxHeight;
+
+            if (rateWidth > rateHeight) {
+                param.width = maxWidth;
+                param.height = Math.round(height / rateWidth);
+            } else {
+                param.width = Math.round(width / rateHeight);
+                param.height = maxHeight;
+            }
+        }
+        param.left = Math.round((maxWidth - param.width) / 2);
+        param.top = Math.round((maxHeight - param.height) / 2);
+        return param;
+    }
+
+    function getPicName(obj) {
+        if (obj) {
+
+            if (window.navigator.userAgent.indexOf("MSIE") >= 1) {
+                obj.select();
+
+                return document.selection.createRange().text;
+            }
+
+            else if (window.navigator.userAgent.indexOf("Firefox") >= 1) {
+                if (obj.files) {
+
+                    return obj.files.item(0).getAsDataURL();
+                }
+                return obj.value;
+            }
+            return obj.value;
+        }
+    }
+    function getPicBase64() {
+        var file = document.getElementById("previewImg").files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = function (e) {
+            var imageBase64Date = e.target.result;
+
+            $("#bookPicUrl").val(imageBase64Date);
+
+        }
+    }
+
+    ##    /**
+    ##     * 表单提交相关
+    ##     */
+    ##    function subForm() {
+    ##
+    ##        var data = $('#user_form').serializeObject();
+    ##
+    ##        $.ajax({
+    ##            type: "POST",//方法类型
+    ##            //dataType: "text",//预期服务器返回的数据类型
+    ##            url: "$!{rc.contextPath}/hoUser/addUser",//url
+    ##            data: data,
+    ##//            contentType:"application/x-www-from-urlencoded",
+    ##            success: function (result) {
+    ##                $.message('操作成功');
+    ##
+    ##            },
+    ##            error: function () {
+    ##                $.message({
+    ##                    message: '操作失败',
+    ##                    type: 'error'
+    ##                });
+    ##            }
+    ##        });
+    ##
+    ##    }
+    ##    //将form进行对象进行封装
+    ##    $.fn.serializeObject = function () {
+    ##        var o = {};
+    ##        var a = this.serializeArray();
+    ##        $.each(a, function () {
+    ##            if (o[this.name]) {
+    ##                if (!o[this.name].push) {
+    ##                    o[this.name] = [o[this.name]];
+    ##                }
+    ##                o[this.name].push(this.value || '');
+    ##            } else {
+    ##                o[this.name] = this.value || '';
+    ##            }
+    ##        });
+    ##        return o;
+    ##    };
+
+
+</script>
+
+</body>
+</html>

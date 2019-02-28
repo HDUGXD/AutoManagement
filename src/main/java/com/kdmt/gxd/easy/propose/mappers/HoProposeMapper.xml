@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kdmt.gxd.easy.propose.daos.HoProposeMapper" >
+    <resultMap id="BaseResultMap" type="com.kdmt.gxd.easy.propose.entities.HoPropose" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="propose_name" property="proposeName" jdbcType="VARCHAR" />
+        <result column="propose_code" property="proposeCode" jdbcType="VARCHAR" />
+        <result column="statu_code" property="statuCode" jdbcType="VARCHAR" />
+        <result column="start_person" property="startPerson" jdbcType="VARCHAR" />
+        <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,
+        propose_name,
+        propose_code,
+        statu_code,
+        start_person,
+        start_time,
+        remark
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from ho_propose
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <delete id="deleteByPrimaryKey" >
+        delete from ho_propose
+        where
+        id = #{id,jdbcType=BIGINT}
+        
+    </delete>
+
+    <delete id="deleteByPrimaryKeys" >
+        delete from ho_propose
+        where <foreach collection="primaryKeys" item = "primaryKey" separator=" or " >id = #{primaryKey,jdbcType=BIGINT}</foreach>
+    </delete>
+
+    <insert id="insert" parameterType="com.kdmt.gxd.easy.propose.entities.HoPropose" >
+        insert into ho_propose (
+            id,
+            propose_name,
+            propose_code,
+            statu_code,
+            start_person,
+            start_time,
+            remark
+        )
+        values (
+            #{id,jdbcType=BIGINT},
+            #{proposeName,jdbcType=VARCHAR},
+            #{proposeCode,jdbcType=VARCHAR},
+            #{statuCode,jdbcType=VARCHAR},
+            #{startPerson,jdbcType=VARCHAR},
+            #{startTime,jdbcType=VARCHAR},
+            #{remark,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.kdmt.gxd.easy.propose.entities.HoPropose" >
+        insert into ho_propose
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="proposeName != null" >
+                propose_name,
+            </if>
+            <if test="proposeCode != null" >
+                propose_code,
+            </if>
+            <if test="statuCode != null" >
+                statu_code,
+            </if>
+            <if test="startPerson != null" >
+                start_person,
+            </if>
+            <if test="startTime != null" >
+                start_time,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="proposeName != null" >
+                #{proposeName,jdbcType=VARCHAR},
+            </if>
+            <if test="proposeCode != null" >
+                #{proposeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="statuCode != null" >
+                #{statuCode,jdbcType=VARCHAR},
+            </if>
+            <if test="startPerson != null" >
+                #{startPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null" >
+                #{startTime,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.kdmt.gxd.easy.propose.entities.HoPropose" >
+        update ho_propose
+        <set >
+            <if test="id != null" >
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="proposeName != null" >
+                propose_name = #{proposeName,jdbcType=VARCHAR},
+            </if>
+            <if test="proposeCode != null" >
+                propose_code = #{proposeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="statuCode != null" >
+                statu_code = #{statuCode,jdbcType=VARCHAR},
+            </if>
+            <if test="startPerson != null" >
+                start_person = #{startPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null" >
+                start_time = #{startTime,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+            where
+            id = #{id,jdbcType=BIGINT}
+                
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.kdmt.gxd.easy.propose.entities.HoPropose" >
+        update ho_propose
+        set
+        <trim suffixOverrides="," >
+            propose_name = #{proposeName,jdbcType=VARCHAR},
+            propose_code = #{proposeCode,jdbcType=VARCHAR},
+            statu_code = #{statuCode,jdbcType=VARCHAR},
+            start_person = #{startPerson,jdbcType=VARCHAR},
+            start_time = #{startTime,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+        </trim>
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </update>
+
+    <select id="loadModels" resultMap="BaseResultMap">
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from ho_propose
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="loadMaps" resultType="java.util.HashMap">
+        select
+        <if test="parameters != null">
+         ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from ho_propose
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="count" resultType="long">
+        select count(
+        <if test="isDistinct == true">
+            distinct
+        </if>
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        ) from ho_propose
+        <if test="condition != null">
+            where ${condition}
+        </if>
+    </select>
+
+    <select id="findModel" resultMap="BaseResultMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from ho_propose
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <select id="findMap" resultType="java.util.HashMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from ho_propose
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <!--################## 查询 #####################-->
+    <select id="findAllByCondition"  resultType="com.kdmt.gxd.easy.propose.entities.HoPropose">
+        select * from ho_propose where 1=1
+        <!--<if test="bookName!=null">-->
+            <!--and book_name=#{bookName}-->
+        <!--</if>-->
+        <!--<if test="bookType!=null">-->
+            <!--and book_type=#{bookType}-->
+        <!--</if>-->
+    </select>
+    <!--查询所有用户(分页)-->
+    <select id="findByPage"  resultType="com.kdmt.gxd.easy.propose.entities.HoPropose">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from ho_propose where 1=1
+
+        <!--<if test="name!=null">-->
+            <!--and book_name=#{bookName}-->
+        <!--</if>-->
+        <!--order by id desc-->
+        <!--<if test="pageNo >= 0 and pageSize > 0">-->
+            <!--limit #{pageNo},#{pageSize}-->
+        <!--</if>-->
+
+    </select>
+
+    <select id="getCount"  resultType="java.lang.Long">
+        SELECT
+        count(1) as count
+        from ho_propose
+    </select>
+</mapper>

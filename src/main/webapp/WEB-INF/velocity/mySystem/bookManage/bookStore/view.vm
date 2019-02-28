@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+##    layui
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="$!{rc.contextPath}/assets/layUI/layui/css/layui.css" media="all">
+##
+    <title></title>
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        a, img {
+            border: 0;
+        }
+
+        a, a:link, a:visited {
+            color: #006699;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #ff7031;
+        }
+
+        body {
+            background-color: #fff;
+            font: 12px/180% Arial, Helvetica, sans-serif, "新宋体";
+        }
+
+        .FlLeft {
+            float: left;
+        }
+
+        .FlRight {
+            float: right;
+        }
+
+        /*幻灯片区域背景*/
+        .MainBg {
+            background-color: #222;
+            width: 1100px;
+            margin: 0 auto;
+        }
+
+        /*标题和页码*/
+        .Title {
+            color: #EEE;
+            padding: 5px 20px 0 20px;
+            text-align: center;
+            line-height: 40px;
+            height: 40px;
+        }
+
+        .Title h1 {
+            display: inline;
+        }
+
+        .Title .Counter {
+            color: #666;
+        }
+
+        .Title .CounterCurrent {
+            color: #C00;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /*灰色分隔线*/
+        .SpaceLine {
+            border-bottom: 1px solid #333;
+            height: 1px;
+            font-size: 1px;
+        }
+
+        /*大图展示区域*/
+        .OriginalPicBorder {
+            padding: 5px 15px 0 15px;
+        }
+
+        #OriginalPic {
+            width: 930px;
+            overflow: hidden;
+            position: relative;
+            font-size: 12px;
+        }
+
+        #OriginalPic img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        /*鼠标手势*/
+        .CursorL {
+            position: absolute;
+            z-index: 999;
+            width: 50%;
+            height: 600px;
+            color: #FFF;
+            left: 120px;
+            cursor: url($!{_platform_assets_url}/images/imgShow/images/CurL.cur), auto;
+            background: url($!{_platform_assets_url}/images/imgShow/images/space.png) repeat scroll 0 0 transparent;
+        }
+
+        .CursorR {
+            position: absolute;
+            z-index: 999;
+            width: 50%;
+            height: 80%;
+            color: #FFF;
+            right: 0;
+            cursor: url($!{_platform_assets_url}/images/imgShow/images/CurR.cur), auto;
+            background: url($!{_platform_assets_url}/images/imgShow/images/space.png) repeat scroll 0 0 transparent;
+        }
+
+        /*小图预览和滑动*/
+        .SliderPicBorder {
+            width: 800px;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .Summary {
+            line-height: 20px;
+            display: block;
+            width: 100px;
+            margin-right: 10px;
+            color: #999;
+            overflow: hidden;
+            background-color: #333;
+            padding: 10px;
+        }
+
+        .More {
+            text-align: right;
+            color: #666;
+            line-height: 40px;
+            height: 40px;
+            font-size: 12px;
+            display: block;
+        }
+
+        .ThumbPicBorder {
+            width: 940px;
+            margin: 0 auto;
+        }
+
+        #ThumbPic img {
+            border: 3px solid #666;
+            cursor: pointer;
+            background-color: #666;
+            margin: 0 4px;
+            width: 130px;
+            height: 80px;
+            display: block;
+        }
+
+        #ThumbPic img.active {
+            border: 3px solid #FF9900;
+        }
+    </style>
+
+    <script type="text/javascript" src="$!{rc.contextPath}/assets/images/imgShow/js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="$!{rc.contextPath}/assets/layUI/layer/layer.js"></script>
+    <script type="text/javascript"
+            src="$!{rc.contextPath}/assets/images/imgShow/js/jquery.jcarousellite.min.js"></script>
+
+</head>
+<body>
+<div>
+    <div style="display: inline">
+
+        <div style="float: right;margin-top: 3px;margin-left:0px;width: 50%;height: 50%;background-color: #f8fdff">
+            <div>
+                <label style="align-self: center;margin-top: 30px;font-size: large;font-weight:bold;position:absolute;
+   ">图书信息详情</label>
+            </div>
+            <table style="margin-top: 80px">
+
+                <tr>
+                    <td align="left" style="padding-bottom: 2px">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="">书名：</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="bayonetName" style="font-size: large" value="$!{vehicle.qyCode}"
+                                       autocomplete="off" class="layui-input" style="width: 230px;">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" style="padding-bottom: 2px">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">作者：</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="jgsj" style="font-size: large" value="$!{vehicle.countDay}"
+                                       autocomplete="off" class="layui-input" style="width: 230px;">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" style="padding-bottom: 2px">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">库存量：</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="hpCode" style="font-size: large" value="$!{vehicle.plateNo}"
+                                       autocomplete="off" class="layui-input" style="width: 230px">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            ##        <tr>
+            ##            <td align="left" style="padding-bottom: 2px">
+            ##                <div class="layui-form-item">
+            ##                    <label class="layui-form-label" >车牌特写：</label>
+            ##                    <div class="layui-input-block">
+            ##
+            ##                    </div>
+            ##                </div>
+            ##            </td>
+            ##        </tr>
+                <tr>
+                    <td align="left" style="padding-bottom: 2px">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">上架：</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="cllx" style="font-size: large" value="$!{vehicle.plateClass}"
+                                       autocomplete="off" class="layui-input" style="width: 230px;">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="left" style="padding-bottom: 2px">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">入库：</label>
+                            <div class="layui-input-block">
+                                <input type="text" style="font-size: large" id="company"
+                                       value="$!{vehicle.vehicleBrand}" autocomplete="off" class="layui-input"
+                                       style="width: 230px;">
+                            ##                            隐藏字段
+                                <input type="hidden" id="nowRow">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+    </div>
+    <div style="display: inline">
+        <div style="float: left;margin-top: 3px;height: 20%">
+            <div id="aPrev" class="CursorL" style="height: 80%"></div>
+            <div id="aNext" class="CursorR" style="height: 80%"></div>
+            <p>
+                <span><img id="picPath" style="height: 90%;width: 90%;margin-left: 8%;margin-top: 3%"
+                           src="$!{entity.bookPicUrl}"/></span>
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    //缩略图滚动事件
+    $(".jCarouselLite").jCarouselLite({
+        btnNext: "#btnNext",
+        btnPrev: "#btnPrev",
+        scroll: 1,
+        speed: 240,
+        circular: false,
+        visible: 6
+    });
+</script>
+
+<script type="text/javascript">
+    var currentImage;
+    var currentIndex = -1;
+
+    //显示大图(参数index从0开始计数)
+    function showImage(index) {
+        //更新当前图片页码
+        $(".CounterCurrent").html(index + 1);
+
+        //隐藏或显示向左向右鼠标手势
+        var len = $('#OriginalPic img').length;
+//
+
+        //显示大图
+        if (index < $('#OriginalPic img').length) {
+            var indexImage = $('#OriginalPic p')[index];
+
+            //隐藏当前的图
+            if (currentImage) {
+                if (currentImage != indexImage) {
+                    $(currentImage).css('z-index', 2);
+                    $(currentImage).fadeOut(0, function () {
+                        $(this).css({'display': 'none', 'z-index': 1})
+                    });
+                }
+            }
+
+            //显示用户选择的图
+            $(indexImage).show().css({'opacity': 0.4});
+            $(indexImage).animate({opacity: 1}, {duration: 200});
+
+            //更新变量
+            currentImage = indexImage;
+            currentIndex = index;
+
+            //移除并添加高亮
+            $('#ThumbPic img').removeClass('active');
+            $($('#ThumbPic img')[index]).addClass('active');
+
+            //设置向左向右鼠标手势区域的高度
+//            var tempHeight = $($('#OriginalPic img')[index]).height();
+//            $('#aPrev').height(tempHeight*0.5);
+//            $('#aNext').height(tempHeight);
+
+//                        var tempHeight = $($('#OriginalPic img')[index]).height();
+//                        alert(tempHeight)
+//            $('#aPrev').width(tempHeight*0.1);
+//            $('#aNext').width(tempHeight*0.1);
+        }
+    }
+
+    //页面加载
+    $("document").ready(function () {
+        //首次点击的行数
+        $("#nowRow").val("$!{row}");
+
+    ##        alert("$!{bayonet.firstPicPath}")
+    ##        <div style="width: 350px;height: 250px ">
+    ##                <img style="width: 100%;height: 100%;" src ="$!{rc.contextPath}/imgShow/showLocal?address=$!{address1}"/>
+    ##        </div>
+    });
+
+    //下一张事件
+    $("#aNext").click(function () {
+        var nowRow = parseInt($("#nowRow").val()) + parseInt(1);
+        //取得数据 并 赋值
+        var nextLine = parent.getNextLine(nowRow);
+        $("#bayonetName").val(nextLine.passportName);
+        $("#jgsj").val(nextLine.countDay);
+        $("#hpCode").val(nextLine.plateNumber);
+        $("#cllx").val(nextLine.plateColor);
+        $("#company").val(nextLine.company);
+        //picPath
+        var element = document.getElementById("picPath");
+        element.src = nextLine.storageUrl1;
+        //更新行数
+        $("#nowRow").val(nowRow);
+
+    });
+
+    //上一张事件
+    $("#aPrev").click(function () {
+
+        var nowRow = parseInt($("#nowRow").val()) - parseInt(1);
+        var prevLine = parent.getPrevLine(nowRow);
+
+        $("#bayonetName").val(prevLine.passportName);
+        $("#jgsj").val(prevLine.countDay);
+        $("#hpCode").val(prevLine.plateNumber);
+        $("#cllx").val(prevLine.plateColor);
+        $("#company").val(prevLine.company);
+        //picPath
+        var element = document.getElementById("picPath");
+        element.src = prevLine.storageUrl1;
+        //更新行数
+        $("#nowRow").val(nowRow);
+    });
+
+</script>
+
+
+</body>
+</html>

@@ -44,10 +44,41 @@ public class HoUser implements Serializable {
         private String person_code;
 
 
+
        //******分页属性-自定义********
            private int  pageNo;
            private int  pageSize;
+    /**专业**/
+    private String major;
+    /**头像地址**/
+    private String headImgSrc;
+    /**头像名称**/
+    private String headImgName;
        //**************************
+
+    public String getHeadImgName() {
+        return headImgName;
+    }
+
+    public void setHeadImgName(String headImgName) {
+        this.headImgName = headImgName;
+    }
+
+    public String getHeadImgSrc() {
+        return headImgSrc;
+    }
+
+    public void setHeadImgSrc(String headImgSrc) {
+        this.headImgSrc = headImgSrc;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
 
     public String getPerson_name() {
         return person_name;

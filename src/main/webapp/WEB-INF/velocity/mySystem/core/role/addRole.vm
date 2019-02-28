@@ -1,109 +1,545 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="$!{rc.contextPath}/assets/layUI/layui/css/layui.css"/>
+##    <link rel="stylesheet" href="$!{rc.contextPath}/assets/mySystem/bookManage/css/ySelect.css" type="text/css" />
+    <link rel="stylesheet" href="$!{rc.contextPath}/assets/mySystem/bookManage/css/font-awesome.min.css"
+          type="text/css"/>
+    <link rel="stylesheet" href="$!{rc.contextPath}/assets/bootstrap/css/base.css" />
+    <link rel="stylesheet" href="$!{rc.contextPath}/assets/bootstrap/css/info-mgt.css" />
+    <style>
 
 
-    <title>办公自动化系统</title>
+        ::-webkit-scrollbar-track-piece {
+            background-color: #ebebeb;
+            -webkit-border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:vertical {
+            height: 32px;
+            background-color: #ccc;
+            -webkit-border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:horizontal {
+            width: 32px;
+            background-color: #ccc;
+            -webkit-border-radius: 4px;
+        }
+
+        ul, li {
+            padding: 0;
+            margin: 0
+        }
+
+        .mySelect {
+            position: relative;
+        }
+
+        .mySelect .inputWrap {
+            width: 100%;
+            min-height: 40px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .mySelect ul {
+            padding: 0 5px;
+            margin: 0;
+            padding-right: 35px;
+        }
+
+        .mySelect ul, li {
+            list-style: none;
+        }
+
+        .mySelect li {
+            display: inline-block;
+            background: #eaeaea;
+            padding: 5px;
+            margin: 5px 5px 5px 0;
+            border-radius: 5px;
+        }
+
+        .mySelect .fa-close {
+            cursor: pointer;
+        }
+
+        .mySelect .fa-close:hover {
+            color: #237eff;
+        }
+
+        .mySelect .mySelect-option {
+            width: 100%;
+            border: 1px solid #ccc;
+            max-height: 200px;
+            overflow-y: scroll;
+            position: absolute;
+            height: 0;
+            opacity: 0;
+        }
+
+        .mySelect .mySelect-option div {
+            padding: 10px;
+        }
+
+        .mySelect .inputWrap > i {
+            position: absolute;
+            padding: 13px;
+            right: 0;
+            top: 0;
+        }
+
+        .mySelect-option div {
+            cursor: pointer;
+            border-bottom: 1px solid #e7e7e7;
+            margin: 5px;
+        }
+
+        .mySelect-option div i {
+            float: right;
+            color: #ffffff;
+        }
+
+        .mySelect-option div.selected {
+            background: #237eff;
+            color: #ffffff;
+            border-radius: 5px;
+        }
+
+        .mySelect-option div:hover {
+            /*background: #9ec6ff;*/
+            color: #9ec6ff;
+            border-bottom: 1px solid #9ec6ff;
+        }
+    </style>
 </head>
-
 <body>
-<div class="title"><h2></h2></div>
 
-<div class="main">
-    <form id="user_form" action="" method="post">
+<form class="layui-form" id="user_form" action="$!{rc.contextPath}/hoUser/addUser" method="post"
+      enctype="multipart/form-data">
+<table>
+    <div class="layui-form-item" style="margin-top: 2%">
+        <div class="layui-inline">
+            <label class="layui-form-label">角色名称:</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="name" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">角色编号:</label>
+            <div class="layui-input-inline">
+                <input type="text" name="type" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">上级角色:</label>
+            <div class="layui-input-inline">
+                <select name="modules" lay-verify="required" lay-search="">
+                    <option value="">直接选择或搜索选择</option>
+                    <option value="1">中国</option>
+                    <option value="2">form</option>
+                    <option value="3">俄罗斯</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+##    <class="layui-form-item">
+##    <div class="layui-form-item" style="margin-top: 3%">
+##
+##
+##    </div>
+##    <div class="layui-form-item">
+##        <div class="layui-inline">
+##            <label class="layui-form-label">权限分配:</label>
+##        </div>
+##    </div>
 
 
-    </form>
-</div>
+        <thead>
+        <tr>
 
-</body>
+            <th class="name" style="text-align: center;vertical-align: middle;">分配菜单权限：</th>
+            <th class="process" style="text-align: center;vertical-align: middle;">分配操作做权限：</th>
 
-<script type="text/javascript">
-    $(".select-title").on("click", function () {
-        $(".select-list").toggle();
-        return false;
-    });
-    $(".select-list").on("click", "li", function () {
-        var txt = $(this).text();
-        $(".select-title").find("span").text(txt);
-    });
-    //加载表单效果
-    $("document").ready(function () {
-        $('.login').show();
-        $('.login-bg').show();
-    })
+        </tr>
+        </thead>
+    ## 变化内容
+        <tbody id="change_table" >
+        <tr>
+            <td style="text-align:center;vertical-align:middle;"><input type="checkbox" name="like1[write]" lay-skin="primary" title="图书借阅" checked=""></td>
+            <td class='name'><input type="checkbox" name="like1[write]" lay-skin="primary" title="图书借阅" checked=""><input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked=""></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;vertical-align:middle;"><input type="checkbox" name="like1[write]" lay-skin="primary" title="已借查询" checked=""></td>
+            <td class='name'><input type="checkbox" name="like1[write]" lay-skin="primary" title="已借查询" checked=""><input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked=""></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;vertical-align:middle;"><input type="checkbox" name="like1[write]" lay-skin="primary" title="图书上下架" checked=""></td>
+            <td class='name'><input type="checkbox" name="like1[write]" lay-skin="primary" title="图书上下架" checked=""><input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked=""></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;vertical-align:middle;"><input type="checkbox" name="like1[write]" lay-skin="primary" title="库存管理" checked=""></td>
+            <td class='name'><input type="checkbox" name="like1[write]" lay-skin="primary" title="库存管理" checked=""><input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked=""></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;vertical-align:middle;"><input type="checkbox" name="like1[write]" lay-skin="primary" title="我的申请" checked=""></td>
+            <td class='name'><input type="checkbox" name="like1[write]" lay-skin="primary" title="我的申请" checked=""><input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked=""></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;vertical-align:middle;"><input type="checkbox" name="like1[write]" lay-skin="primary" title="用户中心" checked=""></td>
+            <td class='name'><input type="checkbox" name="like1[write]" lay-skin="primary" title="用户中心" checked=""><input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked=""></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;vertical-align:middle;"><input type="checkbox" name="like1[write]" lay-skin="primary" title="角色管理" checked=""></td>
+            <td class='name'><input type="checkbox" name="like1[write]" lay-skin="primary" title="角色管理" checked=""><input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked=""></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;vertical-align:middle;"><input type="checkbox" name="like1[write]" lay-skin="primary" title="权限管理" checked=""></td>
+            <td class='name'><input type="checkbox" name="like1[write]" lay-skin="primary" title="权限管理" checked=""><input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked=""></td>
+        </tr>
+
+        </tbody>
+    </table>
 
 
+##    <div class="layui-form-item">
+##
+##        <table>
+##            <tr>
+##                <td>
+##                    <label class="layui-form-label">菜单权限</label>
+##                </td>
+##                <td>
+##                    <label class="layui-form-label">操作权限</label>
+##                </td>
+##            </tr>
+##            <tr>
+##                <td style="width: 200px">
+##                    <label class="layui-form-label">图书借阅</label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+##                               lay-text="ON|OFF">
+##                    </div>
+##                </td>
+##                <td>
+##                ##            <label id="mySelect" class="mySelect" style="width: 190px;float: left"></label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked="">
+##                        <input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+##                        <input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏">
+##                    </div>
+##                    <input type="hidden" name="permission" id="permission">
+##
+##                </td>
+##            </tr>
+##            <tr>
+##                <td>
+##                    <label class="layui-form-label">已借查询</label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+##                               lay-text="ON|OFF">
+##                    </div>
+##                </td>
+##                <td>
+##                ##            <label id="mySelect" class="mySelect" style="width: 190px;float: left"></label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked="">
+##                        <input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+##                        <input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏">
+##                    </div>
+##                    <input type="hidden" name="permission" id="permission">
+##                </td>
+##            </tr>
+##            <tr>
+##                <td>
+##                    <label class="layui-form-label">图书上下架</label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+##                               lay-text="ON|OFF">
+##                    </div>
+##                </td>
+##                <td>
+##                ##            <label id="mySelect" class="mySelect" style="width: 190px;float: left"></label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked="">
+##                        <input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+##                        <input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏">
+##                    </div>
+##                    <input type="hidden" name="permission" id="permission">
+##                </td>
+##            </tr>
+##            <tr>
+##                <td>
+##                    <label class="layui-form-label">库存管理</label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+##                               lay-text="ON|OFF">
+##                    </div>
+##                </td>
+##                <td>
+##                ##            <label id="mySelect" class="mySelect" style="width: 190px;float: left"></label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked="">
+##                        <input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+##                        <input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏">
+##                    </div>
+##                    <input type="hidden" name="permission" id="permission">
+##                </td>
+##            </tr>
+##            <tr>
+##                <td>
+##                    <label class="layui-form-label">我的申请</label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+##                               lay-text="ON|OFF">
+##                    </div>
+##                </td>
+##                <td>
+##                ##            <label id="mySelect" class="mySelect" style="width: 190px;float: left"></label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked="">
+##                        <input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+##                        <input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏">
+##                    </div>
+##                    <input type="hidden" name="permission" id="permission">
+##
+##                </td>
+##            </tr>
+##            <tr>
+##                <td>
+##                    <label class="layui-form-label">用户中心</label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+##                               lay-text="ON|OFF">
+##                    </div>
+##                </td>
+##                <td>
+##                ##            <label id="mySelect" class="mySelect" style="width: 190px;float: left"></label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked="">
+##                        <input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+##                        <input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏">
+##                    </div>
+##                    <input type="hidden" name="permission" id="permission">
+##                </td>
+##            </tr>
+##            <tr>
+##                <td>
+##                    <label class="layui-form-label">角色管理</label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+##                               lay-text="ON|OFF">
+##                    </div>
+##                </td>
+##                <td>
+##                ##            <label id="mySelect" class="mySelect" style="width: 190px;float: left"></label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked="">
+##                        <input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+##                        <input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏">
+##                    </div>
+##                    <input type="hidden" name="permission" id="permission">
+##                </td>
+##            </tr>
+##            <tr>
+##                <td>
+##                    <label class="layui-form-label">权限管理</label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+##                               lay-text="ON|OFF">
+##                    </div>
+##                </td>
+##                <td>
+##                ##            <label id="mySelect" class="mySelect" style="width: 190px;float: left"></label>
+##                    <div class="layui-input-block">
+##                        <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked="">
+##                        <input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">
+##                        <input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏">
+##                    </div>
+##                    <input type="hidden" name="permission" id="permission">
+##                </td>
+##            </tr>
+##
+##        </table>
+##
+##    </div>
+
+        <div class="layui-form-item" style="margin-top: 3%">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="addRole">提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+</form>
 
 
+<script src="$!{rc.contextPath}/assets/layUI/layui/layui.js" charset="utf-8"></script>
+
+<script type="text/javascript" src="$!{rc.contextPath}/assets/upload/pic_upload/single_head/js/jquery.min.js"></script>
+<script type="text/javascript" src="$!{rc.contextPath}/assets/mySystem/bookManage/js/select.js"></script>
+
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
 
 
-    showRemind('input[type=text], textarea', 'placeholder');
-    function subForm() {
-        var data = $('#user_form').serializeObject();
-        debugger;
-        $.ajax({
-            type: "POST",//方法类型
-            //dataType: "text",//预期服务器返回的数据类型
-            url: "$!{rc.contextPath}/hoUser/addUser",//url
-            data: data,
-//            contentType:"application/x-www-from-urlencoded",
-            success: function (result) {
-                $.message('操作成功');
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
 
-            },
-            error: function () {
-                $.message({
-                    message: '操作失败',
-                    type: 'error'
-                });
+        //自定义验证规则
+        form.verify({
+            title: function (value) {
+                if (value.length < 5) {
+                    return '标题至少得5个字符啊';
+                }
+            }
+            , pass: [
+                /^[\S]{6,12}$/
+                , '密码必须6到12位，且不能出现空格'
+            ]
+            , content: function (value) {
+                layedit.sync(editIndex);
             }
         });
+
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+
+        //监听提交
+        form.on('submit(addRole)', function (data) {
+
+            var jsonStr = JSON.stringify(data.field)
+
+            jQuery.ajax({
+                type: "POST",
+                url: "$!{rc.contextPath}/role/addRole",
+                dataType: "json",
+                data: {jsonStr: jsonStr},
+                async: false,
+                //map传值前台获取
+                success: function (jso) {
+
+                    alert(123);
+                }
+            });
+
+
+            return false;
+        });
+
+//        //表单初始赋值
+//        form.val('example', {
+//            "username": "贤心" // "name": "value"
+//            ,"password": "123456"
+//            ,"interest": 1
+//            ,"like[write]": true //复选框选中状态
+//            ,"close": true //开关状态
+//            ,"sex": "女"
+//            ,"desc": "我爱 layui"
+//        })
+
+
+    });
+
+    //    $(function () {
+    //
+    //        var mySelect = $("#mySelect").mySelect({
+    //            mult: true,//true为多选,false为单选
+    //            option: [//选项数据
+    //                {label: "选项1", value: 0},
+    //                {label: "选项2", value: 1},
+    //                {label: "选项3", value: 2},
+    //                {label: "选项4", value: 3},
+    //                {label: "选项5", value: 4},
+    //                {label: "选项6", value: 5}
+    //            ],
+    //            onChange: function (res) {//选择框值变化返回结果
+    //                $("#permission").val(res);
+    ////                alert($("#permission").val());
+    //                console.log(res)
+    //            }
+    //        });
+    //        mySelect.setResult(["1", "2"]);
+    //
+    //    });
+
+
+    //        /**
+    //         * 表单提交相关
+    //         */
+    ##        function subForm() {
+    ##
+    ##            var data = $('#user_form').serializeObject();
+    ##
+    ##            $.ajax({
+    ##                type: "POST",//方法类型
+    ##                //dataType: "text",//预期服务器返回的数据类型
+    ##                url: "$!{rc.contextPath}/hoUser/addUser",//url
+    ##                data: data,
+    ##    //            contentType:"application/x-www-from-urlencoded",
+    ##                success: function (result) {
+    ##                    $.message('操作成功');
+    ##
+    ##                },
+    ##                error: function () {
+    ##                    $.message({
+    ##                        message: '操作失败',
+    ##                        type: 'error'
+    ##                    });
+    ##                }
+    ##            });
+    ##
+    ##        }
+    ##        //将form进行对象进行封装
+    ##        $.fn.serializeObject = function () {
+    ##            var o = {};
+    ##            var a = this.serializeArray();
+    ##            $.each(a, function () {
+    ##                if (o[this.name]) {
+    ##                    if (!o[this.name].push) {
+    ##                        o[this.name] = [o[this.name]];
+    ##                    }
+    ##                    o[this.name].push(this.value || '');
+    ##                } else {
+    ##                    o[this.name] = this.value || '';
+    ##                }
+    ##            });
+    ##            return o;
+    ##        };
+    //表格样式
+    $(document).ready(function () {
+        //加载行tr 的样式
+        $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
+    })
+    function radioClick(radio) {
+
+        if(radio.checked==true)
+        {
+            alert(1)
+            radio.checked==false;
+        }else {
+            alert()
+            radio.checked==true;
+        }
+
 
     }
-    //将form进行对象进行封装
-    $.fn.serializeObject = function () {
-        var o = {};
-        var a = this.serializeArray();
-        $.each(a, function () {
-            if (o[this.name]) {
-                if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
-                }
-                o[this.name].push(this.value || '');
-            } else {
-                o[this.name] = this.value || '';
-            }
-        });
-        return o;
-    };
-    //消息相关方法
-    //    $(function(){
-    //        $('#btn-success').on('click',function(){
-    //            $.message('成功');
-    //        })
-    //        $('.btn-danger').on('click',function(){
-    //            $.message({
-    //                message:'失败提示',
-    //                type:'error'
-    //            });
-    //        })
-    //        $('.btn-warning').on('click',function(){
-    //            $.message({
-    //                message:'警告提示',
-    //                type:'warning'
-    //            });
-    //        })
-    //        $('.btn-info').on('click',function(){
-    //            $.message({
-    //                message:'信息提醒',
-    //                type:'info'
-    //            });
-    //        })
-    //
-    //    })
-
 
 </script>
+
+</body>
 </html>

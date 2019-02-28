@@ -41,7 +41,27 @@ public class HoUserDTO implements Serializable {
     //******分页属性-自定义********
     private String pageNo;
     private String pageSize;
+    /**专业**/
+    private String major;
+    /**头像地址**/
+    private String headImgSrc;
     //**************************
+
+    public String getHeadImgSrc() {
+        return headImgSrc;
+    }
+
+    public void setHeadImgSrc(String headImgSrc) {
+        this.headImgSrc = headImgSrc;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
 
     public String getPageNo() {
         return pageNo;

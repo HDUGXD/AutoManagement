@@ -18,7 +18,7 @@
 	<div id="hd">
     	<div class="hd-wrap ue-clear">
         	<div class="top-light"></div>
-            <h1 class="logo"></h1>
+##            <h1 class="logo"></h1>
             <div class="login-info ue-clear">
                 <div class="welcome ue-clear"><span>欢迎您,</span><a href="javascript:;" class="user-name">Admin</a></div>
                 <div class="login-msg ue-clear">
@@ -33,12 +33,12 @@
         </div>
     </div>
     <div id="bd">
-    	<div class="wrap ue-clear">
+    	<div class="wrap ue-clear" style="width: 100%">
         	<div class="sidebar">
             	<h2 class="sidebar-header"><p>功能导航</p></h2>
                 <ul class="nav">
                 	<li class="office current"><div class="nav-header"><a onclick="homeMenu();" class="ue-clear"><span>日常办公</span><i class="icon"></i></a></div></li>
-                    <li class="gongwen"><div class="nav-header"><a href="javascript:;" class="ue-clear"><span>公文起草</span><i class="icon"></i></a></div></li>
+##                    <li class="gongwen"><div class="nav-header"><a href="javascript:;" class="ue-clear"><span>公文起草</span><i class="icon"></i></a></div></li>
 ##                    <li class="nav-info">
 ##                    	<div class="nav-header"><a href="javascript:;" class="ue-clear"><span>导航信息管理</span><i class="icon"></i></a></div>
 ##                        <ul class="subnav">
@@ -53,12 +53,15 @@
                     <li class="konwledge"><div class="nav-header"><a href="javascript:;" class="ue-clear"><span>图书借阅管理</span><i class="icon"></i></a></div>
                         <ul class="subnav">
                             <li><a onclick="borrowBook()">图书借阅</a></li>
-                            <li><a onclick="updownBook();">图书上下架</a></li>
+                            <li><a onclick="haveBorrow()">已借查询</a></li>
+##                            <li><a onclick="updownBook();">图书上下架</a></li>
                             <li><a onclick="bookStore();">库存管理</a></li>
                         </ul>
                     </li>
                     <li class="agency"><div class="nav-header"><a href="javascript:;" class="ue-clear"><span>流程中心</span><i class="icon"></i></a></div>
-
+                        <ul class="subnav">
+                            <li><a onclick="myPropose()">我的申请</a></li>
+                        </ul>
                     </li>
 ##                    <li class="email"><div class="nav-header"><a href="javascript:;" class="ue-clear"><span>邮件管理</span><i class="icon"></i></a></div>
 ##
@@ -68,14 +71,14 @@
                             <li><a onclick="userCeter();">用户中心</a></li>
                             <li><a onclick="roalManage();">角色管理</a></li>
                             <li><a onclick="permissionManage();">权限管理</a></li>
-                            <li><a onclick="departmentManage();">部门管理</a></li>
+##                            <li><a onclick="departmentManage();">部门管理</a></li>
 
                         </ul>
                     </li>
                 </ul>
             </div>
-            <div class="content">
-            	<iframe src="info-mgt.html" id="iframe" width="100%" height="100%" frameborder="0">
+            <div class="content" >
+            	<iframe  id="iframe" width="100%" height="100%" frameborder="0">
 
                 </iframe>
            </div>
@@ -131,6 +134,7 @@
         $("#iframe").attr("src","$!{rc.contextPath}/hoUser/userManage");
     }
     function roalManage(){
+
         $("#iframe").attr("src","$!{rc.contextPath}/role/roalManage");
     }
     function permissionManage(){
@@ -143,15 +147,23 @@
      * 图书管理***************************************************************************
      */
     function borrowBook(){
+        $("#iframe").attr("src","$!{rc.contextPath}/book/borrowBook");
+    }
+    function haveBorrow(){
         $("#iframe").attr("src","$!{rc.contextPath}/role/roalManage");
     }
     function updownBook(){
-        $("#iframe").attr("src","$!{rc.contextPath}/permission/permissionList");
+        $("#iframe").attr("src","$!{rc.contextPath}/book/updownBook");
     }
     function bookStore(){
-        $("#iframe").attr("src","$!{rc.contextPath}/department/departmentManage");
+        $("#iframe").attr("src","$!{rc.contextPath}/bookStore/bookStoreList");
     }
-
+    /**
+     * 流程管理
+     */
+    function myPropose() {
+        $("#iframe").attr("src","$!{rc.contextPath}/hoPropose/proposeList");
+    }
     function logOut(){
 ##        var url = '$!{rc.contextPath}/hoUser/logout';
 ##        $.ajax({
@@ -160,8 +172,8 @@
 ##            success:function(data) {
 ##            }
 ##        });
-        alert(123)
-        window.location.href="$!{rc.contextPath}/hoUser/logout";
+
+        window.location.href="$!{rc.contextPath}/index/logout";
     }
 
 

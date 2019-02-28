@@ -14,14 +14,16 @@
             <td >
                 <form  id="search_form" action="" method="post">
                 <div class="query-btn query-conditions ue-clear">
+
                     <div class="conditions staff ue-clear">
-                        <label>用户名称：</label>
+                        <label>图书名称：</label>
                         <input type="text" name="username" id="username_id" style="margin-bottom: 10px" placeholder="请输入用户名称查询"/>
 ##                        //分页属性 中间量   分页条件搜索提交
                         <input type="hidden" name="pageNo" id="pageNo_id">
                         <input type="hidden" name="pageSize" id="pageSize_id">
 
                     </div>
+
                     <a onclick="findPager(-1);" class="confirm">查询</a>
                     <a onclick="clearText();" class="clear">清空条件</a>
                 </div>
@@ -33,21 +35,21 @@
 
 <div class="table-operate ue-clear">
     <a onclick="addUser()" class="add">添加</a>
-    <a onclick="delete()" class="del">删除</a>
+    <a onclick="deleteUser()" class="del">删除</a>
     <a onclick="edit()" class="edit">编辑</a>
     <a onclick="add()" class="count">统计</a>
     <a onclick="check()" class="check">审核</a>
 </div>
-<div class="table-box">
+<div class="table-box" style="width: 90%">
     <table>
         <thead>
         <tr>
             <th width="2%" style="text-align: center;vertical-align: middle;" ><input type="checkbox" id="main_checkBox"  style="width: 14px;height: 15px;margin-top: 5px"></th>
             <th  width="2%" style="text-align: center;vertical-align: middle;">序号</th>
             <th class="name"style="text-align: center;vertical-align: middle;">姓名</th>
-            <th class="process"style="text-align: center;vertical-align: middle;">编号</th>
-            <th class="node"style="text-align: center;vertical-align: middle;">角色</th>
-            <th class="node"style="text-align: center;vertical-align: middle;">所属部门</th>
+            <th class="process"style="text-align: center;vertical-align: middle;">学(工)号</th>
+            <th class="node"style="text-align: center;vertical-align: middle;">角色类型</th>
+            <th class="node"style="text-align: center;vertical-align: middle;">所属学院</th>
             <th class="node"style="text-align: center;vertical-align: middle;">联系电话</th>
 ##            <th class="time"style="text-align: center;vertical-align: middle;">操作时间<span>（小时）</span></th>
             <th class="operate"style="text-align: center;vertical-align: middle;">操作</th>
@@ -60,7 +62,7 @@
     </table>
 </div>
 
-<div class="pagination ue-clear"></div>
+<div class="pagination ue-clear" style="margin-right: 10%"></div>
 </body>
 <script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/jquery.js"></script>
 <script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/common.js"></script>
@@ -138,7 +140,8 @@
 //                    $("#change_table").append("<tr><td> <input style='text-align: center;background-color:white;font-size: 18px; font-weight: bold; border-color: white' type='text' value='"+createTime+"'> </td></tr>");
                     $("#change_table").html("");
                     for(var i=0 ,j=result.startRow;i<result.rows.length;i++,j++){
-                        $("#change_table").append("<tr><td style='text-align: center;vertical-align: middle'><input type='checkbox' style='width: 14px;height: 15px;align-self: center'></td> <td style='text-align:center;vertical-align:middle;'>"+j+"</td><td class='name'>"+result.rows[i].username+"</td> <td class='process'>收文</td><td class='node'>登记</td><td class='node'>登记</td> <td class='time'>未完成</td><td class='operate'><a href='javascript:;'>查看</a></td></tr>");
+                        var temp = result.rows[i].id;
+                        $("#change_table").append("<tr><td style='text-align: center;vertical-align: middle'><input type='checkbox' value='" +temp+ "'  style='width: 14px;height: 15px;align-self: center'></td> <td style='text-align:center;vertical-align:middle;'>"+j+"</td><td class='name'>"+result.rows[i].username+"</td> <td class='process'>"+result.rows[i].person_code+"</td><td class='node'>登记</td><td class='node'>登记</td> <td class='time'>"+result.rows[i].phoneNumber+"</td><td class='operate'><a onclick=View('" +temp+ "');>查看</a><a style='margin-left: 20px' onclick=editUser('" +temp+ "');>编辑</a></td></tr>");
                     }
                     //加载行tr 的样式
                     $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
@@ -198,10 +201,48 @@
             shadeClose: true,
             shade: false,
             maxmin: true, //开启最大化最小化按钮
-            area: ['800px', '400px'],
+            area: ['700px', '550px'],
             content:  '$!{rc.contextPath}/hoUser/addUser',
             end: function(){
 
+            }
+        });
+    }
+    function deleteUser() {
+        var primaryKeys = [];
+        $("input[type='checkbox']").each(function () {
+            if ($(this).is(':checked')) {
+                var id= $(this).val();
+                primaryKeys.push(id);
+            }
+        })
+        jQuery.ajax({
+            type: "POST",
+            url: "$!{rc.contextPath}/hoUser/deletes",
+//            dataType: "json",
+            data: { "primaryKeys": primaryKeys},
+            async: false,
+            //map传值前台获取
+            success: function (jso) {
+
+                alert(123);
+            }
+        });
+
+
+    }
+
+    function View(id) {
+        jQuery.ajax({
+            type: "POST",
+            url: "$!{rc.contextPath}/hoUser/deletes",
+//            dataType: "json",
+            data: { "primaryKeys": primaryKeys},
+            async: false,
+            //map传值前台获取
+            success: function (jso) {
+
+                alert(123);
             }
         });
     }

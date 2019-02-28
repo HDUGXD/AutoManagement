@@ -16,6 +16,7 @@
         <result column="remark" property="remark" jdbcType="VARCHAR" />
         <result column="person_name" property="person_name" jdbcType="VARCHAR" />
         <result column="person_birth" property="person_birth" jdbcType="TIMESTAMP" />
+        <result column="head_img_src" property="headImgSrc" jdbcType="VARCHAR" />
         <result column="person_code" property="person_code" jdbcType="VARCHAR" />
 
 
@@ -40,7 +41,11 @@
         remark,
         person_name,
         person_birth,
+         head_img_src,
         person_code
+
+
+
     </sql>
 
 
@@ -50,8 +55,8 @@
         <if test="username!=null">
             and username=#{username}
         </if>
-        <if test="department!=null">
-            and department=#{department}
+        <if test="password!=null">
+            and password=#{password}
         </if>
     </select>
 
@@ -116,7 +121,9 @@
             remark,
             person_name,
         person_birth,
+        head_img_src,
         person_code
+
         )
         values (
             #{id,jdbcType=BIGINT},
@@ -133,7 +140,9 @@
             #{remark,jdbcType=VARCHAR},
                #{person_name,jdbcType=VARCHAR},
                #{person_birth,jdbcType=TIMESTAMP},
+               #{headImgSrc,jdbcType=VARCHAR},
                #{person_code,jdbcType=VARCHAR}
+
         )
     </insert>
 
@@ -182,9 +191,13 @@
             <if test="person_birth != null" >
                 person_birth,
             </if>
+            <if test="headImgSrc != null" >
+                head_img_src,
+            </if>
             <if test="person_code != null" >
                 person_code,
             </if>
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -229,9 +242,13 @@
             <if test="person_birth != null" >
                 #{person_birth,jdbcType=TIMESTAMP},
             </if>
+            <if test="headImgSrc != null" >
+                #{head_img_src,jdbcType=VARCHAR},
+            </if>
             <if test="person_code != null" >
                 #{person_code,jdbcType=VARCHAR},
             </if>
+
         </trim>
     </insert>
 
@@ -280,9 +297,13 @@
             <if test="person_birth != null" >
                 person_birth = #{person_birth,jdbcType=TIMESTAMP},
             </if>
+            <if test="headImgSrc != null" >
+                head_img_src = #{headImgSrc,jdbcType=VARCHAR},
+            </if>
             <if test="person_code != null" >
                 person_code = #{person_code,jdbcType=VARCHAR},
             </if>
+
         </set>
             where
             id = #{id,jdbcType=BIGINT}
@@ -306,6 +327,7 @@
             remark = #{remark,jdbcType=VARCHAR},
             person_name = #{person_name,jdbcType=VARCHAR},
             person_birth = #{person_birth,jdbcType=TIMESTAMP},
+            head_img_src = #{headImgSrc,jdbcType=VARCHAR},
             person_code = #{person_code,jdbcType=VARCHAR},
         </trim>
         where

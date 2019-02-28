@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kdmt.gxd.easy.borrowBook.daos.BorrowBookMapper" >
+    <resultMap id="BaseResultMap" type="com.kdmt.gxd.easy.borrowBook.entities.BorrowBook" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+        <result column="book_code" property="bookCode" jdbcType="VARCHAR" />
+        <result column="book_type" property="bookType" jdbcType="VARCHAR" />
+        <result column="book_author" property="bookAuthor" jdbcType="VARCHAR" />
+        <result column="book_publish" property="bookPublish" jdbcType="VARCHAR" />
+        <result column="borrow_status" property="borrowStatus" jdbcType="VARCHAR" />
+        <result column="book_left_num" property="bookLeftNum" jdbcType="INTEGER" />
+        <result column="book_pic_url" property="bookPicUrl" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,
+        book_name,
+        book_code,
+        book_type,
+        book_author,
+        book_publish,
+        borrow_status,
+        book_left_num,
+        book_pic_url,
+        remark
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from borrow_book
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <delete id="deleteByPrimaryKey" >
+        delete from borrow_book
+        where
+        id = #{id,jdbcType=BIGINT}
+        
+    </delete>
+
+    <delete id="deleteByPrimaryKeys" >
+        delete from borrow_book
+        where <foreach collection="primaryKeys" item = "primaryKey" separator=" or " >id = #{primaryKey,jdbcType=BIGINT}</foreach>
+    </delete>
+
+    <insert id="insert" parameterType="com.kdmt.gxd.easy.borrowBook.entities.BorrowBook" >
+        insert into borrow_book (
+            id,
+            book_name,
+            book_code,
+            book_type,
+            book_author,
+            book_publish,
+            borrow_status,
+            book_left_num,
+            book_pic_url,
+            remark
+        )
+        values (
+            #{id,jdbcType=BIGINT},
+            #{bookName,jdbcType=VARCHAR},
+            #{bookCode,jdbcType=VARCHAR},
+            #{bookType,jdbcType=VARCHAR},
+            #{bookAuthor,jdbcType=VARCHAR},
+            #{bookPublish,jdbcType=VARCHAR},
+            #{borrowStatus,jdbcType=VARCHAR},
+            #{bookLeftNum,jdbcType=INTEGER},
+            #{bookPicUrl,jdbcType=VARCHAR},
+            #{remark,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.kdmt.gxd.easy.borrowBook.entities.BorrowBook" >
+        insert into borrow_book
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="bookName != null" >
+                book_name,
+            </if>
+            <if test="bookCode != null" >
+                book_code,
+            </if>
+            <if test="bookType != null" >
+                book_type,
+            </if>
+            <if test="bookAuthor != null" >
+                book_author,
+            </if>
+            <if test="bookPublish != null" >
+                book_publish,
+            </if>
+            <if test="borrowStatus != null" >
+                borrow_status,
+            </if>
+            <if test="bookLeftNum != null" >
+                book_left_num,
+            </if>
+            <if test="bookPicUrl != null" >
+                book_pic_url,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="bookName != null" >
+                #{bookName,jdbcType=VARCHAR},
+            </if>
+            <if test="bookCode != null" >
+                #{bookCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bookType != null" >
+                #{bookType,jdbcType=VARCHAR},
+            </if>
+            <if test="bookAuthor != null" >
+                #{bookAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="bookPublish != null" >
+                #{bookPublish,jdbcType=VARCHAR},
+            </if>
+            <if test="borrowStatus != null" >
+                #{borrowStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="bookLeftNum != null" >
+                #{bookLeftNum,jdbcType=INTEGER},
+            </if>
+            <if test="bookPicUrl != null" >
+                #{bookPicUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.kdmt.gxd.easy.borrowBook.entities.BorrowBook" >
+        update borrow_book
+        <set >
+            <if test="id != null" >
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="bookName != null" >
+                book_name = #{bookName,jdbcType=VARCHAR},
+            </if>
+            <if test="bookCode != null" >
+                book_code = #{bookCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bookType != null" >
+                book_type = #{bookType,jdbcType=VARCHAR},
+            </if>
+            <if test="bookAuthor != null" >
+                book_author = #{bookAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="bookPublish != null" >
+                book_publish = #{bookPublish,jdbcType=VARCHAR},
+            </if>
+            <if test="borrowStatus != null" >
+                borrow_status = #{borrowStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="bookLeftNum != null" >
+                book_left_num = #{bookLeftNum,jdbcType=INTEGER},
+            </if>
+            <if test="bookPicUrl != null" >
+                book_pic_url = #{bookPicUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+            where
+            id = #{id,jdbcType=BIGINT}
+                
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.kdmt.gxd.easy.borrowBook.entities.BorrowBook" >
+        update borrow_book
+        set
+        <trim suffixOverrides="," >
+            book_name = #{bookName,jdbcType=VARCHAR},
+            book_code = #{bookCode,jdbcType=VARCHAR},
+            book_type = #{bookType,jdbcType=VARCHAR},
+            book_author = #{bookAuthor,jdbcType=VARCHAR},
+            book_publish = #{bookPublish,jdbcType=VARCHAR},
+            borrow_status = #{borrowStatus,jdbcType=VARCHAR},
+            book_left_num = #{bookLeftNum,jdbcType=INTEGER},
+            book_pic_url = #{bookPicUrl,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+        </trim>
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </update>
+
+    <select id="loadModels" resultMap="BaseResultMap">
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from borrow_book
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="loadMaps" resultType="java.util.HashMap">
+        select
+        <if test="parameters != null">
+         ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from borrow_book
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="count" resultType="long">
+        select count(
+        <if test="isDistinct == true">
+            distinct
+        </if>
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        ) from borrow_book
+        <if test="condition != null">
+            where ${condition}
+        </if>
+    </select>
+
+    <select id="findModel" resultMap="BaseResultMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from borrow_book
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <select id="findMap" resultType="java.util.HashMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from borrow_book
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <!--################## 查询 #####################-->
+    <select id="findAllByCondition"  resultType="com.kdmt.gxd.easy.borrowBook.entities.BorrowBook">
+        select * from borrow_book where 1=1
+        <if test="bookName!=null">
+            and book_name=#{bookName}
+        </if>
+        <if test="bookType!=null">
+            and book_type=#{bookType}
+        </if>
+    </select>
+    <!--查询所有用户(分页)-->
+    <select id="findByPage"  resultType="com.kdmt.gxd.easy.borrowBook.entities.BorrowBook">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from borrow_book where 1=1
+
+        <if test="name!=null">
+            and book_name=#{bookName}
+        </if>
+        order by id desc
+        <if test="pageNo >= 0 and pageSize > 0">
+            limit #{pageNo},#{pageSize}
+        </if>
+
+    </select>
+
+    <select id="getCount"  resultType="java.lang.Long">
+        SELECT
+        count(1) as count
+        from borrow_book
+    </select>
+</mapper>

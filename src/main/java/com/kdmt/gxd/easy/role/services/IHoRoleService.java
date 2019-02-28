@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kdmt.gxd.easy.role.entities.HoRole;
+import javafx.geometry.HorizontalDirection;
 
 public interface IHoRoleService {
     boolean save(HoRole hoRole);
@@ -41,4 +42,8 @@ public interface IHoRoleService {
     long count(String[] parameters, boolean isDistinct);
 
     long count(String[] parameters, String condition, Object[] values, boolean isDistinct);
+    List<HoRole> findAllByCondition(HoRole condition);
+    List<HoRole> findByPage(HoRole condition);
+
+    long getCount();
 }

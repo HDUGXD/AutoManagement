@@ -15,6 +15,8 @@ public interface IHoUserService {
 
     boolean batchDelete(Long[] primaryKeys);
 
+    boolean batchInsert(List<HoUser> list);
+
     HoUser findModel(Long id);
 
     HoUser findModel(Long id, String[] parameters);
@@ -35,7 +37,7 @@ public interface IHoUserService {
 
     List<Map<String, Object>> loadMaps(String[][] parameters, String condition, Object[] values, String order, String sort, int curPage, int limit);
 
-    List<HoUser> findAllByCondition(HoUser condition);
+
     long count();
 
     long count(String condition, Object[] values);
@@ -48,7 +50,10 @@ public interface IHoUserService {
     List<HoUser> findByPage(HoUser condition);
 
     long getCount();
+    List<HoUser> findAllByCondition(HoUser condition);
 
 //    void  saveUser(HoUser hoUser);
     void insert(HoUser user);
+
+
 }

@@ -1,18 +1,23 @@
 package com.kdmt.gxd.easy.user.controllers;
 
+import java.io.File;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.alibaba.fastjson.JSONObject;
 import com.kdmt.gxd.easy.user.entities.HoUser;
 import com.kdmt.gxd.easy.user.entities.HoUserDTO;
 import com.kdmt.gxd.easy.user.services.IHoUserService;
+import com.kdmt.gxd.easy.util.cxf.StaticElement;
 import com.kdmt.gxd.easy.util.pager.PageInfo;
 import com.kdmt.gxd.easy.util.util.DateUtil;
 import com.kdmt.gxd.easy.util.util.ResponseUtil;
+import org.apache.ibatis.annotations.Lang;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -41,7 +46,20 @@ public class HoUserController {
     @RequestMapping(value = "mainn", method = RequestMethod.POST)
     public String main(HoUser hoUser, ModelMap model,
                        HttpSession session, HttpServletRequest request) {
-        return "mySystem/index";
+        HoUser condition = new HoUser();
+        condition.setUsername(hoUser.getUsername());
+        condition.setPassword(hoUser.getPassword());
+       List<HoUser> userList= hoUserService.findAllByCondition(condition);
+       if(userList.size()==1){
+           //登录成功
+           return "mySystem/index";
+       }else{
+           //验证失败跳到登录页面
+           return "ticket/bookLogin";
+       }
+
+
+
     }
     //退出到登录页面
 //    @RequestMapping("/logout")
@@ -79,21 +97,55 @@ public class HoUserController {
 //        return ResponseUtil.getResEntityForGetAndJson(hoUserModel);
 //    }
 
-    @RequestMapping(value = "addUser", method = RequestMethod.POST)
-    public ResponseEntity<String> create(@Validated HoUserDTO hoUserDTO, BindingResult errors) {
-        if (errors.hasErrors())
-            return ResponseUtil.getResponseEntityWhenInvalidReqParams();
+//    @RequestMapping(value = "addUser", method = RequestMethod.POST)
+//    public ResponseEntity<String> create(@RequestParam String jsonStr, BindingResult errors) {
+//        if (errors.hasErrors())
+//            return ResponseUtil.getResponseEntityWhenInvalidReqParams();
+//
+////        HoUser hoUserModel = hoUserDTO.toModel();
+//        //创建时间
+////        hoUserModel.setCreateTime( DateUtil.parse(DateUtil.format(new Date())));
+////        hoUserService.save(hoUserModel);
+////        hoUserService.insert(hoUserModel);      //mongodb
+////          HoUserMongo hoUserMongo = new HoUserMongo();
+////          hoUserMongo.insertMongo();
+//
+//        //批量插入
+//return null;
+//
+////        return ResponseUtil.getResEntityForPPP(hoUserService.save(hoUserModel));
+//    }
+@ResponseBody
+@RequestMapping(value = "addUser")
+public HashMap<String, Object> addUser(@RequestParam(required = true) String jsonStr){
+    HoUser user = JSONObject.parseObject(jsonStr,HoUser.class);
+    //图片路径
+    String toDir="D://head_img/";
+    File toFile = new File(toDir);
+    StaticElement.createDir(toFile,toDir);
+    //完整路径
+    String src="D://head_img/"+user.getHeadImgName();
+    //base64转存图片
+    String pic_base64=user.getHeadImgSrc();
+    String base64=pic_base64.substring(pic_base64.lastIndexOf(",")+1,pic_base64.length());
+    //存图片
+    StaticElement.Base64ToImage(base64,src);
+//入库
+    user.setHeadImgSrc(src);
+    hoUserService.save(user);
 
-        HoUser hoUserModel = hoUserDTO.toModel();
-        //创建时间
-        hoUserModel.setCreateTime( DateUtil.parse(DateUtil.format(new Date())));
-        hoUserService.save(hoUserModel);
-        hoUserService.insert(hoUserModel);      //mongodb
-//          HoUserMongo hoUserMongo = new HoUserMongo();
-//          hoUserMongo.insertMongo();
+    return null;
+}
 
-        return ResponseUtil.getResEntityForPPP(hoUserService.save(hoUserModel));
-    }
+//    @ResponseBody      //返回数据实体  要用此标签
+//    @RequestMapping(value = "getAllByCondition", method = RequestMethod.POST)
+//    public List<HoUser> finAllByCondition(@Validated HoUserDTO hoUserDTO, BindingResult errors) {
+//
+//        HoUser hoUserModel = hoUserDTO.toModel();
+//        List<HoUser> userList= hoUserService.findAllByCondition(hoUserModel);
+//        return userList;
+//    }
+
     @ResponseBody      //返回数据实体  要用此标签
     @RequestMapping(value = "getAllByCondition", method = RequestMethod.POST)
     public List<HoUser> finAllByCondition(@Validated HoUserDTO hoUserDTO, BindingResult errors) {
@@ -102,7 +154,6 @@ public class HoUserController {
         List<HoUser> userList= hoUserService.findAllByCondition(hoUserModel);
         return userList;
     }
-
 //    //分页
 //    @ResponseBody
 //    @RequestMapping(value = "findPager", method = RequestMethod.POST)
@@ -171,8 +222,24 @@ public class HoUserController {
         return ResponseUtil.getResEntityForDel(hoUserService.delete(id));
     }
 
-    @RequestMapping(value = "/deletes", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deletes(@RequestParam("primaryKeys") Long[] primaryKeys) {
+    @RequestMapping(value = "/deletes", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> deletes(@RequestParam(value="primaryKeys[]")Long [] primaryKeys) {
         return ResponseUtil.getResEntityForDel(hoUserService.batchDelete(primaryKeys));
     }
+
+//    @ResponseBody
+//    @RequestMapping(value = "deletes")
+//    public HashMap<String, Object> deletes(@RequestParam(required = true) Lang primaryKeys){
+//
+//
+//        return null;
+//    }
+
+//    @RequestMapping(value="deletes",method=RequestMethod.POST)
+//    public @ResponseBody String issuedWork(@RequestParam(value="primaryKeys[]")Long [] primaryKeys) {
+//
+//        return "1";
+//    }
+
 }

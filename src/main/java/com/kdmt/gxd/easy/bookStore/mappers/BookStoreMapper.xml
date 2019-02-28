@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kdmt.gxd.easy.bookStore.daos.BookStoreMapper" >
+    <resultMap id="BaseResultMap" type="com.kdmt.gxd.easy.bookStore.entities.BookStore" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+        <result column="store_code" property="storeCode" jdbcType="VARCHAR" />
+        <result column="store_type" property="storeType" jdbcType="VARCHAR" />
+        <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+        <result column="book_code" property="bookCode" jdbcType="VARCHAR" />
+        <result column="book_author" property="bookAuthor" jdbcType="VARCHAR" />
+        <result column="book_publish" property="bookPublish" jdbcType="VARCHAR" />
+        <result column="book_type" property="bookType" jdbcType="VARCHAR" />
+        <result column="book_left_num" property="bookLeftNum" jdbcType="INTEGER" />
+        <result column="book_pic_url" property="bookPicUrl" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,
+        store_name,
+        store_code,
+        store_type,
+        book_name,
+        book_code,
+        book_author,
+        book_publish,
+        book_type,
+        book_left_num,
+        book_pic_url
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from book_store
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <delete id="deleteByPrimaryKey" >
+        delete from book_store
+        where
+        id = #{id,jdbcType=BIGINT}
+        
+    </delete>
+
+    <delete id="deleteByPrimaryKeys" >
+        delete from book_store
+        where <foreach collection="primaryKeys" item = "primaryKey" separator=" or " >id = #{primaryKey,jdbcType=BIGINT}</foreach>
+    </delete>
+
+    <insert id="insert" parameterType="com.kdmt.gxd.easy.bookStore.entities.BookStore" >
+        insert into book_store (
+            id,
+            store_name,
+            store_code,
+            store_type,
+            book_name,
+            book_code,
+            book_author,
+            book_publish,
+            book_type,
+            book_left_num,
+            book_pic_url
+        )
+        values (
+            #{id,jdbcType=BIGINT},
+            #{storeName,jdbcType=VARCHAR},
+            #{storeCode,jdbcType=VARCHAR},
+            #{storeType,jdbcType=VARCHAR},
+            #{bookName,jdbcType=VARCHAR},
+            #{bookCode,jdbcType=VARCHAR},
+            #{bookAuthor,jdbcType=VARCHAR},
+            #{bookPublish,jdbcType=VARCHAR},
+            #{bookType,jdbcType=VARCHAR},
+            #{bookLeftNum,jdbcType=INTEGER},
+            #{bookPicUrl,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.kdmt.gxd.easy.bookStore.entities.BookStore" >
+        insert into book_store
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="storeName != null" >
+                store_name,
+            </if>
+            <if test="storeCode != null" >
+                store_code,
+            </if>
+            <if test="storeType != null" >
+                store_type,
+            </if>
+            <if test="bookName != null" >
+                book_name,
+            </if>
+            <if test="bookCode != null" >
+                book_code,
+            </if>
+            <if test="bookAuthor != null" >
+                book_author,
+            </if>
+            <if test="bookPublish != null" >
+                book_publish,
+            </if>
+            <if test="bookType != null" >
+                book_type,
+            </if>
+            <if test="bookLeftNum != null" >
+                book_left_num,
+            </if>
+            <if test="bookPicUrl != null" >
+                book_pic_url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="storeName != null" >
+                #{storeName,jdbcType=VARCHAR},
+            </if>
+            <if test="storeCode != null" >
+                #{storeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="storeType != null" >
+                #{storeType,jdbcType=VARCHAR},
+            </if>
+            <if test="bookName != null" >
+                #{bookName,jdbcType=VARCHAR},
+            </if>
+            <if test="bookCode != null" >
+                #{bookCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bookAuthor != null" >
+                #{bookAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="bookPublish != null" >
+                #{bookPublish,jdbcType=VARCHAR},
+            </if>
+            <if test="bookType != null" >
+                #{bookType,jdbcType=VARCHAR},
+            </if>
+            <if test="bookLeftNum != null" >
+                #{bookLeftNum,jdbcType=INTEGER},
+            </if>
+            <if test="bookPicUrl != null" >
+                #{bookPicUrl,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.kdmt.gxd.easy.bookStore.entities.BookStore" >
+        update book_store
+        <set >
+            <if test="id != null" >
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="storeName != null" >
+                store_name = #{storeName,jdbcType=VARCHAR},
+            </if>
+            <if test="storeCode != null" >
+                store_code = #{storeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="storeType != null" >
+                store_type = #{storeType,jdbcType=VARCHAR},
+            </if>
+            <if test="bookName != null" >
+                book_name = #{bookName,jdbcType=VARCHAR},
+            </if>
+            <if test="bookCode != null" >
+                book_code = #{bookCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bookAuthor != null" >
+                book_author = #{bookAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="bookPublish != null" >
+                book_publish = #{bookPublish,jdbcType=VARCHAR},
+            </if>
+            <if test="bookType != null" >
+                book_type = #{bookType,jdbcType=VARCHAR},
+            </if>
+            <if test="bookLeftNum != null" >
+                book_left_num = #{bookLeftNum,jdbcType=INTEGER},
+            </if>
+            <if test="bookPicUrl != null" >
+                book_pic_url = #{bookPicUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+            where
+            id = #{id,jdbcType=BIGINT}
+                
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.kdmt.gxd.easy.bookStore.entities.BookStore" >
+        update book_store
+        set
+        <trim suffixOverrides="," >
+            store_name = #{storeName,jdbcType=VARCHAR},
+            store_code = #{storeCode,jdbcType=VARCHAR},
+            store_type = #{storeType,jdbcType=VARCHAR},
+            book_name = #{bookName,jdbcType=VARCHAR},
+            book_code = #{bookCode,jdbcType=VARCHAR},
+            book_author = #{bookAuthor,jdbcType=VARCHAR},
+            book_publish = #{bookPublish,jdbcType=VARCHAR},
+            book_type = #{bookType,jdbcType=VARCHAR},
+            book_left_num = #{bookLeftNum,jdbcType=INTEGER},
+            book_pic_url = #{bookPicUrl,jdbcType=VARCHAR},
+        </trim>
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </update>
+
+    <select id="loadModels" resultMap="BaseResultMap">
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from book_store
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="loadMaps" resultType="java.util.HashMap">
+        select
+        <if test="parameters != null">
+         ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from book_store
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="count" resultType="long">
+        select count(
+        <if test="isDistinct == true">
+            distinct
+        </if>
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        ) from book_store
+        <if test="condition != null">
+            where ${condition}
+        </if>
+    </select>
+
+    <select id="findModel" resultMap="BaseResultMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from book_store
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+
+    <select id="findMap" resultType="java.util.HashMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from book_store
+        where
+        id = #{id,jdbcType=BIGINT}
+            
+    </select>
+    <!--################## 查询 #####################-->
+    <select id="findAllByCondition"  resultType="com.kdmt.gxd.easy.bookStore.entities.BookStore">
+        select * from book_store where 1=1
+        <if test="bookName!=null">
+        and book_name=#{bookName}
+        </if>
+        <if test="bookType!=null">
+        and book_type=#{bookType}
+        </if>
+    </select>
+    <!--查询所有用户(分页)-->
+    <select id="findByPage"  resultType="com.kdmt.gxd.easy.bookStore.entities.BookStore">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from book_store where 1=1
+
+        <if test="bookName!=null">
+        and book_name=#{bookName}
+        </if>
+        <if test="bookType!=null">
+            and book_type=#{bookType}
+        </if>
+        order by id desc
+        <if test="pageNo >= 0 and pageSize > 0">
+        limit #{pageNo},#{pageSize}
+        </if>
+
+    </select>
+
+    <select id="getCount"  resultType="java.lang.Long">
+        SELECT
+        count(1) as count
+        from book_store
+    </select>
+</mapper>

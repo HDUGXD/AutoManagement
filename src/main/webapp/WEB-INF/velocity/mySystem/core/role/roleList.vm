@@ -6,16 +6,15 @@
     <link rel="stylesheet" href="$!{rc.contextPath}/assets/bootstrap/css/info-mgt.css" />
     <link rel="stylesheet" href="$!{rc.contextPath}/assets/bootstrap/css/WdatePicker.css" />
 ##    layer
-    <script type="text/javascript" src="$!{rc.contextPath}/assets/layUI/layer/layer.js"></script>
     <script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/jquery-1.8.2.min.js"></script>
 
 </head>
-<body>
-<div class="query">
+<body >
+<div class="query" style="height: 45px">
     <table>
-        <tr style="height: 100px">
+        <tr style="100%">
             <td>
-                <div class="query-btn query-conditions ue-clear">
+                <div class="query-btn query-conditions ue-clear" >
                     <div class="conditions staff ue-clear">
                         <label style="font-weight: bold;font-size: 13px">角色名称：</label>
                         <input type="text" id="role_name" style="margin-bottom: 10px" placeholder="请输入角色名称查询"/>
@@ -40,70 +39,32 @@
     <a href="javascript:;" class="count">统计</a>
     <a href="javascript:;" class="check">审核</a>
 </div>
-<div class="table-box">
+<div class="table-box" style="margin-right: 10%">
     <table>
         <thead>
         <tr>
             <th class="num">序号</th>
-            <th class="name">姓名</th>
-            <th class="process">流程</th>
-            <th class="node">节点</th>
-            <th class="time">操作时间<span>（小时）</span></th>
+            <th class="name">角色名称</th>
+            <th class="process">角色编号</th>
+            <th class="node">上级角色</th>
+            <th class="time">权限分配</th>
             <th class="operate">操作</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td class="num">1</td>
-            <td class="name">admin</td>
-            <td class="process">收文</td>
-            <td class="node">登记</td>
-            <td class="time">未完成</td>
-            <td class="operate"><div><img src="$!{rc.contextPath}/assets/bootstrap/images/role.png"><a>分配权限</a></div></td>
-        </tr>
-        <tr>
-            <td class="num"> 1</td>
-            <td class="name">admin</td>
-            <td class="process">收文</td>
-            <td class="node">登记</td>
-            <td class="time">未完成</td>
-            <td class="operate"><a href="javascript:;">查看</a></td>
-        </tr>
-        <tr>
-            <td class="num">1</td>
-            <td class="name">admin</td>
-            <td class="process">收文</td>
-            <td class="node">登记</td>
-            <td class="time">未完成</td>
-            <td class="operate"><a href="javascript:;">查看</a></td>
-        </tr>
-        <tr>
-            <td class="num">1</td>
-            <td class="name">admin</td>
-            <td class="process">收文</td>
-            <td class="node">登记</td>
-            <td class="time">未完成</td>
-            <td class="operate"><a href="javascript:;">查看</a></td>
-        </tr>
-        <tr>
-            <td class="num">1</td>
-            <td class="name">admin</td>
-            <td class="process">收文</td>
-            <td class="node">登记</td>
-            <td class="time">未完成</td>
-            <td class="operate"><a href="javascript:;">查看</a></td>
-        </tr>
-
+    ## 变化内容
+        <tbody id="change_table">
+        ## 列表
         </tbody>
     </table>
 </div>
 
-<div class="pagination ue-clear"></div>
+<div class="pagination ue-clear" style="margin-right: 10%"></div>
 </body>
 <script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/jquery.js"></script>
 <script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/common.js"></script>
 <script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/WdatePicker.js"></script>
 <script type="text/javascript" src="$!{rc.contextPath}/assets/bootstrap/js/jquery.pagination.js"></script>
+<script type="text/javascript" src="$!{rc.contextPath}/assets/layUI/layer/layer.js"></script>
 <script type="text/javascript">
     $(".select-title").on("click",function(){
         $(".select-list").hide();
@@ -114,14 +75,85 @@
         var txt = $(this).text();
         $(this).parent($(".select-list")).siblings($(".select-title")).find("span").text(txt);
     })
+    //加载 分页标签
+    function showPager(num) {
+        $('.pagination').pagination(num,{
+            callback: function(page){
+                //点击 具体页触方法
+                findPager(page);
+            },
+            display_msg: true,
+            setPageNo: true
+        });
+    }
 
-    $('.pagination').pagination(100,{
-        callback: function(page){
-            alert(page);
-        },
-        display_msg: true,
-        setPageNo: true
-    });
+    showRemind('input[type=text], textarea','placeholder');
+    //分页列表初始化加载
+    $(document).ready(function () {
+        //初始 第一页
+        findPager(0);
+    })
+    //分页列表查询方法
+    function findPager(flag){
+
+        //pageNo:页码,pageSize:一页数量
+        var pageSize=10;
+        //flag:-1 表示点击 搜索  条件查询
+        if(flag==-1){
+            flag=0;
+        }
+        var pageNo=flag;
+        //将查询条件 和 分页的 两个属性封装成一个对象 传到后台
+        //定义了两个属性
+        $("#pageNo_id").val(pageNo);
+        $("#pageSize_id").val(pageSize);
+
+
+        //将表单 分装成对象
+        var condition = $('#search_form').serializeObject();
+
+
+        //pageNo:页码,pageSize:一页数量
+        var pageSize=10;
+        var pageNo=flag;
+
+//            var data={pageSize:pageSize,pageNo:pageNo}
+        $.ajax({
+            type: "POST",//方法类型
+            //dataType: "text",//预期服务器返回的数据类型
+            url: "$!{rc.contextPath}/role/findPager"  ,//url
+            data:condition,
+//            contentType:"application/x-www-from-urlencoded",
+            success: function (result) {
+
+                //显示 页码栏
+                if(flag=="0"){
+                    showPager(result.totalCount);
+                }
+//                    alert(result.rows[0].username);
+                //***** 拼接表单list **********
+//                    $("#change_table").append("<tr><td> <input style='text-align: center;background-color:white;font-size: 18px; font-weight: bold; border-color: white' type='text' value='"+createTime+"'> </td></tr>");
+                $("#change_table").html("");
+                for(var i=0 ,j=result.startRow;i<result.rows.length;i++,j++){
+                    var temp = result.rows[i].id;
+                    $("#change_table").append("<tr><td style='text-align: center;vertical-align: middle'><input type='checkbox' value='" +temp+ "'  style='width: 14px;height: 15px;align-self: center'></td> <td class='name'>"+result.rows[i].name+"</td> <td class='process'>"+result.rows[i].type+"</td><td style='text-align:center;vertical-align:middle;'>"+result.rows[i].fatherRole+"</td><td class='time'>"+result.rows[i].remark+"</td><td class='operate'><a onclick=View('" +temp+ "');>查看</a><a style='margin-left: 20px' onclick=editUser('" +temp+ "');>编辑</a></td></tr>");
+                }
+                //加载行tr 的样式
+                $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
+
+            },
+            error : function() {
+                $.message({
+                    message:'操作失败',
+                    type:'error'
+                });
+            }
+        });
+
+
+
+    }
+
 
     $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
 
@@ -130,35 +162,46 @@
     function clearText(){
         $("#username_id").val("");
     }
+    //将form进行对象进行封装
+    $.fn.serializeObject = function()
+    {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+    //清空
+    function clearText(){
+        $("#username_id").val("");
+    }
     //查询
     function searchByCondition(){
       alert();
     }
-    //弹出添加用户页面
+    //弹出添加角色页面
     function addRole(){
 ##        window.location.href="$!{rc.contextPath}/role/addRole";
         //iframe窗
 
         layer.open({
             type: 2,
-            title: false,
-            closeBtn: 0, //不显示关闭按钮
-            shade: [0],
-            area: ['340px', '215px'],
-            offset: 'rb', //右下角弹出
-            time: 2000, //2秒后自动关闭
-            anim: 2,
-            content: ['test/guodu.html', 'no'], //iframe的url，no代表不显示滚动条
-            end: function(){ //此处用于演示
-                layer.open({
-                    type: 2,
-                    title: '很多时候，我们想最大化看，比如像这个页面。',
-                    shadeClose: true,
-                    shade: false,
-                    maxmin: true, //开启最大化最小化按钮
-                    area: ['893px', '600px'],
-                    content: '$!{rc.contextPath}/role/addRole'
-                });
+            title: '角色操作',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['1050px', '550px'],
+            content:  '$!{rc.contextPath}/role/addRole',
+            end: function(){
+
             }
         });
     }

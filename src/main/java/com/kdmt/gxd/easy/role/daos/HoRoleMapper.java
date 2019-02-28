@@ -31,4 +31,13 @@ public interface HoRoleMapper {
     HoRole findModel(@Param("id") Long id, @Param("parameters") String parameters);
 
     Map<String, Object> findMap(@Param("id") Long id, @Param("parameters") String parameters);
+
+    List<HoRole> findAllByCondition (HoRole condition);
+    //分页
+    //分页查询所有数据
+//    List<HoUser> findByPage(@Param("pageNo") Long pageNo,@Param("pageSize") Long  pageSize,HoUser condition);
+    List<HoRole> findByPage(HoRole condition);
+
+    //获得所有记录数
+    long getCount();
 }

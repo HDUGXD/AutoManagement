@@ -107,5 +107,18 @@ public class HoRoleService implements IHoRoleService {
     public long count(String[] parameters, String condition, Object[] values, boolean isDistinct) {
         return hoRoleMapper.count(SqlUtil.formatParameters(parameters), SqlUtil.fillCondition(condition, values), isDistinct);
     }
+    @Override
+    public List<HoRole> findByPage(HoRole condition) {
+        return hoRoleMapper.findByPage(condition);
+    }
+    @Override
+    public long getCount() {
+        return hoRoleMapper.getCount();
+    }
+    @Override
+    public List<HoRole> findAllByCondition(HoRole condition) {
+        return hoRoleMapper.findAllByCondition(condition);
+    }
+
 
 }
