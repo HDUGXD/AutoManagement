@@ -8,8 +8,9 @@
                            http://www.springframework.org/schema/data/mongo
                            http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
-    <mongo:mongo-client id="mongo" host="192.168.11.69" port="27017" credentials="gxd:gxd@gxd">
-        <mongo:client-options
+    <!--<mongo:mongo-client id="mongo" host="127.0.0.1" port="27017" credentials="zjxc:123456@motor_vehicle">-->
+    <mongo:mongo-client id="mongo" host="127.0.0.1" port="20000" credentials="zjxc:123456@motor_vehicle">
+    <mongo:client-options
                 min-connections-per-host="2"
                 connections-per-host="100"
                 connect-timeout="5000"
@@ -22,7 +23,7 @@
                 threads-allowed-to-block-for-connection-multiplier="5"
                 write-concern="SAFE"/>
     </mongo:mongo-client>
-    <mongo:db-factory id="mongoDbFactory" mongo-ref="mongo" dbname="gxd"/>
+    <mongo:db-factory id="mongoDbFactory" mongo-ref="mongo" dbname="motor_vehicle"/>
 
     <!--<bean id="mappingContext" class="org.springframework.data.mongodb.core.mapping.MongoMappingContext"/>-->
 

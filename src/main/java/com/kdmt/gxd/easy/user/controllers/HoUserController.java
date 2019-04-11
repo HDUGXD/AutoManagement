@@ -1,5 +1,6 @@
 package com.kdmt.gxd.easy.user.controllers;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 public class HoUserController {
     @Resource(name = "hoUserService")
     private IHoUserService hoUserService;
+
 //    @Autowired
 //    private HoUserMongo hoUserMongo;
     //登录主页
@@ -88,7 +90,11 @@ public class HoUserController {
         //创建时间
         hoUserModel.setCreateTime( DateUtil.parse(DateUtil.format(new Date())));
 //        hoUserService.save(hoUserModel);
-//        hoUserService.insert(hoUserModel);      //mongodb
+        long a=new Date().getTime();
+
+        hoUserService.insert(hoUserModel);      //mongodb
+        long b = new Date().getTime()-a;
+
 //          HoUserMongo hoUserMongo = new HoUserMongo();
 //          hoUserMongo.insertMongo();
 
@@ -159,15 +165,15 @@ public class HoUserController {
         return listCount;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<String> update(@PathVariable("id") Long id,
-                                         @Validated
-                                                 HoUserDTO hoUserDTO, BindingResult errors) {
-
-        HoUser hoUserModel = hoUserDTO.toModel();
-        hoUserModel.setId(id);
-        return ResponseUtil.getResEntityForPPP(hoUserService.update(hoUserModel));
-    }
+//    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+//    public ResponseEntity<String> update(@PathVariable("id") Long id,
+//                                         @Validated
+//                                                 HoUserDTO hoUserDTO, BindingResult errors) {
+//
+//        HoUser hoUserModel = hoUserDTO.toModel();
+//        hoUserModel.setId(id);
+//        return ResponseUtil.getResEntityForPPP(hoUserService.update(hoUserModel));
+//    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> destory(@PathVariable("id") Long id) {

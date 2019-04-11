@@ -83,10 +83,10 @@
 //            System.out.println("响应返回内容:"+entityStr);
 //
 //            /**
-//             * 插入数据库
+//             * 插入数据库mysql
 //             */
-//               Bayonet bayonet = StaticElement.changeToBean(jsonObject);
-//               TestClass.bayonetService.save(bayonet);
+////               Bayonet bayonet = StaticElement.changeToBean(jsonObject);
+////               TestClass.bayonetService.save(bayonet);
 //
 //        } catch (Exception e) {
 //            // TODO Auto-generated catch block

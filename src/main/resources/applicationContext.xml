@@ -25,19 +25,23 @@
 
 	<!-- rocketmq配置 -->
 	<bean id="messageListeners" class="com.kdmt.gxd.easy.util.rocketMq.MessageListenerImpl"></bean>
+
+
 	<!-- 导入Spring配置文件 -->
 	<bean id="rocketmqConsumer" class="org.apache.rocketmq.client.consumer.DefaultMQPushConsumer" init-method="start" destroy-method="shutdown">
 		<property name="consumerGroup" value="${rocketmq.consumerGroup}" />
 		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.instanceName}"/>
+		<property name="consumeThreadMax" value="${rocketmq.maxTread}"/>
+		<property name="consumeThreadMin" value="${rocketmq.minTread}"/>
 		<property name="messageListener" ref="messageListeners" />
+
 		<property name="subscription">
 			<map>
 				<entry key="${rocketmq.topic}" value="${rocketmq.tags}" />
 			</map>
 		</property>
 	</bean>
-
-
 	<bean id="rocketMQProducer" class="com.kdmt.gxd.easy.util.rocketMq.RocketMQProducer" init-method="init" destroy-method="destroy">
 		<property name="producerGroup" value="${rocketmq.producer.group}" />
 		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
@@ -93,7 +97,8 @@
 	<!--&lt;!&ndash;引入MongoDB连接文件&ndash;&gt;-->
 	<context:property-placeholder location="classpath*:mongodb.properties" ignore-unresolvable="true"/>
 	<!--连接MongoDB服务器-->
-	<mongo:mongo-client id="mongo" host="192.168.11.69" port="27017" >
+	<!--<mongo:mongo-client id="mongo" host="127.0.0.1" port="27017" >-->
+	<mongo:mongo-client id="mongo" host="127.0.0.1" port="20000" >
 		<mongo:client-options connections-per-host="8"
 							  threads-allowed-to-block-for-connection-multiplier="4"
 							  connect-timeout="1500"
@@ -101,8 +106,7 @@
 							  socket-keep-alive="true"
 							  socket-timeout="1500"/>
 	</mongo:mongo-client>
-
-	<mongo:db-factory id="mongoDbFactory"  dbname="${mongo.dbname}"  mongo-ref="mongo"/>
+	<mongo:db-factory id="mongoDbFactory"  dbname="motor_vehicle"  mongo-ref="mongo"/>
 
 
 	<!--配置mongoTemplate-->
@@ -124,14 +128,14 @@
 		<!--ssm 集成 mongodb-->
 		<import resource="classpath:/spring-mongodb.xml"/>
 		<!--&lt;!&ndash;ssm 集成 rabbitmq&ndash;&gt;-->
-		<!--<import resource="classpath:/spring-rabbitmq.xml"/>-->
-		<!--&lt;!&ndash; 扫描指定package下所有带有如@controller,@services,@resource,@ods并把所注释的注册为Spring Beans &ndash;&gt;-->
-		<!--<context:component-scan base-package="com.kdmt.gxd.easy.util.rabbitMq,com.kdmt.gxd.easy.webservice.services" />-->
+		<import resource="classpath:/spring-rabbitmq.xml"/>
+		<!-- 扫描指定package下所有带有如@controller,@services,@resource,@ods并把所注释的注册为Spring Beans -->
+		<context:component-scan base-package="com.kdmt.gxd.easy.util.rabbitMq,com.kdmt.gxd.easy.webservice.services" />
 
-		<!--&lt;!&ndash; 激活annotation功能 &ndash;&gt;-->
-		<!--<context:annotation-config />-->
-		<!--&lt;!&ndash; 激活annotation功能 &ndash;&gt;-->
-		<!--<context:spring-configured />-->
+		<!-- 激活annotation功能 -->
+		<context:annotation-config />
+		<!-- 激活annotation功能 -->
+		<context:spring-configured />
 
 		<!--######## rocketmq ########-->
 		<context:annotation-config />

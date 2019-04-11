@@ -1,10 +1,9 @@
-//package com.supconit.easy.ticket.util.mongodb;
+//package com.kdmt.gxd.easy.util.mongodb;
 //
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.data.mongodb.core.FindAndModifyOptions;
 //import org.springframework.data.mongodb.core.MongoTemplate;
 //import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
-//import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
 //import org.springframework.data.mongodb.core.mapping.event.BeforeSaveEvent;
 //import org.springframework.data.mongodb.core.query.Criteria;
 //import org.springframework.data.mongodb.core.query.Query;

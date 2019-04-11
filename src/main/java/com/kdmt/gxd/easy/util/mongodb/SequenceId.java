@@ -1,4 +1,4 @@
-//package com.supconit.easy.ticket.util.mongodb;
+//package com.kdmt.gxd.easy.util.mongodb;
 //
 //import org.springframework.data.annotation.Id;
 //import org.springframework.data.mongodb.core.mapping.Document;

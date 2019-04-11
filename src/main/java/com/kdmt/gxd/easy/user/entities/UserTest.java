@@ -1,6 +1,6 @@
 package com.kdmt.gxd.easy.user.entities;
 
-import com.kdmt.gxd.easy.user.services.impl.AutoValue;
+//import com.kdmt.gxd.easy.user.services.impl.AutoValue;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class UserTest implements Serializable {
     private static final long serialVersionUID = 1L;
-    @AutoValue
+//    @AutoValue
     @Id
     private String id;
     /**用户昵称*/

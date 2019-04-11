@@ -1,4 +1,4 @@
-//package com.supconit.easy.ticket.util.mongodb;
+//package com.kdmt.gxd.easy.util.mongodb;
 //
 //import java.lang.annotation.ElementType;
 //import java.lang.annotation.Retention;

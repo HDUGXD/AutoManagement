@@ -1,0 +1,1336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kdmt.gxd.easy.vehicle.daos.VehicleMapper" >
+    <resultMap id="BaseResultMap" type="com.kdmt.gxd.easy.vehicle.entities.Vehicle" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="vehicle_trunk" property="vehicleTrunk" jdbcType="VARCHAR" />
+        <result column="vehicle_wheel" property="vehicleWheel" jdbcType="VARCHAR" />
+        <result column="plate_reliability" property="plateReliability" jdbcType="VARCHAR" />
+        <result column="vehicle_window" property="vehicleWindow" jdbcType="VARCHAR" />
+        <result column="pass_time" property="passTime" jdbcType="TIMESTAMP" />
+        <result column="mark_time" property="markTime" jdbcType="VARCHAR" />
+        <result column="plate_color" property="plateColor" jdbcType="VARCHAR" />
+        <result column="has_plate" property="hasPlate" jdbcType="VARCHAR" />
+        <result column="storage_url1" property="storageUrl1" jdbcType="VARCHAR" />
+        <result column="storage_url2" property="storageUrl2" jdbcType="VARCHAR" />
+        <result column="appear_time" property="appearTime" jdbcType="VARCHAR" />
+        <result column="storage_url3" property="storageUrl3" jdbcType="VARCHAR" />
+        <result column="driving_status_code" property="drivingStatusCode" jdbcType="VARCHAR" />
+        <result column="is_modified" property="isModified" jdbcType="VARCHAR" />
+        <result column="vehicle_color_depth" property="vehicleColorDepth" jdbcType="VARCHAR" />
+        <result column="lane_no" property="laneNo" jdbcType="VARCHAR" />
+        <result column="motor_vehicleID" property="motorVehicleid" jdbcType="VARCHAR" />
+        <result column="vehicle_height" property="vehicleHeight" jdbcType="VARCHAR" />
+        <result column="using_properties_code" property="usingPropertiesCode" jdbcType="VARCHAR" />
+        <result column="film_color" property="filmColor" jdbcType="VARCHAR" />
+        <result column="vehicle_chassis" property="vehicleChassis" jdbcType="VARCHAR" />
+        <result column="brand_reliability" property="brandReliability" jdbcType="VARCHAR" />
+        <result column="is_covered" property="isCovered" jdbcType="VARCHAR" />
+        <result column="is_altered" property="isAltered" jdbcType="VARCHAR" />
+        <result column="vehicle_styles" property="vehicleStyles" jdbcType="VARCHAR" />
+        <result column="left_top_y" property="leftTopY" jdbcType="VARCHAR" />
+        <result column="left_top_x" property="leftTopX" jdbcType="VARCHAR" />
+        <result column="plate_char_reliability" property="plateCharReliability" jdbcType="VARCHAR" />
+        <result column="rearview_mirror" property="rearviewMirror" jdbcType="VARCHAR" />
+        <result column="vehicle_rear_item" property="vehicleRearItem" jdbcType="VARCHAR" />
+        <result column="wheel_printed_pattern" property="wheelPrintedPattern" jdbcType="VARCHAR" />
+        <result column="vehicle_roof" property="vehicleRoof" jdbcType="VARCHAR" />
+        <result column="plate_no_attach" property="plateNoAttach" jdbcType="VARCHAR" />
+        <result column="sub_image_list" property="subImageList" jdbcType="VARCHAR" />
+        <result column="event_sort" property="eventSort" jdbcType="VARCHAR" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="deviceID" property="deviceid" jdbcType="VARCHAR" />
+        <result column="security_level" property="securityLevel" jdbcType="VARCHAR" />
+        <result column="content_description" property="contentDescription" jdbcType="VARCHAR" />
+        <result column="file_format" property="fileFormat" jdbcType="VARCHAR" />
+        <result column="plate_describe" property="plateDescribe" jdbcType="VARCHAR" />
+        <result column="tollgateID" property="tollgateid" jdbcType="VARCHAR" />
+        <result column="side_of_vehicle" property="sideOfVehicle" jdbcType="VARCHAR" />
+        <result column="is_suspicious" property="isSuspicious" jdbcType="VARCHAR" />
+        <result column="vehicle_front_item" property="vehicleFrontItem" jdbcType="VARCHAR" />
+        <result column="disappear_time" property="disappearTime" jdbcType="VARCHAR" />
+        <result column="name_of_passed_road" property="nameOfPassedRoad" jdbcType="VARCHAR" />
+        <result column="safety_belt" property="safetyBelt" jdbcType="VARCHAR" />
+        <result column="speed" property="speed" jdbcType="VARCHAR" />
+        <result column="desc_of_front_item" property="descOfFrontItem" jdbcType="VARCHAR" />
+        <result column="vehicle_brand" property="vehicleBrand" jdbcType="VARCHAR" />
+        <result column="vehicle_shielding" property="vehicleShielding" jdbcType="VARCHAR" />
+        <result column="num_of_passenger" property="numOfPassenger" jdbcType="VARCHAR" />
+        <result column="desc_of_rear_item" property="descOfRearItem" jdbcType="VARCHAR" />
+        <result column="vehicle_class" property="vehicleClass" jdbcType="VARCHAR" />
+        <result column="vehicle_model" property="vehicleModel" jdbcType="VARCHAR" />
+        <result column="is_decked" property="isDecked" jdbcType="VARCHAR" />
+        <result column="hit_mark_info" property="hitMarkInfo" jdbcType="VARCHAR" />
+        <result column="direction" property="direction" jdbcType="VARCHAR" />
+        <result column="car_of_vehicle" property="carOfVehicle" jdbcType="VARCHAR" />
+        <result column="sourceID" property="sourceid" jdbcType="VARCHAR" />
+        <result column="vehicle_color" property="vehicleColor" jdbcType="VARCHAR" />
+        <result column="plate_class" property="plateClass" jdbcType="VARCHAR" />
+        <result column="plate_no" property="plateNo" jdbcType="VARCHAR" />
+        <result column="right_btm_x" property="rightBtmX" jdbcType="VARCHAR" />
+        <result column="vehicle_body_desc" property="vehicleBodyDesc" jdbcType="VARCHAR" />
+        <result column="vehicle_door" property="vehicleDoor" jdbcType="VARCHAR" />
+        <result column="right_btm_y" property="rightBtmY" jdbcType="VARCHAR" />
+        <result column="storage_url4" property="storageUrl4" jdbcType="VARCHAR" />
+        <result column="storage_url5" property="storageUrl5" jdbcType="VARCHAR" />
+        <result column="sunvisor" property="sunvisor" jdbcType="VARCHAR" />
+        <result column="vehicle_length" property="vehicleLength" jdbcType="VARCHAR" />
+        <result column="vehicle_width" property="vehicleWidth" jdbcType="VARCHAR" />
+        <result column="info_kind" property="infoKind" jdbcType="VARCHAR" />
+        <result column="calling" property="calling" jdbcType="VARCHAR" />
+        <result column="vehicle_hood" property="vehicleHood" jdbcType="VARCHAR" />
+        <result column="page_no" property="pageNo" jdbcType="VARCHAR" />
+        <result column="page_size" property="pageSize" jdbcType="VARCHAR" />
+        <result column="count_day" property="countDay" jdbcType="VARCHAR" />
+        <result column="count_hour" property="countHour" jdbcType="VARCHAR" />
+        <result column="count_month" property="countMonth" jdbcType="VARCHAR" />
+        <result column="qy_code" property="qyCode" jdbcType="VARCHAR" />
+        <result column="gs_code" property="gsCode" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,
+        vehicle_trunk,
+        vehicle_wheel,
+        plate_reliability,
+        vehicle_window,
+        pass_time,
+        mark_time,
+        plate_color,
+        has_plate,
+        storage_url1,
+        storage_url2,
+        appear_time,
+        storage_url3,
+        driving_status_code,
+        is_modified,
+        vehicle_color_depth,
+        lane_no,
+        motor_vehicleID,
+        vehicle_height,
+        using_properties_code,
+        film_color,
+        vehicle_chassis,
+        brand_reliability,
+        is_covered,
+        is_altered,
+        vehicle_styles,
+        left_top_y,
+        left_top_x,
+        plate_char_reliability,
+        rearview_mirror,
+        vehicle_rear_item,
+        wheel_printed_pattern,
+        vehicle_roof,
+        plate_no_attach,
+        sub_image_list,
+        event_sort,
+        title,
+        type,
+        deviceID,
+        security_level,
+        content_description,
+        file_format,
+        plate_describe,
+        tollgateID,
+        side_of_vehicle,
+        is_suspicious,
+        vehicle_front_item,
+        disappear_time,
+        name_of_passed_road,
+        safety_belt,
+        speed,
+        desc_of_front_item,
+        vehicle_brand,
+        vehicle_shielding,
+        num_of_passenger,
+        desc_of_rear_item,
+        vehicle_class,
+        vehicle_model,
+        is_decked,
+        hit_mark_info,
+        direction,
+        car_of_vehicle,
+        sourceID,
+        vehicle_color,
+        plate_class,
+        plate_no,
+        right_btm_x,
+        vehicle_body_desc,
+        vehicle_door,
+        right_btm_y,
+        storage_url4,
+        storage_url5,
+        sunvisor,
+        vehicle_length,
+        vehicle_width,
+        info_kind,
+        calling,
+        vehicle_hood,
+        page_no,
+        page_size,
+        count_day,
+        count_hour,
+        count_month,
+        qy_code,
+        gs_code
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from vehicle
+        where
+        id = #{id,jdbcType=VARCHAR}
+            
+    </select>
+
+    <delete id="deleteByPrimaryKey" >
+        delete from vehicle
+        where
+        id = #{id,jdbcType=VARCHAR}
+        
+    </delete>
+
+    <delete id="deleteByPrimaryKeys" >
+        delete from vehicle
+        where <foreach collection="primaryKeys" item = "primaryKey" separator=" or " >id = #{primaryKey,jdbcType=VARCHAR}</foreach>
+    </delete>
+
+    <insert id="insert" parameterType="com.kdmt.gxd.easy.vehicle.entities.Vehicle" >
+        insert into vehicle (
+            id,
+            vehicle_trunk,
+            vehicle_wheel,
+            plate_reliability,
+            vehicle_window,
+            pass_time,
+            mark_time,
+            plate_color,
+            has_plate,
+            storage_url1,
+            storage_url2,
+            appear_time,
+            storage_url3,
+            driving_status_code,
+            is_modified,
+            vehicle_color_depth,
+            lane_no,
+            motor_vehicleID,
+            vehicle_height,
+            using_properties_code,
+            film_color,
+            vehicle_chassis,
+            brand_reliability,
+            is_covered,
+            is_altered,
+            vehicle_styles,
+            left_top_y,
+            left_top_x,
+            plate_char_reliability,
+            rearview_mirror,
+            vehicle_rear_item,
+            wheel_printed_pattern,
+            vehicle_roof,
+            plate_no_attach,
+            sub_image_list,
+            event_sort,
+            title,
+            type,
+            deviceID,
+            security_level,
+            content_description,
+            file_format,
+            plate_describe,
+            tollgateID,
+            side_of_vehicle,
+            is_suspicious,
+            vehicle_front_item,
+            disappear_time,
+            name_of_passed_road,
+            safety_belt,
+            speed,
+            desc_of_front_item,
+            vehicle_brand,
+            vehicle_shielding,
+            num_of_passenger,
+            desc_of_rear_item,
+            vehicle_class,
+            vehicle_model,
+            is_decked,
+            hit_mark_info,
+            direction,
+            car_of_vehicle,
+            sourceID,
+            vehicle_color,
+            plate_class,
+            plate_no,
+            right_btm_x,
+            vehicle_body_desc,
+            vehicle_door,
+            right_btm_y,
+            storage_url4,
+            storage_url5,
+            sunvisor,
+            vehicle_length,
+            vehicle_width,
+            info_kind,
+            calling,
+            vehicle_hood,
+            page_no,
+            page_size,
+            count_day,
+            count_hour,
+            count_month,
+            qy_code,
+            gs_code
+        )
+        values (
+            #{id,jdbcType=VARCHAR},
+            #{vehicleTrunk,jdbcType=VARCHAR},
+            #{vehicleWheel,jdbcType=VARCHAR},
+            #{plateReliability,jdbcType=VARCHAR},
+            #{vehicleWindow,jdbcType=VARCHAR},
+            #{passTime,jdbcType=TIMESTAMP},
+            #{markTime,jdbcType=VARCHAR},
+            #{plateColor,jdbcType=VARCHAR},
+            #{hasPlate,jdbcType=VARCHAR},
+            #{storageUrl1,jdbcType=VARCHAR},
+            #{storageUrl2,jdbcType=VARCHAR},
+            #{appearTime,jdbcType=VARCHAR},
+            #{storageUrl3,jdbcType=VARCHAR},
+            #{drivingStatusCode,jdbcType=VARCHAR},
+            #{isModified,jdbcType=VARCHAR},
+            #{vehicleColorDepth,jdbcType=VARCHAR},
+            #{laneNo,jdbcType=VARCHAR},
+            #{motorVehicleid,jdbcType=VARCHAR},
+            #{vehicleHeight,jdbcType=VARCHAR},
+            #{usingPropertiesCode,jdbcType=VARCHAR},
+            #{filmColor,jdbcType=VARCHAR},
+            #{vehicleChassis,jdbcType=VARCHAR},
+            #{brandReliability,jdbcType=VARCHAR},
+            #{isCovered,jdbcType=VARCHAR},
+            #{isAltered,jdbcType=VARCHAR},
+            #{vehicleStyles,jdbcType=VARCHAR},
+            #{leftTopY,jdbcType=VARCHAR},
+            #{leftTopX,jdbcType=VARCHAR},
+            #{plateCharReliability,jdbcType=VARCHAR},
+            #{rearviewMirror,jdbcType=VARCHAR},
+            #{vehicleRearItem,jdbcType=VARCHAR},
+            #{wheelPrintedPattern,jdbcType=VARCHAR},
+            #{vehicleRoof,jdbcType=VARCHAR},
+            #{plateNoAttach,jdbcType=VARCHAR},
+            #{subImageList,jdbcType=VARCHAR},
+            #{eventSort,jdbcType=VARCHAR},
+            #{title,jdbcType=VARCHAR},
+            #{type,jdbcType=VARCHAR},
+            #{deviceid,jdbcType=VARCHAR},
+            #{securityLevel,jdbcType=VARCHAR},
+            #{contentDescription,jdbcType=VARCHAR},
+            #{fileFormat,jdbcType=VARCHAR},
+            #{plateDescribe,jdbcType=VARCHAR},
+            #{tollgateid,jdbcType=VARCHAR},
+            #{sideOfVehicle,jdbcType=VARCHAR},
+            #{isSuspicious,jdbcType=VARCHAR},
+            #{vehicleFrontItem,jdbcType=VARCHAR},
+            #{disappearTime,jdbcType=VARCHAR},
+            #{nameOfPassedRoad,jdbcType=VARCHAR},
+            #{safetyBelt,jdbcType=VARCHAR},
+            #{speed,jdbcType=VARCHAR},
+            #{descOfFrontItem,jdbcType=VARCHAR},
+            #{vehicleBrand,jdbcType=VARCHAR},
+            #{vehicleShielding,jdbcType=VARCHAR},
+            #{numOfPassenger,jdbcType=VARCHAR},
+            #{descOfRearItem,jdbcType=VARCHAR},
+            #{vehicleClass,jdbcType=VARCHAR},
+            #{vehicleModel,jdbcType=VARCHAR},
+            #{isDecked,jdbcType=VARCHAR},
+            #{hitMarkInfo,jdbcType=VARCHAR},
+            #{direction,jdbcType=VARCHAR},
+            #{carOfVehicle,jdbcType=VARCHAR},
+            #{sourceid,jdbcType=VARCHAR},
+            #{vehicleColor,jdbcType=VARCHAR},
+            #{plateClass,jdbcType=VARCHAR},
+            #{plateNo,jdbcType=VARCHAR},
+            #{rightBtmX,jdbcType=VARCHAR},
+            #{vehicleBodyDesc,jdbcType=VARCHAR},
+            #{vehicleDoor,jdbcType=VARCHAR},
+            #{rightBtmY,jdbcType=VARCHAR},
+            #{storageUrl4,jdbcType=VARCHAR},
+            #{storageUrl5,jdbcType=VARCHAR},
+            #{sunvisor,jdbcType=VARCHAR},
+            #{vehicleLength,jdbcType=VARCHAR},
+            #{vehicleWidth,jdbcType=VARCHAR},
+            #{infoKind,jdbcType=VARCHAR},
+            #{calling,jdbcType=VARCHAR},
+            #{vehicleHood,jdbcType=VARCHAR},
+            #{pageNo,jdbcType=VARCHAR},
+            #{pageSize,jdbcType=VARCHAR},
+            #{countDay,jdbcType=VARCHAR},
+            #{countHour,jdbcType=VARCHAR},
+            #{countMonth,jdbcType=VARCHAR},
+            #{qyCode,jdbcType=VARCHAR},
+            #{gsCode,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.kdmt.gxd.easy.vehicle.entities.Vehicle" >
+        insert into vehicle
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="vehicleTrunk != null" >
+                vehicle_trunk,
+            </if>
+            <if test="vehicleWheel != null" >
+                vehicle_wheel,
+            </if>
+            <if test="plateReliability != null" >
+                plate_reliability,
+            </if>
+            <if test="vehicleWindow != null" >
+                vehicle_window,
+            </if>
+            <if test="passTime != null" >
+                pass_time,
+            </if>
+            <if test="markTime != null" >
+                mark_time,
+            </if>
+            <if test="plateColor != null" >
+                plate_color,
+            </if>
+            <if test="hasPlate != null" >
+                has_plate,
+            </if>
+            <if test="storageUrl1 != null" >
+                storage_url1,
+            </if>
+            <if test="storageUrl2 != null" >
+                storage_url2,
+            </if>
+            <if test="appearTime != null" >
+                appear_time,
+            </if>
+            <if test="storageUrl3 != null" >
+                storage_url3,
+            </if>
+            <if test="drivingStatusCode != null" >
+                driving_status_code,
+            </if>
+            <if test="isModified != null" >
+                is_modified,
+            </if>
+            <if test="vehicleColorDepth != null" >
+                vehicle_color_depth,
+            </if>
+            <if test="laneNo != null" >
+                lane_no,
+            </if>
+            <if test="motorVehicleid != null" >
+                motor_vehicleID,
+            </if>
+            <if test="vehicleHeight != null" >
+                vehicle_height,
+            </if>
+            <if test="usingPropertiesCode != null" >
+                using_properties_code,
+            </if>
+            <if test="filmColor != null" >
+                film_color,
+            </if>
+            <if test="vehicleChassis != null" >
+                vehicle_chassis,
+            </if>
+            <if test="brandReliability != null" >
+                brand_reliability,
+            </if>
+            <if test="isCovered != null" >
+                is_covered,
+            </if>
+            <if test="isAltered != null" >
+                is_altered,
+            </if>
+            <if test="vehicleStyles != null" >
+                vehicle_styles,
+            </if>
+            <if test="leftTopY != null" >
+                left_top_y,
+            </if>
+            <if test="leftTopX != null" >
+                left_top_x,
+            </if>
+            <if test="plateCharReliability != null" >
+                plate_char_reliability,
+            </if>
+            <if test="rearviewMirror != null" >
+                rearview_mirror,
+            </if>
+            <if test="vehicleRearItem != null" >
+                vehicle_rear_item,
+            </if>
+            <if test="wheelPrintedPattern != null" >
+                wheel_printed_pattern,
+            </if>
+            <if test="vehicleRoof != null" >
+                vehicle_roof,
+            </if>
+            <if test="plateNoAttach != null" >
+                plate_no_attach,
+            </if>
+            <if test="subImageList != null" >
+                sub_image_list,
+            </if>
+            <if test="eventSort != null" >
+                event_sort,
+            </if>
+            <if test="title != null" >
+                title,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="deviceid != null" >
+                deviceID,
+            </if>
+            <if test="securityLevel != null" >
+                security_level,
+            </if>
+            <if test="contentDescription != null" >
+                content_description,
+            </if>
+            <if test="fileFormat != null" >
+                file_format,
+            </if>
+            <if test="plateDescribe != null" >
+                plate_describe,
+            </if>
+            <if test="tollgateid != null" >
+                tollgateID,
+            </if>
+            <if test="sideOfVehicle != null" >
+                side_of_vehicle,
+            </if>
+            <if test="isSuspicious != null" >
+                is_suspicious,
+            </if>
+            <if test="vehicleFrontItem != null" >
+                vehicle_front_item,
+            </if>
+            <if test="disappearTime != null" >
+                disappear_time,
+            </if>
+            <if test="nameOfPassedRoad != null" >
+                name_of_passed_road,
+            </if>
+            <if test="safetyBelt != null" >
+                safety_belt,
+            </if>
+            <if test="speed != null" >
+                speed,
+            </if>
+            <if test="descOfFrontItem != null" >
+                desc_of_front_item,
+            </if>
+            <if test="vehicleBrand != null" >
+                vehicle_brand,
+            </if>
+            <if test="vehicleShielding != null" >
+                vehicle_shielding,
+            </if>
+            <if test="numOfPassenger != null" >
+                num_of_passenger,
+            </if>
+            <if test="descOfRearItem != null" >
+                desc_of_rear_item,
+            </if>
+            <if test="vehicleClass != null" >
+                vehicle_class,
+            </if>
+            <if test="vehicleModel != null" >
+                vehicle_model,
+            </if>
+            <if test="isDecked != null" >
+                is_decked,
+            </if>
+            <if test="hitMarkInfo != null" >
+                hit_mark_info,
+            </if>
+            <if test="direction != null" >
+                direction,
+            </if>
+            <if test="carOfVehicle != null" >
+                car_of_vehicle,
+            </if>
+            <if test="sourceid != null" >
+                sourceID,
+            </if>
+            <if test="vehicleColor != null" >
+                vehicle_color,
+            </if>
+            <if test="plateClass != null" >
+                plate_class,
+            </if>
+            <if test="plateNo != null" >
+                plate_no,
+            </if>
+            <if test="rightBtmX != null" >
+                right_btm_x,
+            </if>
+            <if test="vehicleBodyDesc != null" >
+                vehicle_body_desc,
+            </if>
+            <if test="vehicleDoor != null" >
+                vehicle_door,
+            </if>
+            <if test="rightBtmY != null" >
+                right_btm_y,
+            </if>
+            <if test="storageUrl4 != null" >
+                storage_url4,
+            </if>
+            <if test="storageUrl5 != null" >
+                storage_url5,
+            </if>
+            <if test="sunvisor != null" >
+                sunvisor,
+            </if>
+            <if test="vehicleLength != null" >
+                vehicle_length,
+            </if>
+            <if test="vehicleWidth != null" >
+                vehicle_width,
+            </if>
+            <if test="infoKind != null" >
+                info_kind,
+            </if>
+            <if test="calling != null" >
+                calling,
+            </if>
+            <if test="vehicleHood != null" >
+                vehicle_hood,
+            </if>
+            <if test="pageNo != null" >
+                page_no,
+            </if>
+            <if test="pageSize != null" >
+                page_size,
+            </if>
+            <if test="countDay != null" >
+                count_day,
+            </if>
+            <if test="countHour != null" >
+                count_hour,
+            </if>
+            <if test="countMonth != null" >
+                count_month,
+            </if>
+            <if test="qyCode != null" >
+                qy_code,
+            </if>
+            <if test="gsCode != null" >
+                gs_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleTrunk != null" >
+                #{vehicleTrunk,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleWheel != null" >
+                #{vehicleWheel,jdbcType=VARCHAR},
+            </if>
+            <if test="plateReliability != null" >
+                #{plateReliability,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleWindow != null" >
+                #{vehicleWindow,jdbcType=VARCHAR},
+            </if>
+            <if test="passTime != null" >
+                #{passTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="markTime != null" >
+                #{markTime,jdbcType=VARCHAR},
+            </if>
+            <if test="plateColor != null" >
+                #{plateColor,jdbcType=VARCHAR},
+            </if>
+            <if test="hasPlate != null" >
+                #{hasPlate,jdbcType=VARCHAR},
+            </if>
+            <if test="storageUrl1 != null" >
+                #{storageUrl1,jdbcType=VARCHAR},
+            </if>
+            <if test="storageUrl2 != null" >
+                #{storageUrl2,jdbcType=VARCHAR},
+            </if>
+            <if test="appearTime != null" >
+                #{appearTime,jdbcType=VARCHAR},
+            </if>
+            <if test="storageUrl3 != null" >
+                #{storageUrl3,jdbcType=VARCHAR},
+            </if>
+            <if test="drivingStatusCode != null" >
+                #{drivingStatusCode,jdbcType=VARCHAR},
+            </if>
+            <if test="isModified != null" >
+                #{isModified,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleColorDepth != null" >
+                #{vehicleColorDepth,jdbcType=VARCHAR},
+            </if>
+            <if test="laneNo != null" >
+                #{laneNo,jdbcType=VARCHAR},
+            </if>
+            <if test="motorVehicleid != null" >
+                #{motorVehicleid,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleHeight != null" >
+                #{vehicleHeight,jdbcType=VARCHAR},
+            </if>
+            <if test="usingPropertiesCode != null" >
+                #{usingPropertiesCode,jdbcType=VARCHAR},
+            </if>
+            <if test="filmColor != null" >
+                #{filmColor,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleChassis != null" >
+                #{vehicleChassis,jdbcType=VARCHAR},
+            </if>
+            <if test="brandReliability != null" >
+                #{brandReliability,jdbcType=VARCHAR},
+            </if>
+            <if test="isCovered != null" >
+                #{isCovered,jdbcType=VARCHAR},
+            </if>
+            <if test="isAltered != null" >
+                #{isAltered,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleStyles != null" >
+                #{vehicleStyles,jdbcType=VARCHAR},
+            </if>
+            <if test="leftTopY != null" >
+                #{leftTopY,jdbcType=VARCHAR},
+            </if>
+            <if test="leftTopX != null" >
+                #{leftTopX,jdbcType=VARCHAR},
+            </if>
+            <if test="plateCharReliability != null" >
+                #{plateCharReliability,jdbcType=VARCHAR},
+            </if>
+            <if test="rearviewMirror != null" >
+                #{rearviewMirror,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleRearItem != null" >
+                #{vehicleRearItem,jdbcType=VARCHAR},
+            </if>
+            <if test="wheelPrintedPattern != null" >
+                #{wheelPrintedPattern,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleRoof != null" >
+                #{vehicleRoof,jdbcType=VARCHAR},
+            </if>
+            <if test="plateNoAttach != null" >
+                #{plateNoAttach,jdbcType=VARCHAR},
+            </if>
+            <if test="subImageList != null" >
+                #{subImageList,jdbcType=VARCHAR},
+            </if>
+            <if test="eventSort != null" >
+                #{eventSort,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null" >
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceid != null" >
+                #{deviceid,jdbcType=VARCHAR},
+            </if>
+            <if test="securityLevel != null" >
+                #{securityLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="contentDescription != null" >
+                #{contentDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="fileFormat != null" >
+                #{fileFormat,jdbcType=VARCHAR},
+            </if>
+            <if test="plateDescribe != null" >
+                #{plateDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="tollgateid != null" >
+                #{tollgateid,jdbcType=VARCHAR},
+            </if>
+            <if test="sideOfVehicle != null" >
+                #{sideOfVehicle,jdbcType=VARCHAR},
+            </if>
+            <if test="isSuspicious != null" >
+                #{isSuspicious,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleFrontItem != null" >
+                #{vehicleFrontItem,jdbcType=VARCHAR},
+            </if>
+            <if test="disappearTime != null" >
+                #{disappearTime,jdbcType=VARCHAR},
+            </if>
+            <if test="nameOfPassedRoad != null" >
+                #{nameOfPassedRoad,jdbcType=VARCHAR},
+            </if>
+            <if test="safetyBelt != null" >
+                #{safetyBelt,jdbcType=VARCHAR},
+            </if>
+            <if test="speed != null" >
+                #{speed,jdbcType=VARCHAR},
+            </if>
+            <if test="descOfFrontItem != null" >
+                #{descOfFrontItem,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleBrand != null" >
+                #{vehicleBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleShielding != null" >
+                #{vehicleShielding,jdbcType=VARCHAR},
+            </if>
+            <if test="numOfPassenger != null" >
+                #{numOfPassenger,jdbcType=VARCHAR},
+            </if>
+            <if test="descOfRearItem != null" >
+                #{descOfRearItem,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleClass != null" >
+                #{vehicleClass,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleModel != null" >
+                #{vehicleModel,jdbcType=VARCHAR},
+            </if>
+            <if test="isDecked != null" >
+                #{isDecked,jdbcType=VARCHAR},
+            </if>
+            <if test="hitMarkInfo != null" >
+                #{hitMarkInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null" >
+                #{direction,jdbcType=VARCHAR},
+            </if>
+            <if test="carOfVehicle != null" >
+                #{carOfVehicle,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceid != null" >
+                #{sourceid,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleColor != null" >
+                #{vehicleColor,jdbcType=VARCHAR},
+            </if>
+            <if test="plateClass != null" >
+                #{plateClass,jdbcType=VARCHAR},
+            </if>
+            <if test="plateNo != null" >
+                #{plateNo,jdbcType=VARCHAR},
+            </if>
+            <if test="rightBtmX != null" >
+                #{rightBtmX,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleBodyDesc != null" >
+                #{vehicleBodyDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleDoor != null" >
+                #{vehicleDoor,jdbcType=VARCHAR},
+            </if>
+            <if test="rightBtmY != null" >
+                #{rightBtmY,jdbcType=VARCHAR},
+            </if>
+            <if test="storageUrl4 != null" >
+                #{storageUrl4,jdbcType=VARCHAR},
+            </if>
+            <if test="storageUrl5 != null" >
+                #{storageUrl5,jdbcType=VARCHAR},
+            </if>
+            <if test="sunvisor != null" >
+                #{sunvisor,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleLength != null" >
+                #{vehicleLength,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleWidth != null" >
+                #{vehicleWidth,jdbcType=VARCHAR},
+            </if>
+            <if test="infoKind != null" >
+                #{infoKind,jdbcType=VARCHAR},
+            </if>
+            <if test="calling != null" >
+                #{calling,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleHood != null" >
+                #{vehicleHood,jdbcType=VARCHAR},
+            </if>
+            <if test="pageNo != null" >
+                #{pageNo,jdbcType=VARCHAR},
+            </if>
+            <if test="pageSize != null" >
+                #{pageSize,jdbcType=VARCHAR},
+            </if>
+            <if test="countDay != null" >
+                #{countDay,jdbcType=VARCHAR},
+            </if>
+            <if test="countHour != null" >
+                #{countHour,jdbcType=VARCHAR},
+            </if>
+            <if test="countMonth != null" >
+                #{countMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="qyCode != null" >
+                #{qyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="gsCode != null" >
+                #{gsCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.kdmt.gxd.easy.vehicle.entities.Vehicle" >
+        update vehicle
+        <set >
+            <if test="id != null" >
+                id = #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleTrunk != null" >
+                vehicle_trunk = #{vehicleTrunk,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleWheel != null" >
+                vehicle_wheel = #{vehicleWheel,jdbcType=VARCHAR},
+            </if>
+            <if test="plateReliability != null" >
+                plate_reliability = #{plateReliability,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleWindow != null" >
+                vehicle_window = #{vehicleWindow,jdbcType=VARCHAR},
+            </if>
+            <if test="passTime != null" >
+                pass_time = #{passTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="markTime != null" >
+                mark_time = #{markTime,jdbcType=VARCHAR},
+            </if>
+            <if test="plateColor != null" >
+                plate_color = #{plateColor,jdbcType=VARCHAR},
+            </if>
+            <if test="hasPlate != null" >
+                has_plate = #{hasPlate,jdbcType=VARCHAR},
+            </if>
+            <if test="storageUrl1 != null" >
+                storage_url1 = #{storageUrl1,jdbcType=VARCHAR},
+            </if>
+            <if test="storageUrl2 != null" >
+                storage_url2 = #{storageUrl2,jdbcType=VARCHAR},
+            </if>
+            <if test="appearTime != null" >
+                appear_time = #{appearTime,jdbcType=VARCHAR},
+            </if>
+            <if test="storageUrl3 != null" >
+                storage_url3 = #{storageUrl3,jdbcType=VARCHAR},
+            </if>
+            <if test="drivingStatusCode != null" >
+                driving_status_code = #{drivingStatusCode,jdbcType=VARCHAR},
+            </if>
+            <if test="isModified != null" >
+                is_modified = #{isModified,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleColorDepth != null" >
+                vehicle_color_depth = #{vehicleColorDepth,jdbcType=VARCHAR},
+            </if>
+            <if test="laneNo != null" >
+                lane_no = #{laneNo,jdbcType=VARCHAR},
+            </if>
+            <if test="motorVehicleid != null" >
+                motor_vehicleID = #{motorVehicleid,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleHeight != null" >
+                vehicle_height = #{vehicleHeight,jdbcType=VARCHAR},
+            </if>
+            <if test="usingPropertiesCode != null" >
+                using_properties_code = #{usingPropertiesCode,jdbcType=VARCHAR},
+            </if>
+            <if test="filmColor != null" >
+                film_color = #{filmColor,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleChassis != null" >
+                vehicle_chassis = #{vehicleChassis,jdbcType=VARCHAR},
+            </if>
+            <if test="brandReliability != null" >
+                brand_reliability = #{brandReliability,jdbcType=VARCHAR},
+            </if>
+            <if test="isCovered != null" >
+                is_covered = #{isCovered,jdbcType=VARCHAR},
+            </if>
+            <if test="isAltered != null" >
+                is_altered = #{isAltered,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleStyles != null" >
+                vehicle_styles = #{vehicleStyles,jdbcType=VARCHAR},
+            </if>
+            <if test="leftTopY != null" >
+                left_top_y = #{leftTopY,jdbcType=VARCHAR},
+            </if>
+            <if test="leftTopX != null" >
+                left_top_x = #{leftTopX,jdbcType=VARCHAR},
+            </if>
+            <if test="plateCharReliability != null" >
+                plate_char_reliability = #{plateCharReliability,jdbcType=VARCHAR},
+            </if>
+            <if test="rearviewMirror != null" >
+                rearview_mirror = #{rearviewMirror,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleRearItem != null" >
+                vehicle_rear_item = #{vehicleRearItem,jdbcType=VARCHAR},
+            </if>
+            <if test="wheelPrintedPattern != null" >
+                wheel_printed_pattern = #{wheelPrintedPattern,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleRoof != null" >
+                vehicle_roof = #{vehicleRoof,jdbcType=VARCHAR},
+            </if>
+            <if test="plateNoAttach != null" >
+                plate_no_attach = #{plateNoAttach,jdbcType=VARCHAR},
+            </if>
+            <if test="subImageList != null" >
+                sub_image_list = #{subImageList,jdbcType=VARCHAR},
+            </if>
+            <if test="eventSort != null" >
+                event_sort = #{eventSort,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null" >
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceid != null" >
+                deviceID = #{deviceid,jdbcType=VARCHAR},
+            </if>
+            <if test="securityLevel != null" >
+                security_level = #{securityLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="contentDescription != null" >
+                content_description = #{contentDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="fileFormat != null" >
+                file_format = #{fileFormat,jdbcType=VARCHAR},
+            </if>
+            <if test="plateDescribe != null" >
+                plate_describe = #{plateDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="tollgateid != null" >
+                tollgateID = #{tollgateid,jdbcType=VARCHAR},
+            </if>
+            <if test="sideOfVehicle != null" >
+                side_of_vehicle = #{sideOfVehicle,jdbcType=VARCHAR},
+            </if>
+            <if test="isSuspicious != null" >
+                is_suspicious = #{isSuspicious,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleFrontItem != null" >
+                vehicle_front_item = #{vehicleFrontItem,jdbcType=VARCHAR},
+            </if>
+            <if test="disappearTime != null" >
+                disappear_time = #{disappearTime,jdbcType=VARCHAR},
+            </if>
+            <if test="nameOfPassedRoad != null" >
+                name_of_passed_road = #{nameOfPassedRoad,jdbcType=VARCHAR},
+            </if>
+            <if test="safetyBelt != null" >
+                safety_belt = #{safetyBelt,jdbcType=VARCHAR},
+            </if>
+            <if test="speed != null" >
+                speed = #{speed,jdbcType=VARCHAR},
+            </if>
+            <if test="descOfFrontItem != null" >
+                desc_of_front_item = #{descOfFrontItem,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleBrand != null" >
+                vehicle_brand = #{vehicleBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleShielding != null" >
+                vehicle_shielding = #{vehicleShielding,jdbcType=VARCHAR},
+            </if>
+            <if test="numOfPassenger != null" >
+                num_of_passenger = #{numOfPassenger,jdbcType=VARCHAR},
+            </if>
+            <if test="descOfRearItem != null" >
+                desc_of_rear_item = #{descOfRearItem,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleClass != null" >
+                vehicle_class = #{vehicleClass,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleModel != null" >
+                vehicle_model = #{vehicleModel,jdbcType=VARCHAR},
+            </if>
+            <if test="isDecked != null" >
+                is_decked = #{isDecked,jdbcType=VARCHAR},
+            </if>
+            <if test="hitMarkInfo != null" >
+                hit_mark_info = #{hitMarkInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null" >
+                direction = #{direction,jdbcType=VARCHAR},
+            </if>
+            <if test="carOfVehicle != null" >
+                car_of_vehicle = #{carOfVehicle,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceid != null" >
+                sourceID = #{sourceid,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleColor != null" >
+                vehicle_color = #{vehicleColor,jdbcType=VARCHAR},
+            </if>
+            <if test="plateClass != null" >
+                plate_class = #{plateClass,jdbcType=VARCHAR},
+            </if>
+            <if test="plateNo != null" >
+                plate_no = #{plateNo,jdbcType=VARCHAR},
+            </if>
+            <if test="rightBtmX != null" >
+                right_btm_x = #{rightBtmX,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleBodyDesc != null" >
+                vehicle_body_desc = #{vehicleBodyDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleDoor != null" >
+                vehicle_door = #{vehicleDoor,jdbcType=VARCHAR},
+            </if>
+            <if test="rightBtmY != null" >
+                right_btm_y = #{rightBtmY,jdbcType=VARCHAR},
+            </if>
+            <if test="storageUrl4 != null" >
+                storage_url4 = #{storageUrl4,jdbcType=VARCHAR},
+            </if>
+            <if test="storageUrl5 != null" >
+                storage_url5 = #{storageUrl5,jdbcType=VARCHAR},
+            </if>
+            <if test="sunvisor != null" >
+                sunvisor = #{sunvisor,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleLength != null" >
+                vehicle_length = #{vehicleLength,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleWidth != null" >
+                vehicle_width = #{vehicleWidth,jdbcType=VARCHAR},
+            </if>
+            <if test="infoKind != null" >
+                info_kind = #{infoKind,jdbcType=VARCHAR},
+            </if>
+            <if test="calling != null" >
+                calling = #{calling,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleHood != null" >
+                vehicle_hood = #{vehicleHood,jdbcType=VARCHAR},
+            </if>
+            <if test="pageNo != null" >
+                page_no = #{pageNo,jdbcType=VARCHAR},
+            </if>
+            <if test="pageSize != null" >
+                page_size = #{pageSize,jdbcType=VARCHAR},
+            </if>
+            <if test="countDay != null" >
+                count_day = #{countDay,jdbcType=VARCHAR},
+            </if>
+            <if test="countHour != null" >
+                count_hour = #{countHour,jdbcType=VARCHAR},
+            </if>
+            <if test="countMonth != null" >
+                count_month = #{countMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="qyCode != null" >
+                qy_code = #{qyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="gsCode != null" >
+                gs_code = #{gsCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+            where
+            id = #{id,jdbcType=VARCHAR}
+                
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.kdmt.gxd.easy.vehicle.entities.Vehicle" >
+        update vehicle
+        set
+        <trim suffixOverrides="," >
+            vehicle_trunk = #{vehicleTrunk,jdbcType=VARCHAR},
+            vehicle_wheel = #{vehicleWheel,jdbcType=VARCHAR},
+            plate_reliability = #{plateReliability,jdbcType=VARCHAR},
+            vehicle_window = #{vehicleWindow,jdbcType=VARCHAR},
+            pass_time = #{passTime,jdbcType=TIMESTAMP},
+            mark_time = #{markTime,jdbcType=VARCHAR},
+            plate_color = #{plateColor,jdbcType=VARCHAR},
+            has_plate = #{hasPlate,jdbcType=VARCHAR},
+            storage_url1 = #{storageUrl1,jdbcType=VARCHAR},
+            storage_url2 = #{storageUrl2,jdbcType=VARCHAR},
+            appear_time = #{appearTime,jdbcType=VARCHAR},
+            storage_url3 = #{storageUrl3,jdbcType=VARCHAR},
+            driving_status_code = #{drivingStatusCode,jdbcType=VARCHAR},
+            is_modified = #{isModified,jdbcType=VARCHAR},
+            vehicle_color_depth = #{vehicleColorDepth,jdbcType=VARCHAR},
+            lane_no = #{laneNo,jdbcType=VARCHAR},
+            motor_vehicleID = #{motorVehicleid,jdbcType=VARCHAR},
+            vehicle_height = #{vehicleHeight,jdbcType=VARCHAR},
+            using_properties_code = #{usingPropertiesCode,jdbcType=VARCHAR},
+            film_color = #{filmColor,jdbcType=VARCHAR},
+            vehicle_chassis = #{vehicleChassis,jdbcType=VARCHAR},
+            brand_reliability = #{brandReliability,jdbcType=VARCHAR},
+            is_covered = #{isCovered,jdbcType=VARCHAR},
+            is_altered = #{isAltered,jdbcType=VARCHAR},
+            vehicle_styles = #{vehicleStyles,jdbcType=VARCHAR},
+            left_top_y = #{leftTopY,jdbcType=VARCHAR},
+            left_top_x = #{leftTopX,jdbcType=VARCHAR},
+            plate_char_reliability = #{plateCharReliability,jdbcType=VARCHAR},
+            rearview_mirror = #{rearviewMirror,jdbcType=VARCHAR},
+            vehicle_rear_item = #{vehicleRearItem,jdbcType=VARCHAR},
+            wheel_printed_pattern = #{wheelPrintedPattern,jdbcType=VARCHAR},
+            vehicle_roof = #{vehicleRoof,jdbcType=VARCHAR},
+            plate_no_attach = #{plateNoAttach,jdbcType=VARCHAR},
+            sub_image_list = #{subImageList,jdbcType=VARCHAR},
+            event_sort = #{eventSort,jdbcType=VARCHAR},
+            title = #{title,jdbcType=VARCHAR},
+            type = #{type,jdbcType=VARCHAR},
+            deviceID = #{deviceid,jdbcType=VARCHAR},
+            security_level = #{securityLevel,jdbcType=VARCHAR},
+            content_description = #{contentDescription,jdbcType=VARCHAR},
+            file_format = #{fileFormat,jdbcType=VARCHAR},
+            plate_describe = #{plateDescribe,jdbcType=VARCHAR},
+            tollgateID = #{tollgateid,jdbcType=VARCHAR},
+            side_of_vehicle = #{sideOfVehicle,jdbcType=VARCHAR},
+            is_suspicious = #{isSuspicious,jdbcType=VARCHAR},
+            vehicle_front_item = #{vehicleFrontItem,jdbcType=VARCHAR},
+            disappear_time = #{disappearTime,jdbcType=VARCHAR},
+            name_of_passed_road = #{nameOfPassedRoad,jdbcType=VARCHAR},
+            safety_belt = #{safetyBelt,jdbcType=VARCHAR},
+            speed = #{speed,jdbcType=VARCHAR},
+            desc_of_front_item = #{descOfFrontItem,jdbcType=VARCHAR},
+            vehicle_brand = #{vehicleBrand,jdbcType=VARCHAR},
+            vehicle_shielding = #{vehicleShielding,jdbcType=VARCHAR},
+            num_of_passenger = #{numOfPassenger,jdbcType=VARCHAR},
+            desc_of_rear_item = #{descOfRearItem,jdbcType=VARCHAR},
+            vehicle_class = #{vehicleClass,jdbcType=VARCHAR},
+            vehicle_model = #{vehicleModel,jdbcType=VARCHAR},
+            is_decked = #{isDecked,jdbcType=VARCHAR},
+            hit_mark_info = #{hitMarkInfo,jdbcType=VARCHAR},
+            direction = #{direction,jdbcType=VARCHAR},
+            car_of_vehicle = #{carOfVehicle,jdbcType=VARCHAR},
+            sourceID = #{sourceid,jdbcType=VARCHAR},
+            vehicle_color = #{vehicleColor,jdbcType=VARCHAR},
+            plate_class = #{plateClass,jdbcType=VARCHAR},
+            plate_no = #{plateNo,jdbcType=VARCHAR},
+            right_btm_x = #{rightBtmX,jdbcType=VARCHAR},
+            vehicle_body_desc = #{vehicleBodyDesc,jdbcType=VARCHAR},
+            vehicle_door = #{vehicleDoor,jdbcType=VARCHAR},
+            right_btm_y = #{rightBtmY,jdbcType=VARCHAR},
+            storage_url4 = #{storageUrl4,jdbcType=VARCHAR},
+            storage_url5 = #{storageUrl5,jdbcType=VARCHAR},
+            sunvisor = #{sunvisor,jdbcType=VARCHAR},
+            vehicle_length = #{vehicleLength,jdbcType=VARCHAR},
+            vehicle_width = #{vehicleWidth,jdbcType=VARCHAR},
+            info_kind = #{infoKind,jdbcType=VARCHAR},
+            calling = #{calling,jdbcType=VARCHAR},
+            vehicle_hood = #{vehicleHood,jdbcType=VARCHAR},
+            page_no = #{pageNo,jdbcType=VARCHAR},
+            page_size = #{pageSize,jdbcType=VARCHAR},
+            count_day = #{countDay,jdbcType=VARCHAR},
+            count_hour = #{countHour,jdbcType=VARCHAR},
+            count_month = #{countMonth,jdbcType=VARCHAR},
+            qy_code = #{qyCode,jdbcType=VARCHAR},
+            gs_code = #{gsCode,jdbcType=VARCHAR},
+        </trim>
+        where
+        id = #{id,jdbcType=VARCHAR}
+            
+    </update>
+
+    <select id="loadModels" resultMap="BaseResultMap">
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from vehicle
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="loadMaps" resultType="java.util.HashMap">
+        select
+        <if test="parameters != null">
+         ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        from vehicle
+        <if test="condition != null">
+            where ${condition}
+        </if>
+        <if test="order != null and sort != null">
+            order by ${order} ${sort}
+        </if>
+        <if test="offset != -1 and limit != -1">
+            limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="count" resultType="long">
+        select count(
+        <if test="isDistinct == true">
+            distinct
+        </if>
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if>
+        ) from vehicle
+        <if test="condition != null">
+            where ${condition}
+        </if>
+    </select>
+
+    <select id="findModel" resultMap="BaseResultMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from vehicle
+        where
+        id = #{id,jdbcType=VARCHAR}
+            
+    </select>
+
+    <select id="findMap" resultType="java.util.HashMap" >
+        select
+        <if test="parameters != null">
+            ${parameters}
+        </if>
+        <if test="parameters == null">
+            *
+        </if> from vehicle
+        where
+        id = #{id,jdbcType=VARCHAR}
+            
+    </select>
+</mapper>

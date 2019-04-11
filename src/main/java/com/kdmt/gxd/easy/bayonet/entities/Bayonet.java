@@ -69,7 +69,10 @@ public class Bayonet implements Serializable {
         private String bz1;
         
         private String bz2;
-        
+    /**
+     * 通用
+     */
+
         private Integer pageNo;
         
         private Integer pageSize;

@@ -1,6 +1,6 @@
 package com.kdmt.gxd.easy.user.entities;
 
-import com.kdmt.gxd.easy.user.services.impl.AutoValue;
+//import com.kdmt.gxd.easy.user.services.impl.AutoValue;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,9 +11,9 @@ import java.io.Serializable;
 public class HoUser implements Serializable {
         
         private static final long serialVersionUID = 1L;
-        @AutoValue
+//        @AutoValue
         @Id
-        private Long id;
+        private String id;
         /**用户昵称*/
         private String username;
         /**邮箱|登录帐号*/
@@ -89,15 +89,24 @@ public class HoUser implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public Long getId() {
-            return this.id;
-        }
-        
-        public void setId(Long id) {
-            this.id = id;
-        }
-        
-        public String getUsername() {
+//    public Long getId() {
+//            return this.id;
+//        }
+//
+//        public void setId(Long id) {
+//            this.id = id;
+//        }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
             return this.username;
         }
         

@@ -2,6 +2,7 @@ package com.kdmt.gxd.easy.user.services.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,8 @@ import com.kdmt.gxd.easy.user.entities.HoUser;
 import com.kdmt.gxd.easy.user.entities.UserTest;
 import com.kdmt.gxd.easy.user.services.IHoUserService;
 import com.kdmt.gxd.easy.util.util.SqlUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -26,6 +29,7 @@ public class HoUserService implements IHoUserService ,Serializable {
 
     @Resource
     private MongoTemplate mongoTemplate;
+
 
     @Override
     public boolean save(HoUser hoUser) {
@@ -149,11 +153,13 @@ public class HoUserService implements IHoUserService ,Serializable {
      */
 
 
+
     @Override
     public void insert(HoUser hoUser) {
         List<String> list = new ArrayList<>();
         String jsonStr = JSONObject.toJSONString(hoUser);
-        list.add(jsonStr);
+
+//        list.add(jsonStr);
         try {
             System.out.println("插入开始。。。。。");
 //            mongoTemplate.insert(list);
@@ -164,6 +170,7 @@ public class HoUserService implements IHoUserService ,Serializable {
             userTest.setDepartment("123123");
             hoUser.setId(null);
             mongoTemplate.save(hoUser,"gxd");
+//插入json
             System.out.println("插入结束。。。。。");
         } catch (Exception e) {
             e.printStackTrace();
