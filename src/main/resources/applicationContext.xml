@@ -31,7 +31,7 @@
 	<bean id="rocketmqConsumer" class="org.apache.rocketmq.client.consumer.DefaultMQPushConsumer" init-method="start" destroy-method="shutdown">
 		<property name="consumerGroup" value="${rocketmq.consumerGroup}" />
 		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
-		<property name="instanceName" value="${rocketmq.instanceName}"/>
+		<!--<property name="instanceName" value="${rocketmq.instanceName}"/>-->
 		<property name="consumeThreadMax" value="${rocketmq.maxTread}"/>
 		<property name="consumeThreadMin" value="${rocketmq.minTread}"/>
 		<property name="messageListener" ref="messageListeners" />
